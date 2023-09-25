@@ -5,12 +5,13 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField]private GameObject Target;
+   [SerializeField]private GameObject Target;
+    [SerializeField] private EnemySpawner enemySpawner;
     private Rigidbody2D rb;
-    private Vector3 MoveDirction;
-    public float speed = 10;
+    private Vector3 MoveDirection;
     private float direction;
-
+    public float speed = 10;
+   
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,10 +24,19 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-       MoveDirction= Target.transform.position- transform.position;
-       direction = Mathf.Sign(MoveDirction.x);
+       MoveDirection= Target.transform.position- transform.position;
+       direction = Mathf.Sign(MoveDirection.x);
        transform.localScale = new Vector3(direction, transform.localScale.y, transform.localScale.z);
-       rb.velocity = MoveDirction * Time.fixedDeltaTime * speed;
+       rb.velocity = MoveDirection * Time.fixedDeltaTime * speed;
     }
 
+    public void SetSpawner(EnemySpawner enemySpawner)
+    {
+        this.enemySpawner = enemySpawner;
+    }
+
+    private void OnDestroy()
+    {
+        enemySpawner.RemoveFromList(this.gameObject);
+    }
 } 

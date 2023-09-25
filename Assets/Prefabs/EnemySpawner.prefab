@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 374586269420069469}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 169528234125872226}
@@ -164,7 +164,7 @@ Transform:
   - {fileID: 3603460160012649018}
   - {fileID: 5146430388786004786}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8599558884405766104
 MonoBehaviour:
@@ -185,6 +185,8 @@ MonoBehaviour:
   MainSprite: {fileID: 6129223896093382719}
   NumEnemyA: 4
   NumEnemyB: 1
+  ColliderWidth: 5
+  ColliderHeight: 5
 --- !u!212 &8130344760080970283
 SpriteRenderer:
   m_ObjectHideFlags: 0

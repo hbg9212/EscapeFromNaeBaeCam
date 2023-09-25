@@ -8,10 +8,17 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject Target;
     [SerializeField] private GameObject[] EnemyPrefabs;
     [SerializeField] private GameObject MainSprite;
+    [SerializeField] private GameObject Collider;
     public int NumEnemyA;
     public int NumEnemyB;
+    public float ColliderWidth;
+    public float ColliderHeight;
     private bool first = true;
 
+    private void Start()
+    {
+        Collider.transform.localScale = new Vector3(ColliderWidth, ColliderHeight, 1);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (first && collision.CompareTag(Player))
@@ -69,5 +76,11 @@ public class EnemySpawner : MonoBehaviour
         MainSprite.SetActive(true);
         Invoke(nameof(SpawnEnemies), 0.3f);
         Invoke(nameof(SetMainSprite), 0.5f);
+        Invoke(nameof(Destroy), 0.6f);
+    }
+
+    private void Destroy()
+    {
+        Destroy(this.gameObject);
     }
 }

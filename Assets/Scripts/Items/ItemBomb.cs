@@ -8,6 +8,6 @@ public class ItemBomb : PickupItem
 
     protected override void OnPickedUp(GameObject receiver)
     {
-        ItemPanelManager.instance.bomb += countValue;
+        ItemManager.instance.bomb += countValue;
     }
 }

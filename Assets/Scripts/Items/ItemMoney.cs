@@ -8,6 +8,6 @@ public class ItemMoney : PickupItem
 
     protected override void OnPickedUp(GameObject receiver)
     {
-;       ItemPanelManager.instance.money += countValue;
+;       ItemManager.instance.money += countValue;
     }
 }

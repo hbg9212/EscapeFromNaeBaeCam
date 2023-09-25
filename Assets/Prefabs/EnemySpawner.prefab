@@ -183,10 +183,13 @@ MonoBehaviour:
   - {fileID: 3257866580738339206, guid: 32261f95f4994f4489865866e145a8f8, type: 3}
   - {fileID: 6969382807840113813, guid: 142fbe7d583ae624aa92955c7f8b2c25, type: 3}
   MainSprite: {fileID: 6129223896093382719}
+  Collider: {fileID: 374586269420069469}
+  Enemies: []
   NumEnemyA: 4
   NumEnemyB: 1
   ColliderWidth: 5
   ColliderHeight: 5
+  isClear: 0
 --- !u!212 &8130344760080970283
 SpriteRenderer:
   m_ObjectHideFlags: 0

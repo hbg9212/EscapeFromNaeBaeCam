@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
     public float ColliderWidth;
     public float ColliderHeight;
     private bool first = true;
-
+    public bool isClear= false;
     private void Start()
     {
         Collider.transform.localScale = new Vector3(ColliderWidth, ColliderHeight, 1);
@@ -87,12 +87,15 @@ public class EnemySpawner : MonoBehaviour
     public void RemoveFromList(GameObject gameObject)
     {
         Enemies.Remove(gameObject);
+        CheckListIsZero();
     }
 
-    public bool CheckListIsZero()
+    public void CheckListIsZero()
     {
         if(Enemies.Count== 0)
-            return true;
-        return false;
+        {
+            isClear= true;
+            return;
+        }
     }
 }

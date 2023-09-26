@@ -23,5 +23,15 @@ public class ItemObject : PickupItem
                     break;
             }
         }
+
+        if(itemData.type == ItemType.Accessories)
+        {
+            Inventory.instance.AddItem(itemData);
+        }
+
+        if (itemData.type == ItemType.Weapon)
+        {
+
+        }
     }
 }

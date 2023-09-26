@@ -8,8 +8,9 @@ public class PlayerInputController : CharacterController
     private Camera _camera;
     private bool _invenOpen = false;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _camera = Camera.main;
     }
 

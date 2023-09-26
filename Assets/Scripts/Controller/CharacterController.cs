@@ -8,9 +8,11 @@ public class CharacterController : MonoBehaviour
     public event Action<Vector2> OnMoveEvent;
     public event Action<Vector2> OnLookEvent;
     public event Action OnAttackEvent;
+    public event Action OnRollEvent;
 
     private float _timeSinceLastAttack = float.MaxValue;
     protected bool IsAttacking { get; set; }
+    protected bool IsRolling { get; set; }
 
     protected virtual void Update()
     {
@@ -44,6 +46,11 @@ public class CharacterController : MonoBehaviour
     public void CallAttackEvent()
     {
         OnAttackEvent?.Invoke();
+    }
+
+    public void CallRollEvent()
+    {
+        OnRollEvent?.Invoke();
     }
     
 }

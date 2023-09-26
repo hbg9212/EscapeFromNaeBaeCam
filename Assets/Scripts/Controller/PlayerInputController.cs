@@ -34,4 +34,9 @@ public class PlayerInputController : CharacterController
     {
         IsAttacking = value.isPressed;
     }
+
+    public void OnRoll(InputValue value)
+    {
+        IsAttacking = value.isPressed;
+    }
 }

@@ -43,5 +43,6 @@ public class AnimationController : MonoBehaviour
     private void InvincibilityEnd()
     {
         animator.SetBool(IsHit, false);
+        //animator.SetBool(IsRoll, false);
     }
 }

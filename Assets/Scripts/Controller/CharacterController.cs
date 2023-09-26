@@ -16,7 +16,7 @@ public class CharacterController : MonoBehaviour
     private float _timeSinceLastAttack = float.MaxValue;
     protected CharacterStatsHandler Stats { get; private set; }
     protected bool IsAttacking { get; set; }
-    protected bool IsRolling { get; set; }
+    public bool IsRolling { get; set; }
 
     protected virtual void Awake() {
         Stats = GetComponent<CharacterStatsHandler>();

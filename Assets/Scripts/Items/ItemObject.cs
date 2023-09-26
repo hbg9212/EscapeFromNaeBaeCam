@@ -2,12 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemObject : MonoBehaviour
+public class ItemObject : PickupItem
 {
-    public ItemData item;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnPickedUp(GameObject receiver, ItemData itemData)
     {
-        
+        ItemManager.instance.NoticeOfPanel(itemData);
+        foreach (ItemDataConsumable itemDataConsumable in itemData.consumables)
+        {
+            switch (itemDataConsumable.type)
+            {
+                case ConsumableType.Gold:
+                    ItemManager.instance.gold += (int)itemDataConsumable.value;
+                    break;
+                case ConsumableType.Bomb:
+                    ItemManager.instance.bomb += (int)itemDataConsumable.value;
+                    break;
+                case ConsumableType.Health:
+                    break;
+                case ConsumableType.Maxhealth:
+                    break;
+            }
+        }
     }
 }

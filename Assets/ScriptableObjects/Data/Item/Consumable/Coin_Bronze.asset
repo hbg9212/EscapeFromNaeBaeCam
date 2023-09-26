@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 837f3f10ab7d74447b253ac5f6eb096b, type: 3}
+  m_Name: Coin_Bronze
+  m_EditorClassIdentifier: 
+  displayName: "\uACE8\uB4DC"
+  description: +1
+  type: 0
+  icon: {fileID: 21300000, guid: e320fa4feeb845b4d8d91fd7a52ee68a, type: 3}
+  dropPrefab: {fileID: 5424599962437578889, guid: 7e890d7fcf933a24ea3b5905dff5a6b1, type: 3}
+  consumables:
+  - type: 0
+    value: 1

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2062360783333027366}
   - component: {fileID: 361696602384317676}
   - component: {fileID: 5511726340686607462}
-  - component: {fileID: 9099127144753768710}
   - component: {fileID: -1752029689448623352}
   - component: {fileID: -623130650117141190}
+  - component: {fileID: 180804249539969045}
   m_Layer: 0
   m_Name: Coin_Silver
   m_TagString: Untagged
@@ -123,24 +123,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &9099127144753768710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9123916734603880814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8fd1be88c5a6db44a05bb7e30cc4aad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyOnPickup: 1
-  canBePickupBy:
-    serializedVersion: 2
-    m_Bits: 64
-  pickupSound: {fileID: 8300000, guid: 9994be1476f938448add1761eb03cf06, type: 3}
-  countValue: 5
 --- !u!50 &-1752029689448623352
 Rigidbody2D:
   serializedVersion: 4
@@ -213,3 +195,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.4}
   m_EdgeRadius: 0
+--- !u!114 &180804249539969045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9123916734603880814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04bad24db30f3449981a4c015a72325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyOnPickup: 1
+  canBePickupBy:
+    serializedVersion: 2
+    m_Bits: 64
+  pickupSound: {fileID: 8300000, guid: 9994be1476f938448add1761eb03cf06, type: 3}
+  itemData: {fileID: 11400000, guid: 9dd9d4987c56dac47ab0d2a77006d667, type: 2}

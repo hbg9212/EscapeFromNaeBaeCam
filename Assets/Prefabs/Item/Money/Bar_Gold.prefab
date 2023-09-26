@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 9212681248916205243}
   - component: {fileID: 475142682568204518}
   - component: {fileID: 1941445694432446801}
-  - component: {fileID: 6975850269138525208}
   - component: {fileID: 4312246632273036084}
+  - component: {fileID: -6761758945732494467}
   m_Layer: 0
   m_Name: Bar_Gold
   m_TagString: Untagged
@@ -150,24 +150,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6975850269138525208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7824480890868050078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8fd1be88c5a6db44a05bb7e30cc4aad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyOnPickup: 1
-  canBePickupBy:
-    serializedVersion: 2
-    m_Bits: 64
-  pickupSound: {fileID: 8300000, guid: 9994be1476f938448add1761eb03cf06, type: 3}
-  countValue: 50
 --- !u!61 &4312246632273036084
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -213,3 +195,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.4}
   m_EdgeRadius: 0
+--- !u!114 &-6761758945732494467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7824480890868050078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04bad24db30f3449981a4c015a72325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyOnPickup: 1
+  canBePickupBy:
+    serializedVersion: 2
+    m_Bits: 64
+  pickupSound: {fileID: 8300000, guid: 9994be1476f938448add1761eb03cf06, type: 3}
+  itemData: {fileID: 11400000, guid: ca5c2c492cf5809409a85da8607bcb4c, type: 2}

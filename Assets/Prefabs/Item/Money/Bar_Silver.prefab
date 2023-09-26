@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 539333729741913861}
   - component: {fileID: 8776751667851324543}
   - component: {fileID: 6348571307622929469}
-  - component: {fileID: 5232815809412939773}
   - component: {fileID: -4635440475902374126}
   - component: {fileID: -3813242584477210452}
+  - component: {fileID: -4271297423259093438}
   m_Layer: 0
   m_Name: Bar_Silver
   m_TagString: Untagged
@@ -123,24 +123,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &5232815809412939773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6006411964830587401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8fd1be88c5a6db44a05bb7e30cc4aad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyOnPickup: 1
-  canBePickupBy:
-    serializedVersion: 2
-    m_Bits: 64
-  pickupSound: {fileID: 8300000, guid: 9994be1476f938448add1761eb03cf06, type: 3}
-  countValue: 30
 --- !u!50 &-4635440475902374126
 Rigidbody2D:
   serializedVersion: 4
@@ -213,3 +195,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.4}
   m_EdgeRadius: 0
+--- !u!114 &-4271297423259093438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6006411964830587401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04bad24db30f3449981a4c015a72325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyOnPickup: 1
+  canBePickupBy:
+    serializedVersion: 2
+    m_Bits: 64
+  pickupSound: {fileID: 8300000, guid: 9994be1476f938448add1761eb03cf06, type: 3}
+  itemData: {fileID: 11400000, guid: a4173fba93509c44fb16b6cadaf37934, type: 2}

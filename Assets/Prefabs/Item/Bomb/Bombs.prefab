@@ -285,6 +285,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   pickupSound: {fileID: 8300000, guid: fd0ec3052e2fa294abc1d9d540934e18, type: 3}
+  itemData: {fileID: 11400000, guid: af651a89fa2411f49a734a2b48968c57, type: 2}
   countValue: 5
 --- !u!61 &-5015075225586268896
 BoxCollider2D:

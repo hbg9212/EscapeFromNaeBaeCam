@@ -338,7 +338,6 @@ GameObject:
   m_Component:
   - component: {fileID: 353917132}
   - component: {fileID: 353917131}
-  - component: {fileID: 353917130}
   m_Layer: 0
   m_Name: ItemManager
   m_TagString: Untagged
@@ -346,20 +345,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &353917130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353917129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ddd88e27c7966a459dbe67d359888b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moneyText: {fileID: 1740174879}
-  _bombText: {fileID: 800752183}
 --- !u!114 &353917131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1218,6 +1203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8f183ae76dc2c47882422a92e774e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileSpawnPosition: {fileID: 0}
 --- !u!114 &1244991910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1230,7 +1216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfb77cf34da8a042b785fa3e60e9865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterRenderer: {fileID: 1244991908}
+  armRenderer: {fileID: 0}
+  armPivot: {fileID: 0}
 --- !u!114 &1244991911
 MonoBehaviour:
   m_ObjectHideFlags: 0

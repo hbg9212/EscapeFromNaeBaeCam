@@ -6,6 +6,7 @@ public class Shooting : MonoBehaviour
 {
     private CharacterController _controller;
 
+    [SerializeField] private Transform projectileSpawnPosition;
     private Vector2 _aimDirection = Vector2.right;
 
     private void Awake()
@@ -27,9 +28,8 @@ public class Shooting : MonoBehaviour
     private void OnShoot()
     {
         Transform bullet = PoolManager.I.Get((int)PoolManager.PrefabId.SnowBall).transform;
-        bullet.position = transform.position;
+        bullet.position = projectileSpawnPosition.position;
         bullet.GetComponent<SnowBall>().Init(15f, _aimDirection.normalized);
     }
-
 }
 

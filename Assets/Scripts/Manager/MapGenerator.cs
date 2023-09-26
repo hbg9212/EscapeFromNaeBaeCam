@@ -35,34 +35,18 @@ public class MapGenerator : MonoBehaviour
         public Node ChildLeft;
         public Node ChildRight;
 
+        //디버깅용 입니다.
         public GameObject   Grid;
         public GameObject   Room;
         public GameObject   Corridor;
 
-    }
 
+    }
 
     public void GenerateMap()
     {
 
-        //맵 전체 크기의 루트 노드를 생성합니다.
-        //포화 이진 트리 구조이기에 노드의 개수를 알 수 있으니 미리 생성해 놓습니다.
-        _node_array = new Node[(int)Mathf.Pow(2, _map_generation_patition_number + 1) - 1];
-        for (int i = 0; i < _node_array.Length; ++i)
-        {
-            _node_array[i] = new Node();
-            _node_array[i].Grid     = Instantiate(_grid_prefab);
-            _node_array[i].Room     = Instantiate(_grid_prefab);
-            _node_array[i].Corridor = Instantiate(_grid_prefab);
-            _node_array[i].Grid.transform.SetParent(_grid_parent.transform);
-            _node_array[i].Room.transform.SetParent(_grid_parent.transform);
-            _node_array[i].Corridor.transform.SetParent(_grid_parent.transform);
-        }
-        _node_array[0].X = 0;
-        _node_array[0].Y = 0;
-        _node_array[0].W = _grid_number_x;
-        _node_array[0].H = _grid_number_y;
-        UpdateLineRenderer(_node_array[0]);
+        CreateTree();
 
         
         //영역을 분할합니다.
@@ -82,7 +66,7 @@ public class MapGenerator : MonoBehaviour
                 var childRight = childLeft + 1;
 
                 //자신을 분할해 자식을 설정합니다.
-                Split(_node_array[index], _node_array[childLeft], _node_array[childRight], isHorizonSplit);
+                Split(_node_array[index], isHorizonSplit);
 
 
             }
@@ -122,50 +106,85 @@ public class MapGenerator : MonoBehaviour
     }
 
 
-    public void Split(Node parent, Node left, Node right, bool isHorizonSplit)
+    private void CreateTree()
     {
 
-        parent.ChildLeft    = left;
-        parent.ChildRight   = right;
-
-        parent.IsSplitHorizon = isHorizonSplit;
-        if (parent.IsSplitHorizon)
+        //포화 이진 트리 구조이기에 노드의 개수를 알 수 있으니 미리 생성해 놓습니다.
+        _node_array = new Node[(int)Mathf.Pow(2, _map_generation_patition_number + 1) - 1];
+        for (int i = 0; i < _node_array.Length; ++i)
         {
 
-            int splitY = (int)(parent.H * Random.Range(_grid_split_random_range_y.x, _grid_split_random_range_y.y));
+            _node_array[i] = new Node();
 
-            left.X = parent.X;
-            left.Y = parent.Y;
-            left.W = parent.W;
+            //디버깅 용도
+            _node_array[i].Grid     = Instantiate(_grid_prefab);
+            _node_array[i].Room     = Instantiate(_grid_prefab);
+            _node_array[i].Corridor = Instantiate(_grid_prefab);
+            _node_array[i].Grid.transform.SetParent(_grid_parent.transform);
+            _node_array[i].Room.transform.SetParent(_grid_parent.transform);
+            _node_array[i].Corridor.transform.SetParent(_grid_parent.transform);
+
+        }
+
+        int   parentNodeCount = (int)Mathf.Pow(2, _map_generation_patition_number) - 1;
+        for (int i = 0; i < parentNodeCount; ++i)
+        {
+            _node_array[i].ChildLeft  = _node_array[i * 2 + 1];
+            _node_array[i].ChildRight = _node_array[i * 2 + 2];
+        }
+
+        //루트 노드를 맵 전체 크기로 설정합니다.
+        _node_array[0].X = 0;
+        _node_array[0].Y = 0;
+        _node_array[0].W = _grid_number_x;
+        _node_array[0].H = _grid_number_y;
+        UpdateLineRenderer(_node_array[0]);
+
+    }
+
+    private void Split(Node node, bool isHorizonSplit)
+    {
+
+        var left    = node.ChildLeft;
+        var right   = node.ChildRight;
+        node.IsSplitHorizon = isHorizonSplit;
+        if (node.IsSplitHorizon)
+        {
+
+            int splitY = (int)(node.H * Random.Range(_grid_split_random_range_y.x, _grid_split_random_range_y.y));
+
+            left.X = node.X;
+            left.Y = node.Y;
+            left.W = node.W;
             left.H = splitY;
 
-            right.X = parent.X;
-            right.Y = parent.Y + splitY;
-            right.W = parent.W;
-            right.H = parent.H - splitY;
+            right.X = node.X;
+            right.Y = node.Y + splitY;
+            right.W = node.W;
+            right.H = node.H - splitY;
 
         }
         else
         {
 
-            var splitX = (int)(parent.W * Random.Range(_grid_split_random_range_x.x, _grid_split_random_range_x.y));
+            var splitX = (int)(node.W * Random.Range(_grid_split_random_range_x.x, _grid_split_random_range_x.y));
 
-            left.X = parent.X;
-            left.Y = parent.Y;
+            left.X = node.X;
+            left.Y = node.Y;
             left.W = splitX;
-            left.H = parent.H;
+            left.H = node.H;
 
-            right.X = parent.X + splitX;
-            right.Y = parent.Y;
-            right.W = parent.W - splitX;
-            right.H = parent.H;
+            right.X = node.X + splitX;
+            right.Y = node.Y;
+            right.W = node.W - splitX;
+            right.H = node.H;
 
         }
 
     }
 
 
-    public void GenerateRoom(Node node)
+    private void GenerateRoom(Node node)
     {
 
         node.RoomW = (int)(node.W * Random.Range(_room_random_range_x.x, _room_random_range_x.y));

@@ -15,7 +15,6 @@ public enum ConsumableType
     , Bomb
     , Health
     , Maxhealth
-
 }
 
 [System.Serializable]
@@ -25,7 +24,7 @@ public class ItemDataConsumable
     public float value;
 }
 
-[CreateAssetMenu(fileName = "Item", menuName = "New Item")]
+[CreateAssetMenu(fileName = "Item", menuName = "Item/New Item", order = 0)]
 public class ItemData : ScriptableObject
 {
     [Header("Info")]

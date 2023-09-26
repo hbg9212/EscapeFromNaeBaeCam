@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     Rigidbody2D rb;
     private Vector3 direction;
-    public float speed= 10.0f;
+    public float speed = 10.0f;
 
     private void Awake()
     {
@@ -17,6 +17,11 @@ public class Bullet : MonoBehaviour
     {
         direction = Target.position - this.transform.position;
         direction = Vector3.Normalize(direction);
+    
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        transform.rotation = rotation;
     }
 
     private void FixedUpdate()

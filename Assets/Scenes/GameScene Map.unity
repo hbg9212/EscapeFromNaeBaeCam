@@ -931,6 +931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8f183ae76dc2c47882422a92e774e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileSpawnPosition: {fileID: 0}
 --- !u!114 &1244991910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,7 +944,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfb77cf34da8a042b785fa3e60e9865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterRenderer: {fileID: 1244991908}
+  armRenderer: {fileID: 0}
+  armPivot: {fileID: 0}
 --- !u!114 &1244991911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1204,4 +1206,4 @@ MonoBehaviour:
   _grid_split_random_range_y: {x: 0.3, y: 0.7}
   _room_random_range_x: {x: 0.6, y: 0.9}
   _room_random_range_y: {x: 0.6, y: 0.9}
-  _m_map_door_grid_size: 2
+  _door_grid_size: 2

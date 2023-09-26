@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public static float Playerspeed = 5f;
     private CharacterController _controller;
+    private CharacterStatsHandler _stats;
 
     private Vector2 _movementDirection = Vector2.zero;
     private Rigidbody2D _rigidbody;
@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
+        _stats = GetComponent<CharacterStatsHandler>();
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -33,7 +34,7 @@ public class Movement : MonoBehaviour
 
     private void ApplyMovment(Vector2 direction)
     {
-        direction = direction * Playerspeed;
+        direction = direction * _stats.CurrentStats.speed;
         _rigidbody.velocity = direction;
     }
 

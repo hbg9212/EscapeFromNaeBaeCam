@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5189869415071307399}
   - component: {fileID: 8262757568956598123}
   - component: {fileID: 1075462700708815165}
-  - component: {fileID: 975597896518790747}
+  - component: {fileID: -3994024115646896315}
   m_Layer: 0
   m_Name: SnowBall
   m_TagString: SnowBall
@@ -27,8 +27,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 844005708755998285}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.29820302, w: 0.9545025}
+  m_LocalPosition: {x: -8.184526, y: 3.7876859, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -149,7 +149,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &975597896518790747
+--- !u!114 &-3994024115646896315
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,6 +158,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 844005708755998285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ed0ef4b9095eec4ab8bf3b951f12be0, type: 3}
+  m_Script: {fileID: 11500000, guid: f4e25fa37b7891e45ae12a470f94f710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelCollisionLayer:
+    serializedVersion: 2
+    m_Bits: 128

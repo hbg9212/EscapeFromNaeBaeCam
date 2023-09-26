@@ -1197,8 +1197,11 @@ MonoBehaviour:
   _grid_parent: {fileID: 868286808}
   _map_size: {x: 0, y: 0}
   _map_pivot: {x: 0, y: 0}
-  _map_generation_grid_number_x: 64
-  _map_generation_grid_number_y: 64
-  _map_generation_grid_split_random_range_x: {x: 0.3, y: 0.7}
-  _map_generation_grid_split_random_range_y: {x: 0.3, y: 0.7}
-  _map_generation_patition_number: 5
+  _map_generation_patition_number: 4
+  _grid_number_x: 64
+  _grid_number_y: 64
+  _grid_split_random_range_x: {x: 0.3, y: 0.7}
+  _grid_split_random_range_y: {x: 0.3, y: 0.7}
+  _room_random_range_x: {x: 0.6, y: 0.9}
+  _room_random_range_y: {x: 0.6, y: 0.9}
+  _m_map_door_grid_size: 2

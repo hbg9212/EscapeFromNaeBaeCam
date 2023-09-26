@@ -5,8 +5,6 @@ using UnityEngine;
 public enum ItemType
 {
     Consumable
-    , Money
-    , Bomb
     , Accessories
     , Weapon
 }
@@ -16,6 +14,7 @@ public enum ConsumableType
     Gold
     , Bomb
     , Health
+    , Maxhealth
 }
 
 [System.Serializable]
@@ -25,7 +24,7 @@ public class ItemDataConsumable
     public float value;
 }
 
-[CreateAssetMenu(fileName = "Item", menuName = "New Item")]
+[CreateAssetMenu(fileName = "Item", menuName = "Item/New Item", order = 0)]
 public class ItemData : ScriptableObject
 {
     [Header("Info")]
@@ -35,13 +34,6 @@ public class ItemData : ScriptableObject
     public Sprite icon;
     public GameObject dropPrefab;
 
-    [Header("Stacking")]
-    public bool canStack;
-    public int maxStackAmount;
-
     [Header("Consumable")]
     public ItemDataConsumable[] consumables;
-
-    [Header("Equip")]
-    public GameObject equipPrefab;
 }

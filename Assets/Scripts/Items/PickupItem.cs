@@ -7,13 +7,13 @@ public abstract class PickupItem : MonoBehaviour
     [SerializeField] private bool destroyOnPickup = true;
     [SerializeField] private LayerMask canBePickupBy;
     [SerializeField] private AudioClip pickupSound;
+    [SerializeField] private ItemData itemData;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (canBePickupBy.value == (canBePickupBy.value | (1 << other.gameObject.layer)))
         {
-            OnPickedUp(other.gameObject);
-
+            OnPickedUp(other.gameObject, itemData);
             if (destroyOnPickup)
             {
                 Destroy(gameObject);
@@ -21,5 +21,5 @@ public abstract class PickupItem : MonoBehaviour
         }
     }
 
-    protected abstract void OnPickedUp(GameObject receiver);
+    protected abstract void OnPickedUp(GameObject receiver, ItemData itemData);
 }

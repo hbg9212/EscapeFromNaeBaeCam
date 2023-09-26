@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerInputController : CharacterController
 {
     private Camera _camera;
+    private bool _invenOpen = false;
 
     protected override void Awake()
     {
@@ -34,5 +35,14 @@ public class PlayerInputController : CharacterController
     public void OnFire(InputValue value)
     {
         IsAttacking = value.isPressed;
+    }
+
+    public void OnInven(InputValue value)
+    {
+        if(value.isPressed)
+        {
+            _invenOpen = !_invenOpen;
+            CallInven(_invenOpen);
+        }
     }
 }

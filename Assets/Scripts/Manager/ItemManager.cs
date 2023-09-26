@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ItemManager : MonoBehaviour
 {
@@ -12,8 +13,14 @@ public class ItemManager : MonoBehaviour
     }
 
     [Header("In Game Count")]
-    public int money;
+    public int gold;
     public int bomb;
+    [SerializeField] private TextMeshProUGUI _goldText;
+    [SerializeField] private TextMeshProUGUI _bombText;
+
+    [Header("PickupPanel")]
+    [SerializeField] private Transform _panelPosition;
+    [SerializeField] private GameObject _panel;
 
     public enum consumableItem { Coin_Bronze, Coin_Silver, Coin_Gold, Bar_Silver, Bar_Gold };
     public enum accessoriesItem { Accessories1, Accessories2 };
@@ -32,6 +39,12 @@ public class ItemManager : MonoBehaviour
         StartCoroutine("DropTest");
     }
 
+    private void Update()
+    {
+        _goldText.text = gold.ToString().PadLeft(3, '0');
+        _bombText.text = bomb.ToString().PadLeft(3, '0');
+    }
+
     IEnumerator DropTest()
     {
         while (true)
@@ -39,5 +52,13 @@ public class ItemManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             testDrop.ItemDrop(transform);
         }
+    }
+
+    public void NoticeOfPanel(ItemData itemData)
+    {
+        GameObject pickupPanel = Instantiate(_panel, _panelPosition);
+        pickupPanel.GetComponent<PickupPanel>().Set(itemData);
+        
+        Destroy(pickupPanel, 1.5f);
     }
 }

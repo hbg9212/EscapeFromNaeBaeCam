@@ -7,7 +7,10 @@ public class CharacterController : MonoBehaviour
 {
     public event Action<Vector2> OnMoveEvent;
     public event Action<Vector2> OnLookEvent;
+
+    public event Action<bool> OnInvenEvent;
     public event Action<AttackSO> OnAttackEvent;
+
 
     private float _timeSinceLastAttack = float.MaxValue;
     protected CharacterStatsHandler Stats { get; private set; }
@@ -54,4 +57,8 @@ public class CharacterController : MonoBehaviour
         OnAttackEvent?.Invoke(attackSO);
     }
     
+    public void CallInven(bool IsInven)
+    {
+        OnInvenEvent?.Invoke(IsInven);
+    }
 }

@@ -2,33 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class RangeEnemyContreoller : EnemyController
 {
-    [SerializeField][Range(0f, 100f)] private float followRange;
-    private bool _isCollidingWithTarget;
-    private Vector2 direction = Vector2.zero;
+    [SerializeField] private float followRange = 15f;
+    [SerializeField] private float shootRange = 10f;
     [SerializeField] private SpriteRenderer characterRenderer;
-
+    [SerializeField] private GameObject BulletPrefab;
+    [SerializeField] private Transform BulletSpawnPoint;
+    private Vector2 direction = Vector2.zero;
     protected override void Awake()
     {
         base.Awake();
+        OnAttackEvent += ShootBullet;
     }
-
     protected void FixedUpdate()
     {
-        direction = DirectionToTarget();
+        float distance = DistanceToTarget();
+        Vector2 direction = DirectionToTarget();
 
-        direction = Vector2.zero;
-        if (DistanceToTarget() < followRange)
+        IsAttacking = true;
+        if (distance <= followRange)
         {
-            direction = DirectionToTarget();
+            if (distance <= shootRange)
+            {
+                CallLookEvent(direction);
+                CallMoveEvent(Vector2.zero);
+            }
+            else
+            {
+                CallMoveEvent(direction);
+            }
         }
-        CallMoveEvent(direction);
-        Rotate(direction);
-
+        else
+        {
+            CallMoveEvent(direction);
+        }
     }
+  
 
     private void Rotate(Vector2 direction)
     {
@@ -39,5 +50,11 @@ public class RangeEnemyContreoller : EnemyController
     protected override void OnDestroy()
     {
         base.OnDestroy();
+    }
+
+    private void ShootBullet(AttackSO attackSo)
+    {
+        GameObject bullet = Instantiate(BulletPrefab, BulletSpawnPoint.position, Quaternion.identity);
+        bullet.GetComponent<Bullet>().Shoot(Target.transform);
     }
 }

@@ -146,8 +146,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5317533720095545249}
-  - component: {fileID: 8745475673460516883}
-  - component: {fileID: 3773932913268072618}
   - component: {fileID: 5005701181922428345}
   - component: {fileID: 7580923870895295844}
   - component: {fileID: 2515214888456773621}
@@ -175,36 +173,8 @@ Transform:
   - {fileID: 4940721460200034377}
   - {fileID: 1181962070164708147}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8745475673460516883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3878377266091272735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd8f183ae76dc2c47882422a92e774e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileSpawnPosition: {fileID: 1181962070164708147}
---- !u!114 &3773932913268072618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3878377266091272735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4e25fa37b7891e45ae12a470f94f710, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelCollisionLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &5005701181922428345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,9 +188,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats:
-    type: 0
+    type: 2
     maxHealth: 5
-    speed: 5
+    speed: 10
     attackSO: {fileID: 11400000, guid: 4170dec5fc97b8b41b11ac93548a8d16, type: 2}
   statsModifiers: []
 --- !u!114 &7580923870895295844
@@ -276,8 +246,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   enemySpawner: {fileID: 0}
-  followRange: 36.8
+  followRange: 40
+  shootRange: 10
   characterRenderer: {fileID: 824802026541975339}
+  BulletPrefab: {fileID: 3203894352867431723, guid: 27020a61353b62444bf427ac124f819d, type: 3}
+  BulletSpawnPoint: {fileID: 1181962070164708147}
 --- !u!61 &5154052368975748209
 BoxCollider2D:
   m_ObjectHideFlags: 0

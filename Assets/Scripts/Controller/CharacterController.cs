@@ -7,11 +7,14 @@ public class CharacterController : MonoBehaviour
 {
     public event Action<Vector2> OnMoveEvent;
     public event Action<Vector2> OnLookEvent;
-    public event Action OnAttackEvent;
-
+    public event Action<AttackSo> OnAttackEvent;
+    protected CharacterStatsHandler Stats;
     private float _timeSinceLastAttack = float.MaxValue;
     protected bool IsAttacking { get; set; }
-
+    protected virtual void Awake()
+    {
+        Stats = GetComponent<CharacterStatsHandler>();
+    }
     protected virtual void Update()
     {
         HandleAttackDelay();
@@ -27,7 +30,7 @@ public class CharacterController : MonoBehaviour
         if(IsAttacking && _timeSinceLastAttack > 0.5f)
         {
             _timeSinceLastAttack = 0;
-            CallAttackEvent();
+            CallAttackEvent(Stats.CurrentStates.attackSO);
         }
     }
 
@@ -41,9 +44,9 @@ public class CharacterController : MonoBehaviour
         OnLookEvent?.Invoke(direction);
     }
 
-    public void CallAttackEvent()
+    public void CallAttackEvent(AttackSo attackSo)
     {
-        OnAttackEvent?.Invoke();
+        OnAttackEvent?.Invoke(attackSo);
     }
     
 }

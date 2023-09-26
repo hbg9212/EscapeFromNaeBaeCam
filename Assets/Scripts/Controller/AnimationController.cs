@@ -30,7 +30,7 @@ public class AnimationController : MonoBehaviour
         animator.SetBool(IsWalking, obj.magnitude > .5f);
     }
 
-    private void Attacking()
+    private void Attacking(AttackSo attackSo)
     {
         animator.SetTrigger(Attack);
     }

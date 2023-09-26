@@ -10,8 +10,12 @@ public class RangeEnemyContreoller : EnemyController
     private bool _isCollidingWithTarget;
     private Vector2 direction = Vector2.zero;
     [SerializeField] private SpriteRenderer characterRenderer;
- 
-   
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     protected void FixedUpdate()
     {
         direction = DirectionToTarget();
@@ -30,5 +34,10 @@ public class RangeEnemyContreoller : EnemyController
     {
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         characterRenderer.flipX = Mathf.Abs(rotZ) > 90f;
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
     }
 }

@@ -25,7 +25,7 @@ public class Shooting : MonoBehaviour
         _aimDirection = newAimDirection;
     }
 
-    private void OnShoot()
+    private void OnShoot(AttackSo attackSo)
     {
         Transform bullet = PoolManager.I.Get((int)PoolManager.PrefabId.SnowBall).transform;
         bullet.position = projectileSpawnPosition.position;

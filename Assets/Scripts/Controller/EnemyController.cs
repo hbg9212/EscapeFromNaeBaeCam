@@ -7,7 +7,9 @@ public class EnemyController : CharacterController
 {
     [SerializeField] protected GameObject Target;
     [SerializeField] protected EnemySpawner enemySpawner;
-   
+  
+
+    
     public void SetTarget(GameObject target)
     {
         Target = target;
@@ -20,6 +22,7 @@ public class EnemyController : CharacterController
 
     protected virtual void OnDestroy()
     {
+        if(enemySpawner != null) 
         enemySpawner.RemoveFromList(this.gameObject);
     }
 

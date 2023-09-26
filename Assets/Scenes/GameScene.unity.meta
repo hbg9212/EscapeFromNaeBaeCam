@@ -1,5 +1,10 @@
 fileFormatVersion: 2
-guid: 60411c2e400bd734c905da21c8fd68a8
+<<<<<<<< HEAD:Assets/ScriptableObjects/Data/Item.meta
+guid: 45318f1664e6ce94180f730e04d5ab43
+folderAsset: yes
+========
+guid: 63213b1b44fc4594d891d7c219dd71be
+>>>>>>>> 604197162b2d1be30c4df5d97b69a853938e8492:Assets/Scenes/BattleTest.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

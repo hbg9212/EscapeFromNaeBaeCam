@@ -16,6 +16,7 @@ public class PlayerInputController : CharacterController
         base.Awake();
         _camera = Camera.main;
     }
+  
 
     public void OnMove(InputValue value)
     {

@@ -13,9 +13,8 @@ public class ItemManager : MonoBehaviour
     }
 
     [Header("In Game Count")]
-    public int money = 0;
-    public int bomb = 0;
-
+    public int money;
+    public int bomb;
     [SerializeField] private TextMeshProUGUI _moneyText;
     [SerializeField] private TextMeshProUGUI _bombText;
 

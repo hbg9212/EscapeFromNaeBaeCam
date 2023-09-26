@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class AimRotation : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer characterRenderer;
+    private SpriteRenderer characterRenderer;
+    [SerializeField] private SpriteRenderer armRenderer;
+    [SerializeField] private Transform armPivot;
 
     private CharacterController _controller;
 
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
+        characterRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Start()
@@ -26,15 +29,18 @@ public class AimRotation : MonoBehaviour
     private void RotateArm(Vector2 direction)
     {
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
+        armPivot.rotation = Quaternion.Euler(0, 0, rotZ);
+        
         // 마우스 위치에 따른 캐릭터 스프라이트 랜더러 전환
         if (Mathf.Abs(rotZ) > 90f)
         {
-            characterRenderer.transform.localScale = new Vector3(-1, 1, 1);
+            armRenderer.flipY = true;
+            characterRenderer.flipX = true;
         }
         else
         {
-            characterRenderer.transform.localScale = new Vector3(1, 1, 1);
+            armRenderer.flipY = false;
+            characterRenderer.flipX = false;
         }
     }
 }

@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
 {
     private CharacterController _controller;
     private CharacterStatsHandler _stats;
+    private AnimationController _anim;
 
     private Vector2 _movementDirection = Vector2.zero;
     private Rigidbody2D _rigidbody;
@@ -15,6 +16,7 @@ public class Movement : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _stats = GetComponent<CharacterStatsHandler>();
         _rigidbody = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<AnimationController>();
     }
 
     private void Start()
@@ -41,9 +43,10 @@ public class Movement : MonoBehaviour
 
     private void Dodge()
     {
+        Debug.Log(_movementDirection);
         if (_movementDirection != Vector2.zero && !(_controller.IsRolling))
         {
-            _controller.dodgeVec = _movementDirection;
+            //_controller.dodgeVec = _movementDirection;
             _stats.CurrentStats.speed *= 2;
             //anim.SetTrigger("doDodge");
             _controller.IsRolling = true;
@@ -55,7 +58,9 @@ public class Movement : MonoBehaviour
     {
         _stats.CurrentStats.speed *= 0.5f;
         _controller.IsRolling = false;
-        _rigidbody.velocity = Vector2.zero;
+        _controller.dodgeVec = Vector2.zero;
+        _anim.InvincibilityEnd();
+        Move(Vector2.zero);
     }
 
 }

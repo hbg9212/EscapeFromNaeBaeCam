@@ -25,6 +25,7 @@ public class PlayerInputController : CharacterController
         else
         {
             moveInput = value.Get<Vector2>().normalized;
+            dodgeVec = moveInput;
         }
 
         CallMoveEvent(moveInput);

@@ -23,7 +23,7 @@ public class AnimationController : MonoBehaviour
     {
         controller.OnAttackEvent += Attacking;
         controller.OnMoveEvent += Move;
-
+        controller.OnRollEvent += Roll;
     }
 
     private void Move(Vector2 obj)
@@ -46,7 +46,7 @@ public class AnimationController : MonoBehaviour
         animator.SetBool(IsRoll, true);
     }
 
-    private void InvincibilityEnd()
+    public void InvincibilityEnd()
     {
         animator.SetBool(IsHit, false);
         animator.SetBool(IsRoll, false);

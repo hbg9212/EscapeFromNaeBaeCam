@@ -32,6 +32,9 @@ public class MapGenerator : MonoBehaviour
 
         public bool IsSplitHorizon;
 
+        public Node ChildLeft;
+        public Node ChildRight;
+
         public GameObject   Grid;
         public GameObject   Room;
         public GameObject   Corridor;
@@ -108,12 +111,12 @@ public class MapGenerator : MonoBehaviour
         //
         //}
 
-        siblingNumber   = (int)Mathf.Pow(2, _map_generation_patition_number);
-        begin           = (int)Mathf.Pow(2, _map_generation_patition_number) - 1;
-        for (int i = 0; i < siblingNumber; i += 2)
+        siblingNumber   = (int)Mathf.Pow(2, _map_generation_patition_number - 1);
+        begin           = (int)Mathf.Pow(2, _map_generation_patition_number - 1) - 1;
+        for (int i = 0; i < siblingNumber; ++i)
         {
-            GenerateCorrider(_node_array[(begin + i - 1) / 2], _node_array[begin + i], _node_array[begin + i + 1]);
-            UpdateLineRenderer(_node_array[(begin + i - 1) / 2]);
+            GenerateCorrider(_node_array[begin + i]);
+            UpdateLineRenderer(_node_array[begin + i]);
         }
 
     }
@@ -121,6 +124,9 @@ public class MapGenerator : MonoBehaviour
 
     public void Split(Node parent, Node left, Node right, bool isHorizonSplit)
     {
+
+        parent.ChildLeft    = left;
+        parent.ChildRight   = right;
 
         parent.IsSplitHorizon = isHorizonSplit;
         if (parent.IsSplitHorizon)
@@ -169,33 +175,35 @@ public class MapGenerator : MonoBehaviour
 
     }
 
-    private void GenerateCorrider(Node parent, Node node0, Node node1)
+    private void GenerateCorrider(Node node)
     {
 
+        Node left   = node.ChildLeft;
+        Node right  = node.ChildRight;
         int maxBegin;
         int minEnd;
-        if (parent.IsSplitHorizon)
+        if (node.IsSplitHorizon)
         {
 
-            maxBegin    = Mathf.Max(node0.RoomX + _door_grid_size, node1.RoomX + _door_grid_size);
-            minEnd      = Mathf.Min(node0.RoomX + node0.RoomW - _door_grid_size, node1.RoomX + node1.RoomW - _door_grid_size);
+            maxBegin    = Mathf.Max(left.RoomX + _door_grid_size, right.RoomX + _door_grid_size);
+            minEnd      = Mathf.Min(left.RoomX + left.RoomW - _door_grid_size, right.RoomX + right.RoomW - _door_grid_size);
 
-            parent.CorridorX        = Random.Range(maxBegin, minEnd + 1);
-            parent.CorridorW        = _door_grid_size;
-            parent.CorridorY        = Mathf.Min(node0.CenterY, node1.CenterY);
-            parent.CorridorH        = Mathf.Abs(node1.CenterY - node0.CenterY);
+            node.CorridorX        = Random.Range(maxBegin, minEnd + 1);
+            node.CorridorW        = _door_grid_size;
+            node.CorridorY        = Mathf.Min(left.CenterY, right.CenterY);
+            node.CorridorH        = Mathf.Abs(right.CenterY - left.CenterY);
 
         }
         else
         {
 
-            maxBegin    = Mathf.Max(node0.RoomY + _door_grid_size, node1.RoomY + _door_grid_size);
-            minEnd      = Mathf.Min(node0.RoomY + node0.RoomH - _door_grid_size, node1.RoomY + node1.RoomH - _door_grid_size);
+            maxBegin    = Mathf.Max(left.RoomY + _door_grid_size, right.RoomY + _door_grid_size);
+            minEnd      = Mathf.Min(left.RoomY + left.RoomH - _door_grid_size, right.RoomY + right.RoomH - _door_grid_size);
 
-            parent.CorridorX        = Mathf.Min(node0.CenterX, node1.CenterX);
-            parent.CorridorW        = Mathf.Abs(node1.CenterX - node0.CenterX);
-            parent.CorridorY        = Random.Range(maxBegin, minEnd + 1);
-            parent.CorridorH        = _door_grid_size;
+            node.CorridorX        = Mathf.Min(left.CenterX, right.CenterX);
+            node.CorridorW        = Mathf.Abs(right.CenterX - left.CenterX);
+            node.CorridorY        = Random.Range(maxBegin, minEnd + 1);
+            node.CorridorH        = _door_grid_size;
 
         }
 

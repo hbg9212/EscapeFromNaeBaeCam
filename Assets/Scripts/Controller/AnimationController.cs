@@ -8,6 +8,7 @@ public class AnimationController : MonoBehaviour
     private static readonly int IsWalking = Animator.StringToHash("IsWalking");
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int IsHit = Animator.StringToHash("IsHit");
+    private static readonly int IsRoll = Animator.StringToHash("IsRoll");
 
     protected CharacterController controller;
     protected Animator animator;
@@ -40,8 +41,14 @@ public class AnimationController : MonoBehaviour
         animator.SetBool(IsHit, true);
     }
 
+    private void Roll()
+    {
+        animator.SetBool(IsRoll, true);
+    }
+
     private void InvincibilityEnd()
     {
         animator.SetBool(IsHit, false);
+        animator.SetBool(IsRoll, false);
     }
 }

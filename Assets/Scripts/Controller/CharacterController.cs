@@ -11,10 +11,12 @@ public class CharacterController : MonoBehaviour
     public event Action<bool> OnInvenEvent;
     public event Action<AttackSO> OnAttackEvent;
 
+    public event Action OnRollEvent;
 
     private float _timeSinceLastAttack = float.MaxValue;
     protected CharacterStatsHandler Stats { get; private set; }
     protected bool IsAttacking { get; set; }
+    protected bool IsRolling { get; set; }
 
     protected virtual void Awake() {
         Stats = GetComponent<CharacterStatsHandler>();
@@ -55,6 +57,11 @@ public class CharacterController : MonoBehaviour
     public void CallAttackEvent(AttackSO attackSO)
     {
         OnAttackEvent?.Invoke(attackSO);
+    }
+
+    public void CallRollEvent()
+    {
+        OnRollEvent?.Invoke();
     }
     
     public void CallInven(bool IsInven)

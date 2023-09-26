@@ -29,15 +29,15 @@ public class Shooting : MonoBehaviour
 
     private void OnShoot(AttackSO attackSO)
     {
-        RangedAttackData rangedAttackData = attackSO as RangedAttackData; // °ø°Ý Á¤º¸
-        float projectilesAngleSpace = rangedAttackData.multipleProjectilesAngle; // ¾Þ±Û
-        int numberOfProjectilesPerShot = rangedAttackData.numberOfProjectilesPerShot; // ¹ß»çÃ¼ ¼ö
+        RangedAttackData rangedAttackData = attackSO as RangedAttackData; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        float projectilesAngleSpace = rangedAttackData.multipleProjectilesAngle; // ï¿½Þ±ï¿½
+        int numberOfProjectilesPerShot = rangedAttackData.numberOfProjectilesPerShot; // ï¿½ß»ï¿½Ã¼ ï¿½ï¿½
 
-        float minAngle = -(numberOfProjectilesPerShot / 2) * projectilesAngleSpace + 0.5f * rangedAttackData.multipleProjectilesAngle; // ¾Þ±Û À§Ä¡¸¦ À§·Î ²ø¾î¿Ã¸²
+        float minAngle = -(numberOfProjectilesPerShot / 2) * projectilesAngleSpace + 0.5f * rangedAttackData.multipleProjectilesAngle; // ï¿½Þ±ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½
 
         for (int i = 0; i < numberOfProjectilesPerShot; i++) {
-            float angle = minAngle + projectilesAngleSpace * i; // ¹ß»çÃ¼¸¶´Ù ¾Þ±Û º¯°æ
-            float randomSpread = Random.Range(-rangedAttackData.spread, rangedAttackData.spread); // ÅººÐ»ê
+            float angle = minAngle + projectilesAngleSpace * i; // ï¿½ß»ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½ ï¿½ï¿½ï¿½ï¿½
+            float randomSpread = Random.Range(-rangedAttackData.spread, rangedAttackData.spread); // Åºï¿½Ð»ï¿½
             angle += randomSpread;
             CreateProjectile(rangedAttackData, angle);
         }
@@ -55,7 +55,7 @@ public class Shooting : MonoBehaviour
     }
 
     private static Vector2 RotateVector2(Vector2 v, float degree) {
-        return Quaternion.Euler(0, 0, degree) * v; // ¹ß»çÃ¼ º¤ÅÍ È¸Àü
+        return Quaternion.Euler(0, 0, degree) * v; // ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½
     }
 }
 

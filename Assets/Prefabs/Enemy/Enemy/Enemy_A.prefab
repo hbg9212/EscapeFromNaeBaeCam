@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 592059701731643607}
   - component: {fileID: 4662492531970413627}
   - component: {fileID: 7480158538162101950}
+  - component: {fileID: 7268920082225234489}
   m_Layer: 0
   m_Name: Enemy_A
   m_TagString: Untagged
@@ -140,7 +141,7 @@ Transform:
   m_Children:
   - {fileID: 4335280431327834158}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1586694593787200210
 Rigidbody2D:
@@ -248,4 +249,16 @@ MonoBehaviour:
   enemySpawner: {fileID: 0}
   followRange: 32.9
   characterRenderer: {fileID: 2347226200333821233}
-  speed: 100
+--- !u!114 &7268920082225234489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3257866580738339206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d99b7a1c48bab1249bd4d29846fa5b07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Playerspeed: 5

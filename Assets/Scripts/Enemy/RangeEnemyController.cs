@@ -10,12 +10,8 @@ public class RangeEnemyContreoller : EnemyController
     private bool _isCollidingWithTarget;
     private Vector2 direction = Vector2.zero;
     [SerializeField] private SpriteRenderer characterRenderer;
-    private Rigidbody2D rb;
-    public float speed = 100.0f;
-    protected void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+ 
+   
     protected void FixedUpdate()
     {
         direction = DirectionToTarget();
@@ -25,7 +21,6 @@ public class RangeEnemyContreoller : EnemyController
         {
             direction = DirectionToTarget();
         }
-        rb.velocity = direction * speed * Time.fixedDeltaTime;
         CallMoveEvent(direction);
         Rotate(direction);
 

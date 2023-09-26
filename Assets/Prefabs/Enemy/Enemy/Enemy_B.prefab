@@ -117,8 +117,9 @@ GameObject:
   - component: {fileID: 6113487607375200950}
   - component: {fileID: 7702575806344717906}
   - component: {fileID: 6107434538414419669}
-  - component: {fileID: 8667918347540105322}
   - component: {fileID: 8088086114847546227}
+  - component: {fileID: 8667918347540105322}
+  - component: {fileID: 6119879426218777542}
   m_Layer: 0
   m_Name: Enemy_B
   m_TagString: Untagged
@@ -214,23 +215,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 3.3}
   m_EdgeRadius: 0
---- !u!114 &8667918347540105322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6969382807840113813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d054c624233ff6245bb7077477d0bbd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  enemySpawner: {fileID: 0}
-  followRange: 22
-  characterRenderer: {fileID: 3819757501905628897}
-  speed: 100
 --- !u!114 &8088086114847546227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,3 +233,32 @@ MonoBehaviour:
     speed: 3
     attackSO: {fileID: 11400000, guid: 1c1ae94894a3041429469691887c148f, type: 2}
   statsModifiers: []
+--- !u!114 &8667918347540105322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6969382807840113813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d054c624233ff6245bb7077477d0bbd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  enemySpawner: {fileID: 0}
+  followRange: 22
+  characterRenderer: {fileID: 3819757501905628897}
+--- !u!114 &6119879426218777542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6969382807840113813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d99b7a1c48bab1249bd4d29846fa5b07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Playerspeed: 5

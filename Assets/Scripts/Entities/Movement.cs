@@ -10,10 +10,6 @@ public class Movement : MonoBehaviour
     private Vector2 _movementDirection = Vector2.zero;
     private Rigidbody2D _rigidbody;
 
-    //회피도중 방향전환되지않게하기위한 변수.
-    Vector2 dodgeVec;
-
-
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
@@ -47,7 +43,7 @@ public class Movement : MonoBehaviour
     {
         if (_movementDirection != Vector2.zero && !(_controller.IsRolling))
         {
-            dodgeVec = _movementDirection;
+            _controller.dodgeVec = _movementDirection;
             _stats.CurrentStats.speed *= 2;
             //anim.SetTrigger("doDodge");
             _controller.IsRolling = true;
@@ -59,6 +55,7 @@ public class Movement : MonoBehaviour
     {
         _stats.CurrentStats.speed *= 0.5f;
         _controller.IsRolling = false;
+        _rigidbody.velocity = Vector2.zero;
     }
 
 }

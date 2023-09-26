@@ -18,6 +18,9 @@ public class CharacterController : MonoBehaviour
     protected bool IsAttacking { get; set; }
     public bool IsRolling { get; set; }
 
+    //회피도중 방향전환되지않게하기위한 변수.
+    public Vector2 dodgeVec;
+
     protected virtual void Awake() {
         Stats = GetComponent<CharacterStatsHandler>();
     }

@@ -18,6 +18,14 @@ public class PlayerInputController : CharacterController
     public void OnMove(InputValue value)
     {
         Vector2 moveInput = value.Get<Vector2>().normalized;
+        if(IsRolling)
+        {
+            moveInput = dodgeVec;
+        }
+        else
+        {
+            moveInput = value.Get<Vector2>().normalized;
+        }
 
         CallMoveEvent(moveInput);
     }

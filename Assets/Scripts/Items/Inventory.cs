@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
+using System.ComponentModel;
+using System.Reflection;
+using System;
 
 public class ItemSlot
 {
@@ -19,7 +20,6 @@ public class Inventory : MonoBehaviour
 
     [Header("Selected Item")]
     private ItemSlot selectedItem;
-    private int selectedItemIndex;
     public TextMeshProUGUI selectedItemName;
     public TextMeshProUGUI selectedItemDescription;
 
@@ -104,16 +104,13 @@ public class Inventory : MonoBehaviour
             return;
 
         selectedItem = slots[index];
-        selectedItemIndex = index;
-
         selectedItemName.text = selectedItem.itemData.displayName;
 
         string str = "";
         str = selectedItem.itemData.description + "\n";
-        for (int i = 0; i < selectedItem.itemData.consumables.Length; i++)
+        foreach(ItemDataAddition itemDataAddition in selectedItem.itemData.addition)
         {
-            str += selectedItem.itemData.consumables[i].type.ToString();
-            str += selectedItem.itemData.consumables[i].value.ToString() + "\n";
+            str = str + EnumHelper.GetDescription(itemDataAddition.type) + " " + itemDataAddition.value.ToString() + "\n";
         }
         selectedItemDescription.text = str;
     }
@@ -123,5 +120,27 @@ public class Inventory : MonoBehaviour
         selectedItem = null;
         selectedItemName.text = string.Empty;
         selectedItemDescription.text = string.Empty;
+    }
+}
+
+public static class EnumHelper
+{
+    public static string GetDescription(Enum en)
+    {
+        Type type = en.GetType();
+
+        MemberInfo[] memInfo = type.GetMember(en.ToString());
+
+        if (memInfo != null && memInfo.Length > 0)
+        {
+            object[] attrs = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            if (attrs != null && attrs.Length > 0)
+            {
+                return ((DescriptionAttribute)attrs[0]).Description;
+            }
+        }
+
+        return en.ToString();
     }
 }

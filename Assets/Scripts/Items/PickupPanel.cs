@@ -12,6 +12,11 @@ public class PickupPanel : MonoBehaviour
     public void Set(ItemData itemData)
     {
         _icon.sprite = itemData.icon;
-        _description.text = $"{itemData.displayName} {itemData.description}";
+
+        string str = $"{itemData.displayName}";
+        if (itemData.type == ItemType.Consumable)
+            str = str + $" { itemData.description}";
+        
+        _description.text = str;
     }
 }

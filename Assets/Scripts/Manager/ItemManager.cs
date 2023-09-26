@@ -26,6 +26,8 @@ public class ItemManager : MonoBehaviour
     public enum accessoriesItem { Accessories1, Accessories2 };
     public enum weaponItem { Weapon1, Weapon2 };
 
+    public CharacterStats playerStats;
+
     public GameObject[] ConsumableItemList;
     public GameObject GetConsumableItem(int index)
     {

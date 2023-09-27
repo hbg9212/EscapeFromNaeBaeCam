@@ -67,11 +67,8 @@ public class RangeEnemyContreoller : EnemyController
 
     private IEnumerator AttackCoroutine()
     {
-        animator.SetTrigger("Fire");
         IsAttacking = true;
         CallAttackEvent(Stats.CurrentStats.attackSO);
-        yield return new WaitForSeconds(1.0f);
-        animator.SetTrigger("Idle");
         yield return new WaitForSeconds(1.0f);
         isAttackingCoroutineRunning = false;
         IsAttacking = false;

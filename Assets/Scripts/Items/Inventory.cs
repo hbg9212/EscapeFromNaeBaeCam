@@ -110,7 +110,7 @@ public class Inventory : MonoBehaviour
         str = selectedItem.itemData.description + "\n";
         foreach(ItemDataAddition itemDataAddition in selectedItem.itemData.addition)
         {
-            str = str + EnumHelper.GetDescription(itemDataAddition.type) + " " + itemDataAddition.value.ToString() + "\n";
+            str = str + GetDescription(itemDataAddition.type) + " " + itemDataAddition.value.ToString() + "\n";
         }
         selectedItemDescription.text = str;
     }
@@ -121,11 +121,8 @@ public class Inventory : MonoBehaviour
         selectedItemName.text = string.Empty;
         selectedItemDescription.text = string.Empty;
     }
-}
 
-public static class EnumHelper
-{
-    public static string GetDescription(Enum en)
+    public string GetDescription(Enum en)
     {
         Type type = en.GetType();
 

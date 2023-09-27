@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 706bfe12cc5081549a537324ff200146, type: 3}
-  m_Name: Player_RangedAttackData
+  m_Name: Shoes_AttackSO
   m_EditorClassIdentifier: 
-  size: 1
-  delay: 1
-  power: 2
-  speed: 20
+  size: 0
+  delay: 0
+  power: 0
+  speed: 1
   target:
     serializedVersion: 2
-    m_Bits: 128
-  isOnKnockback: 1
-  knockbackPower: 5
-  knockbackTime: 0.1
-  bulletNameTag: SnowBall
-  duration: 2
-  spread: 4
-  numberOfProjectilesPerShot: 1
-  multipleProjectilesAngle: 2
-  projectileColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Bits: 0
+  isOnKnockback: 0
+  knockbackPower: 0
+  knockbackTime: 0
+  bulletNameTag: 
+  duration: 0
+  spread: 0
+  numberOfProjectilesPerShot: 0
+  multipleProjectilesAngle: 0
+  projectileColor: {r: 0, g: 0, b: 0, a: 0}

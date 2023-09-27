@@ -6,10 +6,8 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class RangeEnemyContreoller : EnemyController
 {
-    [SerializeField][Range(0f, 100f)] private float followRange;
-    private bool _isCollidingWithTarget;
-    private Vector2 direction = Vector2.zero;
-    [SerializeField] private SpriteRenderer characterRenderer;
+    [SerializeField] private float followRange;
+    [SerializeField] private float shootRange;
 
     protected override void Awake()
     {
@@ -18,22 +16,28 @@ public class RangeEnemyContreoller : EnemyController
 
     protected void FixedUpdate()
     {
-        direction = DirectionToTarget();
+        float distance = DistanceToTarget();
+        Vector2 direction = DirectionToTarget();
 
-        direction = Vector2.zero;
-        if (DistanceToTarget() < followRange)
-        {
-            direction = DirectionToTarget();
+        IsAttacking = false;
+        if (distance <= followRange) {
+            if (distance <= shootRange) {
+                int layerMaskTarget = Stats.CurrentStats.attackSO.target;
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 11f,
+                    (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
+                if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer))) {
+                    CallLookEvent(direction);
+                    CallMoveEvent(Vector2.zero);
+                    IsAttacking = true;
+                } else {
+                    CallMoveEvent(direction);
+                }
+            } else {
+                CallMoveEvent(direction);
+            }
+        } else {
+            CallMoveEvent(direction);
         }
-        CallMoveEvent(direction);
-        Rotate(direction);
-
-    }
-
-    private void Rotate(Vector2 direction)
-    {
-        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        characterRenderer.flipX = Mathf.Abs(rotZ) > 90f;
     }
 
     protected override void OnDestroy()

@@ -10,11 +10,13 @@ public class AnimationController : MonoBehaviour
     private static readonly int IsHit = Animator.StringToHash("IsHit");
     private static readonly int IsRoll = Animator.StringToHash("IsRoll");
 
+    private HealthSystem _healthSystem;
     protected CharacterController controller;
     protected Animator animator;
 
     private void Awake()
     {
+        _healthSystem = GetComponent<HealthSystem>();
         animator = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
     }
@@ -24,6 +26,10 @@ public class AnimationController : MonoBehaviour
         controller.OnAttackEvent += Attacking;
         controller.OnMoveEvent += Move;
 
+        if (_healthSystem != null) {
+            _healthSystem.OnDamage += Hit;
+            _healthSystem.OnInvincibilityEnd += InvincibilityEnd;
+        }
     }
 
     private void Move(Vector2 obj)

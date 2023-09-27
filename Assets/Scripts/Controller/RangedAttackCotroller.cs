@@ -41,6 +41,18 @@ public class RangedAttackCotroller : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer))) {
             DestroyProjectile(collision.ClosestPoint(transform.position) - _direction * .2f, false);
+        } else if (_attackData.target.value == (_attackData.target.value | (1 << collision.gameObject.layer))) {
+            HealthSystem healthSystem = collision.GetComponent<HealthSystem>();
+            if (healthSystem != null) {
+                healthSystem.ChangeHealth(-_attackData.power);
+                if (_attackData.isOnKnockback) {
+                    Movement movement = collision.GetComponent<Movement>();
+                    if (movement != null) {
+                        movement.ApplyKnockback(transform, _attackData.knockbackPower, _attackData.knockbackTime);
+                    }
+                }
+            }
+            DestroyProjectile(collision.ClosestPoint(transform.position), false);
         }
     }
 

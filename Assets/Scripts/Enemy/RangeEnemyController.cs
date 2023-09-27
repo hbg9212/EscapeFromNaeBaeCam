@@ -8,13 +8,11 @@ public class RangeEnemyContreoller : EnemyController
     [SerializeField] private float followRange = 15f;
     [SerializeField] private float shootRange = 10f;
     [SerializeField] private SpriteRenderer characterRenderer;
-    [SerializeField] private GameObject BulletPrefab;
-    [SerializeField] private Transform BulletSpawnPoint;
     private Vector2 direction = Vector2.zero;
+
     protected override void Awake()
     {
         base.Awake();
-        OnAttackEvent += ShootBullet;
     }
     protected void FixedUpdate()
     {
@@ -52,9 +50,4 @@ public class RangeEnemyContreoller : EnemyController
         base.OnDestroy();
     }
 
-    private void ShootBullet(AttackSO attackSo)
-    {
-        GameObject bullet = Instantiate(BulletPrefab, BulletSpawnPoint.position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().Shoot(Target.transform);
-    }
 }

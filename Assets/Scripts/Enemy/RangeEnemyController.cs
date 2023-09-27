@@ -8,18 +8,41 @@ public class RangeEnemyContreoller : EnemyController
     [SerializeField] private float followRange = 15f;
     [SerializeField] private float shootRange = 10f;
     [SerializeField] private SpriteRenderer characterRenderer;
+    [SerializeField] private Animator animator;
     private Vector2 direction = Vector2.zero;
+
+    private bool isAttackingCoroutineRunning = false;
 
     protected override void Awake()
     {
         base.Awake();
+        IsAttacking = false;
     }
+    protected override void Update()
+    {
+        if (Stats.CurrentStats.attackSO == null)
+            return;
+
+        if (_timeSinceLastAttack <= Stats.CurrentStats.attackSO.delay)
+        {
+            _timeSinceLastAttack += Time.deltaTime;
+        }
+
+        if (!IsAttacking && _timeSinceLastAttack > Stats.CurrentStats.attackSO.delay)
+        {
+            // 시작한 코루틴을 중복 실행하지 않도록 체크
+            if (!isAttackingCoroutineRunning)
+            {
+                StartCoroutine(AttackCoroutine());
+            }
+        }
+    }
+
     protected void FixedUpdate()
     {
         float distance = DistanceToTarget();
         Vector2 direction = DirectionToTarget();
 
-        IsAttacking = true;
         if (distance <= followRange)
         {
             if (distance <= shootRange)
@@ -29,6 +52,7 @@ public class RangeEnemyContreoller : EnemyController
             }
             else
             {
+                if(!IsAttacking)
                 CallMoveEvent(direction);
             }
         }
@@ -37,8 +61,17 @@ public class RangeEnemyContreoller : EnemyController
             CallMoveEvent(direction);
         }
     }
-  
 
+    private IEnumerator AttackCoroutine()
+    {
+        animator.SetTrigger("Fire");
+        IsAttacking = true;
+        CallAttackEvent(Stats.CurrentStats.attackSO);
+        yield return new WaitForSeconds(1.0f);
+        IsAttacking = false;
+        isAttackingCoroutineRunning = false;
+        animator.SetTrigger("Idle");
+    }
     private void Rotate(Vector2 direction)
     {
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -50,4 +83,8 @@ public class RangeEnemyContreoller : EnemyController
         base.OnDestroy();
     }
 
+    private void AttackFinish()
+    {
+        IsAttacking = false;
+    }
 }

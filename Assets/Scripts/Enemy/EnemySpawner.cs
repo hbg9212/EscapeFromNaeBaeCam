@@ -23,6 +23,8 @@ public class EnemySpawner : MonoBehaviour
     {
         Collider.transform.localScale = new Vector3(ColliderWidth, ColliderHeight, 1);
     }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (first && collision.CompareTag(Player))

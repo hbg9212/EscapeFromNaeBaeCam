@@ -70,7 +70,7 @@ Transform:
   m_Children:
   - {fileID: 5532691066714643922}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5005701181922428345
 MonoBehaviour:
@@ -146,6 +146,7 @@ MonoBehaviour:
   followRange: 40
   shootRange: 10
   characterRenderer: {fileID: 0}
+  animator: {fileID: 5548091697281572659}
 --- !u!61 &5154052368975748209
 BoxCollider2D:
   m_ObjectHideFlags: 0

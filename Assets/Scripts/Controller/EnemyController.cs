@@ -7,7 +7,7 @@ public class EnemyController : CharacterController
 {
     [SerializeField] protected GameObject Target;
     [SerializeField] protected EnemySpawner enemySpawner;
-  
+    
 
     
     public void SetTarget(GameObject target)

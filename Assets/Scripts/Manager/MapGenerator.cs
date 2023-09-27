@@ -35,25 +35,14 @@ public class MapGenerator
     public class Node
     {
 
-        public int CenterX => X + W / 2;
-        public int CenterY => Y + H / 2;
+        public int CenterX => GridRect.x + GridRect.width / 2;
+        public int CenterY => GridRect.y + GridRect.height / 2;
 
-        public bool IsLeafNode => ChildLeft == null;
+        public bool IsLeaf => ChildLeft == null;
 
-        public int X;
-        public int Y;
-        public int W;
-        public int H;
-
-        public int RoomX;
-        public int RoomY;
-        public int RoomW;
-        public int RoomH;
-
-        public int CorridorX;
-        public int CorridorY;
-        public int CorridorW;
-        public int CorridorH;
+        public RectInt GridRect = new RectInt();
+        public RectInt RoomRect;
+        public RectInt CorridorRect;
 
         public bool IsSplitHorizon;
 
@@ -71,11 +60,9 @@ public class MapGenerator
 
             RectInt rect = new RectInt();
 
-            if (IsLeafNode)
+            if (IsLeaf)
             {
-                rect.min   = new Vector2Int(RoomX, RoomY);
-                rect.max   = new Vector2Int(RoomX + RoomW, RoomY + RoomH);
-                return rect;
+                return RoomRect;
             }
 
             var leftRect    = ChildLeft.CalculateRect();
@@ -85,6 +72,18 @@ public class MapGenerator
 
             return rect;
 
+        }
+
+        public int RecursiveOverlapRoom(RectInt rect)
+        {
+            if(IsLeaf)
+            {
+                return GridRect.Overlaps(rect) ? 1 : 0;
+            }
+            else
+            {
+                return ChildLeft.RecursiveOverlapRoom(rect) + ChildRight.RecursiveOverlapRoom(rect);
+            }
         }
 
 
@@ -172,10 +171,10 @@ public class MapGenerator
         }
 
         //루트 노드를 맵 전체 크기로 설정합니다.
-        _node_array[0].X = 0;
-        _node_array[0].Y = 0;
-        _node_array[0].W = _property._cell_number_x;
-        _node_array[0].H = _property._cell_number_y;
+        _node_array[0].GridRect.x       = 0;
+        _node_array[0].GridRect.y       = 0;
+        _node_array[0].GridRect.width   = _property._cell_number_x;
+        _node_array[0].GridRect.height  = _property._cell_number_y;
 
     }
 
@@ -188,33 +187,33 @@ public class MapGenerator
         if (node.IsSplitHorizon)
         {
 
-            int splitY = (int)(node.H * Random.Range(_property._cell_split_random_range_y.x, _property._cell_split_random_range_y.y));
+            int splitY = (int)(node.GridRect.height * Random.Range(_property._cell_split_random_range_y.x, _property._cell_split_random_range_y.y));
 
-            left.X = node.X;
-            left.Y = node.Y;
-            left.W = node.W;
-            left.H = splitY;
+            left.GridRect.x         = node.GridRect.x;
+            left.GridRect.y         = node.GridRect.y;
+            left.GridRect.width     = node.GridRect.width;
+            left.GridRect.height    = splitY;
 
-            right.X = node.X;
-            right.Y = node.Y + splitY;
-            right.W = node.W;
-            right.H = node.H - splitY;
+            right.GridRect.x        = node.GridRect.x;
+            right.GridRect.y        = node.GridRect.y + splitY;
+            right.GridRect.width    = node.GridRect.width;
+            right.GridRect.height   = node.GridRect.height - splitY;
 
         }
         else
         {
 
-            var splitX = (int)(node.W * Random.Range(_property._cell_split_random_range_x.x, _property._cell_split_random_range_x.y));
+            var splitX = (int)(node.GridRect.width * Random.Range(_property._cell_split_random_range_x.x, _property._cell_split_random_range_x.y));
 
-            left.X = node.X;
-            left.Y = node.Y;
-            left.W = splitX;
-            left.H = node.H;
+            left.GridRect.x         = node.GridRect.x;
+            left.GridRect.y         = node.GridRect.y;
+            left.GridRect.width     = splitX;
+            left.GridRect.height    = node.GridRect.height;
 
-            right.X = node.X + splitX;
-            right.Y = node.Y;
-            right.W = node.W - splitX;
-            right.H = node.H;
+            right.GridRect.x        = node.GridRect.x + splitX;
+            right.GridRect.y        = node.GridRect.y;
+            right.GridRect.width    = node.GridRect.width - splitX;
+            right.GridRect.height   = node.GridRect.height;
 
         }
 
@@ -224,18 +223,21 @@ public class MapGenerator
     private void GenerateRoom(Node node)
     {
 
-        node.RoomW = (int)(node.W * Random.Range(_property._room_random_range_x.x, _property._room_random_range_x.y));
-        node.RoomH = (int)(node.H * Random.Range(_property._room_random_range_x.y, _property._room_random_range_x.y));
-        node.RoomX = Random.Range(node.X + 1, node.X + node.W - node.RoomW - 1);
-        node.RoomY = Random.Range(node.Y + 1, node.Y + node.H - node.RoomH - 1);
+        node.RoomRect           = new RectInt();
+        node.RoomRect.width     = (int)(node.GridRect.width * Random.Range(_property._room_random_range_x.x, _property._room_random_range_x.y));
+        node.RoomRect.height    = (int)(node.GridRect.height * Random.Range(_property._room_random_range_x.y, _property._room_random_range_x.y));
+        node.RoomRect.x         = Random.Range(node.GridRect.x + 1, node.GridRect.x + node.GridRect.width - node.RoomRect.width - 1);
+        node.RoomRect.y         = Random.Range(node.GridRect.y + 1, node.GridRect.y + node.GridRect.height - node.RoomRect.height - 1);
 
     }
 
     private void GenerateCorridor(Node node)
     {
 
-        Node left               = node.ChildLeft;
-        Node right              = node.ChildRight;
+        node.CorridorRect = new RectInt();
+
+        Node    left            = node.ChildLeft;
+        Node    right           = node.ChildRight;
         RectInt leftRect        = left.CalculateRect();
         RectInt rightRect       = right.CalculateRect();
         int maxBegin;
@@ -246,10 +248,13 @@ public class MapGenerator
             maxBegin    = Mathf.Max(leftRect.x + _property._door_grid_size, rightRect.x + _property._door_grid_size);
             minEnd      = Mathf.Min(leftRect.x + leftRect.width - _property._door_grid_size, rightRect.x + rightRect.width - _property._door_grid_size);
 
-            node.CorridorX        = Random.Range(maxBegin, minEnd + 1);
-            node.CorridorW        = _property._door_grid_size;
-            node.CorridorY        = leftRect.y;
-            node.CorridorH        = (int)Mathf.Abs(rightRect.y + rightRect.height - leftRect.y);
+            node.CorridorRect.x         = Random.Range(maxBegin, minEnd + 1);
+            node.CorridorRect.width     = _property._door_grid_size;
+            node.CorridorRect.y         = leftRect.y;
+            node.CorridorRect.height    = (int)Mathf.Abs(rightRect.y + rightRect.height - leftRect.y);
+
+            CuttingCorridorTop(node, left);
+            CuttingCorridorBottom(node, right);
 
         }
         else
@@ -258,24 +263,117 @@ public class MapGenerator
             maxBegin    = Mathf.Max(leftRect.y + _property._door_grid_size, rightRect.y + _property._door_grid_size);
             minEnd      = Mathf.Min(leftRect.y + leftRect.height - _property._door_grid_size, rightRect.y + rightRect.height - _property._door_grid_size);
 
-            node.CorridorX        = leftRect.x;
-            node.CorridorW        = (int)Mathf.Abs(rightRect.x + rightRect.width - leftRect.x);
-            node.CorridorY        = Random.Range(maxBegin, minEnd + 1);
-            node.CorridorH        = _property._door_grid_size;
+            node.CorridorRect.x         = leftRect.x;
+            node.CorridorRect.width     = (int)Mathf.Abs(rightRect.x + rightRect.width - leftRect.x);
+            node.CorridorRect.y         = Random.Range(maxBegin, minEnd + 1);
+            node.CorridorRect.height    = _property._door_grid_size;
+
+            CuttingCorridorLeft(node, left);
+            CuttingCorridorRight(node, right);
 
         }
 
     }
 
-    public void UpdateLineRenderer(Node node)
+    private void CuttingCorridorLeft(Node corridorNode, Node node)
+    {
+
+        if (node.IsLeaf)
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.RoomRect))
+            {
+                corridorNode.CorridorRect.min = new Vector2Int(node.RoomRect.max.x, corridorNode.CorridorRect.min.y);
+            }
+        }
+        else
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.CorridorRect))
+            {
+                corridorNode.CorridorRect.min = new Vector2Int(node.CorridorRect.max.x, corridorNode.CorridorRect.min.y);
+
+            }
+            CuttingCorridorLeft(corridorNode, node.ChildLeft);
+            CuttingCorridorLeft(corridorNode, node.ChildRight);
+        }
+
+    }
+
+    private void CuttingCorridorRight(Node corridorNode, Node node)
+    {
+
+        if (node.IsLeaf)
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.RoomRect))
+            {
+                corridorNode.CorridorRect.max = new Vector2Int(node.RoomRect.min.x, corridorNode.CorridorRect.max.y);
+            }
+        }
+        else
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.CorridorRect))
+            {
+                corridorNode.CorridorRect.max = new Vector2Int(node.CorridorRect.min.x, corridorNode.CorridorRect.max.y);
+            }
+            CuttingCorridorRight(corridorNode, node.ChildLeft);
+            CuttingCorridorRight(corridorNode, node.ChildRight);
+        }
+
+    }
+
+    private void CuttingCorridorTop(Node corridorNode, Node node)
+    {
+
+        if (node.IsLeaf)
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.RoomRect))
+            {
+                corridorNode.CorridorRect.min = new Vector2Int(corridorNode.CorridorRect.min.x, node.RoomRect.max.y);
+            }
+        }
+        else
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.CorridorRect))
+            {
+                corridorNode.CorridorRect.min = new Vector2Int(corridorNode.CorridorRect.min.x, node.CorridorRect.max.y);
+
+            }
+            CuttingCorridorTop(corridorNode, node.ChildLeft);
+            CuttingCorridorTop(corridorNode, node.ChildRight);
+        }
+
+    }
+
+    private void CuttingCorridorBottom(Node corridorNode, Node node)
+    {
+
+        if (node.IsLeaf)
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.RoomRect))
+            {
+                corridorNode.CorridorRect.max = new Vector2Int(corridorNode.CorridorRect.max.x, node.RoomRect.min.y);
+            }
+        }
+        else
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.CorridorRect))
+            {
+                corridorNode.CorridorRect.max = new Vector2Int(corridorNode.CorridorRect.max.x, node.CorridorRect.min.y);
+            }
+            CuttingCorridorBottom(corridorNode, node.ChildLeft);
+            CuttingCorridorBottom(corridorNode, node.ChildRight);
+        }
+
+    }
+
+    private void UpdateLineRenderer(Node node)
     {
 
         var gridLineRenderer = node.Grid.GetComponent<LineRenderer>();
         
-        var left                        = (float)node.X / _property._cell_number_x * _property._map_size.x;
-        var right                       = (float)(node.X + node.W) / _property._cell_number_x * _property._map_size.x;
-        var top                         = (float)(node.Y + node.H) / _property._cell_number_y * _property._map_size.y;
-        var bottom                      = (float)node.Y / _property._cell_number_y * _property._map_size.y;
+        var left                        = (float)node.GridRect.x / _property._cell_number_x * _property._map_size.x;
+        var right                       = (float)(node.GridRect.x + node.GridRect.width) / _property._cell_number_x * _property._map_size.x;
+        var top                         = (float)(node.GridRect.y + node.GridRect.height) / _property._cell_number_y * _property._map_size.y;
+        var bottom                      = (float)node.GridRect.y / _property._cell_number_y * _property._map_size.y;
         gridLineRenderer.enabled        = false;
         gridLineRenderer.startColor     = Color.blue;
         gridLineRenderer.endColor       = Color.blue;
@@ -289,10 +387,10 @@ public class MapGenerator
         //Room
         var roomLineRenderer = node.Room.GetComponent<LineRenderer>();
         
-        left                            = (float)node.RoomX / _property._cell_number_x * _property._map_size.x;
-        right                           = (float)(node.RoomX + node.RoomW) / _property._cell_number_x * _property._map_size.x;
-        top                             = (float)(node.RoomY + node.RoomH) / _property._cell_number_y * _property._map_size.y;
-        bottom                          = (float)node.RoomY / _property._cell_number_y * _property._map_size.y;
+        left                            = (float)node.RoomRect.x / _property._cell_number_x * _property._map_size.x;
+        right                           = (float)(node.RoomRect.y + node.RoomRect.width) / _property._cell_number_x * _property._map_size.x;
+        top                             = (float)(node.RoomRect.y + node.RoomRect.height) / _property._cell_number_y * _property._map_size.y;
+        bottom                          = (float)node.RoomRect.y / _property._cell_number_y * _property._map_size.y;
         roomLineRenderer.startColor     = Color.red;
         roomLineRenderer.endColor       = Color.red;
         roomLineRenderer.positionCount  = 4;
@@ -304,10 +402,10 @@ public class MapGenerator
         //Corrior
         var corridorLineRenderer = node.Corridor.GetComponent<LineRenderer>();
         
-        left                                = (float)node.CorridorX / _property._cell_number_x * _property._map_size.x;
-        right                               = (float)(node.CorridorX + node.CorridorW) / _property._cell_number_x * _property._map_size.x;
-        top                                 = (float)(node.CorridorY + node.CorridorH) / _property._cell_number_y * _property._map_size.y;
-        bottom                              = (float)node.CorridorY / _property._cell_number_y * _property._map_size.y;
+        left                                = (float)node.CorridorRect.x / _property._cell_number_x * _property._map_size.x;
+        right                               = (float)(node.CorridorRect.x + node.CorridorRect.width) / _property._cell_number_x * _property._map_size.x;
+        top                                 = (float)(node.CorridorRect.y + node.CorridorRect.height) / _property._cell_number_y * _property._map_size.y;
+        bottom                              = (float)node.CorridorRect.y / _property._cell_number_y * _property._map_size.y;
         corridorLineRenderer.startColor     = Color.red;
         corridorLineRenderer.endColor       = Color.red;
         corridorLineRenderer.positionCount  = 4;

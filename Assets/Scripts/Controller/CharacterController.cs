@@ -16,7 +16,10 @@ public class CharacterController : MonoBehaviour
     private float _timeSinceLastAttack = float.MaxValue;
     protected CharacterStatsHandler Stats { get; private set; }
     protected bool IsAttacking { get; set; }
-    protected bool IsRolling { get; set; }
+    public bool IsRolling { get; set; }
+
+    //회피도중 방향전환되지않게하기위한 변수.
+    public Vector2 dodgeVec;
 
     protected virtual void Awake() {
         Stats = GetComponent<CharacterStatsHandler>();

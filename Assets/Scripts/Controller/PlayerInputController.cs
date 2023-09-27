@@ -8,9 +8,6 @@ public class PlayerInputController : CharacterController
     private Camera _camera;
     private bool _invenOpen = false;
 
-    //회피도중 방향전환되지않게하기위한 변수.
-    Vector3 dodgeVec;
-
     protected override void Awake()
     {
         base.Awake();
@@ -20,15 +17,17 @@ public class PlayerInputController : CharacterController
 
     public void OnMove(InputValue value)
     {
-        Vector2 moveInput;
-        if (IsRolling)
+        Vector2 moveInput = value.Get<Vector2>().normalized;
+        if(IsRolling)
         {
             moveInput = dodgeVec;
         }
         else
         {
             moveInput = value.Get<Vector2>().normalized;
+            dodgeVec = moveInput;
         }
+
         CallMoveEvent(moveInput);
     }
 
@@ -57,31 +56,10 @@ public class PlayerInputController : CharacterController
             CallInven(_invenOpen);
         }
     }
+
     public void OnRoll(InputValue value)
     {
         IsRolling = value.isPressed;
+        CallRollEvent();
     }
-
-    
-    //void Dodge()
-    //{
-    //    // ??????? jump??????? ??????, ?????? ??? ???? ????? ??????????
-    //    if ( != Vector3.zero && !IsRolling)
-    //    {
-    //        //?????? ???? ??????? ????????.
-    //        dodgeVec = moveVec;
-    //        speed *= 2;
-    //        anim.SetTrigger("doDodge");
-    //        IsRolling = true;
-    //        //?ð??? ?ξ? ????????? ???????
-    //        Invoke("DodgeOut", 0.5f);
-    //    }
-    //}
-
-    //void DodgeOut()
-    //{   
-    //    //??? ??????? ???????
-    //    speed *= 0.5f;
-    //    IsRolling = false;
-    //}
 }

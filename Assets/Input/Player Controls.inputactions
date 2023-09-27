@@ -197,9 +197,9 @@
                     "name": "",
                     "id": "c913c13b-9a87-4eef-90f3-06f3d465117f",
                     "path": "<Keyboard>/space",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardMouse",
                     "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": false

@@ -12,7 +12,7 @@ public class RangeEnemyContreoller : EnemyController
     private Vector2 direction = Vector2.zero;
 
     private bool isAttackingCoroutineRunning = false;
-
+    private bool isAttackRange=false;
     protected override void Awake()
     {
         base.Awake();
@@ -28,7 +28,7 @@ public class RangeEnemyContreoller : EnemyController
             _timeSinceLastAttack += Time.deltaTime;
         }
 
-        if (!IsAttacking && _timeSinceLastAttack > Stats.CurrentStats.attackSO.delay)
+        if (!IsAttacking && isAttackRange && _timeSinceLastAttack > Stats.CurrentStats.attackSO.delay)
         {
             // 시작한 코루틴을 중복 실행하지 않도록 체크
             if (!isAttackingCoroutineRunning)
@@ -49,16 +49,19 @@ public class RangeEnemyContreoller : EnemyController
             {
                 CallLookEvent(direction);
                 CallMoveEvent(Vector2.zero);
+                isAttackRange = true;
             }
             else
             {
                 if(!IsAttacking)
                 CallMoveEvent(direction);
+                isAttackRange = false;
             }
         }
         else
         {
-            CallMoveEvent(direction);
+            CallMoveEvent(Vector2.zero);
+            isAttackRange=false;
         }
     }
 
@@ -68,9 +71,10 @@ public class RangeEnemyContreoller : EnemyController
         IsAttacking = true;
         CallAttackEvent(Stats.CurrentStats.attackSO);
         yield return new WaitForSeconds(1.0f);
-        IsAttacking = false;
-        isAttackingCoroutineRunning = false;
         animator.SetTrigger("Idle");
+        yield return new WaitForSeconds(1.0f);
+        isAttackingCoroutineRunning = false;
+        IsAttacking = false;
     }
     private void Rotate(Vector2 direction)
     {

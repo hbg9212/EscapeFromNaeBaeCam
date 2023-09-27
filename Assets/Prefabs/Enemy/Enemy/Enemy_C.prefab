@@ -143,8 +143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   enemySpawner: {fileID: 0}
-  followRange: 40
-  shootRange: 10
+  followRange: 20
+  shootRange: 5
   characterRenderer: {fileID: 0}
   animator: {fileID: 5548091697281572659}
 --- !u!61 &5154052368975748209

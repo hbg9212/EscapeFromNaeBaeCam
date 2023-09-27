@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Movement : MonoBehaviour
 {
+    [SerializeField] public GameObject character;
+
     private CharacterController _controller;
     private CharacterStatsHandler _stats;
     private AnimationController _anim;
@@ -64,6 +67,8 @@ public class Movement : MonoBehaviour
             _stats.CurrentStats.speed *= 2;
             //anim.SetTrigger("doDodge");
             _controller.IsRolling = true;
+            character.gameObject.tag = "Rolling";
+            character.gameObject.layer = LayerMask.NameToLayer("Rolling");
             Invoke("DodgeOut", 0.5f);
         }
     }
@@ -74,6 +79,8 @@ public class Movement : MonoBehaviour
         _controller.IsRolling = false;
         _controller.dodgeVec = Vector2.zero;
         _anim.InvincibilityEnd();
+        character.gameObject.tag = "Player";
+        character.gameObject.layer = LayerMask.NameToLayer("Player");
         Move(Vector2.zero);
     }
 

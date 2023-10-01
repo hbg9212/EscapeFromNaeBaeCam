@@ -218,3 +218,5 @@ MonoBehaviour:
     maxHealth: 0
     speed: 0
     attackSO: {fileID: 11400000, guid: d9b00b75b0a2f6b4e8158ba25dc2c9aa, type: 2}
+  id: Gloves
+  weight: 40

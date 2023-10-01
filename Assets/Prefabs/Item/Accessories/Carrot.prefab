@@ -218,3 +218,5 @@ MonoBehaviour:
     maxHealth: 1
     speed: 0
     attackSO: {fileID: 11400000, guid: c9afe6f3603214549a8f9bad5296c23f, type: 2}
+  id: Carrot
+  weight: 50

@@ -218,3 +218,5 @@ MonoBehaviour:
     maxHealth: 0
     speed: 0
     attackSO: {fileID: 11400000, guid: ef275dbd673c4d748808a83c63a62427, type: 2}
+  id: Flashlight
+  weight: 30

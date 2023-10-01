@@ -218,3 +218,5 @@ MonoBehaviour:
     maxHealth: 0
     speed: 0
     attackSO: {fileID: 11400000, guid: 1fe394d788eadf94f9d574d39b17b568, type: 2}
+  id: Mirror
+  weight: 30

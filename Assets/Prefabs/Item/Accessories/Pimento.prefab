@@ -218,3 +218,5 @@ MonoBehaviour:
     maxHealth: 2
     speed: 0
     attackSO: {fileID: 11400000, guid: cbade3df42d13bf4396d1b2184a6f5b5, type: 2}
+  id: Pimento
+  weight: 30

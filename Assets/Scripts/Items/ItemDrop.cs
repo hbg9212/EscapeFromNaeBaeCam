@@ -27,7 +27,17 @@ public class AccessoriesItemDrop : IItemDrop
 {
     public void ItemDrop(Transform tf)
     {
-      
+        List<GameObject> itemList = ItemManager.instance.AccessoriesItemList;
+        int[] probability = new int[itemList.Count];
+        for(int i = 0; i < itemList.Count; i ++)
+        {
+            probability[i] = itemList[i].GetComponent<ItemAccessories>().weight;
+        }
+
+        int target = Probability.Drop(probability);
+        Transform item = ItemManager.instance.GetAccessoriesItem(target).transform;
+        item.position = tf.position;
+
     }
 }
 

@@ -23,7 +23,7 @@ MonoBehaviour:
   knockbackPower: 5
   knockbackTime: 0.1
   bulletNameTag: SnowBall
-  duration: 10
+  duration: 2
   spread: 4
   numberOfProjectilesPerShot: 1
   multipleProjectilesAngle: 2

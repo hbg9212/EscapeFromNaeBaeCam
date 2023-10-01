@@ -218,3 +218,5 @@ MonoBehaviour:
     maxHealth: 1
     speed: 0
     attackSO: {fileID: 11400000, guid: 7b8d13623ac6eab449d67d9ce02bdcc4, type: 2}
+  id: Apple
+  weight: 50

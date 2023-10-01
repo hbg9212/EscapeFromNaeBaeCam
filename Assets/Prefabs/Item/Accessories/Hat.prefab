@@ -218,3 +218,5 @@ MonoBehaviour:
     maxHealth: 0
     speed: 0
     attackSO: {fileID: 11400000, guid: 9f386fbd94e66ed49a8005c42f5d6c65, type: 2}
+  id: Hat
+  weight: 30

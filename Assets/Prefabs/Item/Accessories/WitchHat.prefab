@@ -218,3 +218,5 @@ MonoBehaviour:
     maxHealth: 0
     speed: 0
     attackSO: {fileID: 11400000, guid: 947c01c0d8324ed4bac1bb2fbad00644, type: 2}
+  id: WitchHat
+  weight: 20

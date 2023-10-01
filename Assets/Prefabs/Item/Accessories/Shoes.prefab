@@ -218,3 +218,5 @@ MonoBehaviour:
     maxHealth: 0
     speed: 0
     attackSO: {fileID: 11400000, guid: 3d1f65723e7b6d34f8f2ad58754fcb95, type: 2}
+  id: Shoes
+  weight: 50

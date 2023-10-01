@@ -218,3 +218,5 @@ MonoBehaviour:
     maxHealth: 1
     speed: 0
     attackSO: {fileID: 11400000, guid: f21b18165ae678749b70bd52f77895bb, type: 2}
+  id: Meat
+  weight: 30

@@ -218,3 +218,5 @@ MonoBehaviour:
     maxHealth: 3
     speed: 0
     attackSO: {fileID: 11400000, guid: ec767c355610bd647835a086ce8ae0c8, type: 2}
+  id: Armor
+  weight: 10

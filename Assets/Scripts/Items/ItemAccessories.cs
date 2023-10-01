@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Accessories : PickupItem
+public class ItemAccessories : PickupItem
 {
     [SerializeField] private List<CharacterStats> statsModifier;
+    public string id;
+    public int weight;
 
     protected override void OnPickedUp(GameObject receiver, ItemData itemData)
     {
@@ -15,5 +17,7 @@ public class Accessories : PickupItem
         {
             statsHandler.AddStatModifier(stat);
         }
+
+        ItemManager.instance.AccessoriesItemList.RemoveAll(item => item.GetComponent<ItemAccessories>().id == id);
     }
 }

@@ -218,3 +218,5 @@ MonoBehaviour:
     maxHealth: 0
     speed: 0
     attackSO: {fileID: 11400000, guid: b32f2154586b6eb47ad5b8452599529f, type: 2}
+  id: Shadow
+  weight: 40

@@ -218,3 +218,5 @@ MonoBehaviour:
     maxHealth: 0
     speed: 0
     attackSO: {fileID: 11400000, guid: e3778fe547821a648af53fa7ff81b658, type: 2}
+  id: Gauntlet
+  weight: 20

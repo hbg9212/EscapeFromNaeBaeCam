@@ -7,7 +7,8 @@ using UnityEngine.Tilemaps;
 public class Map : MonoBehaviour
 {
 
-    public GameObject PlayerPrefab { get => _player_prefab; }
+    public GameObject Player { get => _player; }
+    public GameObject BossPrefab { get => _boss_prefab; }
 
     private void Start()
     {
@@ -154,7 +155,8 @@ public class Map : MonoBehaviour
     [SerializeField] private Tilemap                                _wall_tile_map;
     [SerializeField] private MapGenerator.MAP_GANARATION_PROPERTY   _map_generation_property;
 
-    [SerializeField] private GameObject                             _player_prefab;
+    [SerializeField] private GameObject                             _player;
+    [SerializeField] private GameObject                             _boss_prefab;
 
     private List<Room>  _roomList = new List<Room>();
 

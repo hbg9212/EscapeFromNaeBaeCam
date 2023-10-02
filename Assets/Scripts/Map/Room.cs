@@ -43,16 +43,31 @@ public class EmptyRoom : Room
 {
 }
 
+public class MonsterRoom : Room
+{
+
+    public override void Enter()
+    {
+
+        if (_first)
+        {
+
+            _first = false;
+
+        }
+
+    }
+
+    private bool _first = true;
+
+}
 
 public class PlayerStartRoom : Room
 {
 
     public override void Start()
     {
-
-        Vector3 position = rect.center;
-        GameObject.Instantiate(map.PlayerPrefab, position, Quaternion.identity).SetActive(true);
-
+        map.Player.transform.position = rect.center;
     }
 
 }
@@ -64,7 +79,8 @@ public class BossRoom : Room
     public override void Start()
     {
 
-
+        Vector3 position = rect.center;
+        GameObject.Instantiate(map.BossPrefab, position, Quaternion.identity).SetActive(true);
 
     }
 

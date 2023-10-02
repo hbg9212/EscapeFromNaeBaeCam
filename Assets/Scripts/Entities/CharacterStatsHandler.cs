@@ -118,10 +118,12 @@ public class CharacterStatsHandler : MonoBehaviour
         }
 
         RangedAttackData rangedAttacksModifier = (RangedAttackData)newModifier.attackSO;
-        currentRangedAttacks.multipleProjectilesAngle = operation(currentRangedAttacks.multipleProjectilesAngle, rangedAttacksModifier.multipleProjectilesAngle);
+        currentRangedAttacks.multipleProjectilesAngle =
+            operation(currentRangedAttacks.multipleProjectilesAngle, rangedAttacksModifier.multipleProjectilesAngle);
         currentRangedAttacks.spread = operation(currentRangedAttacks.spread, rangedAttacksModifier.spread);
         currentRangedAttacks.duration = operation(currentRangedAttacks.duration, rangedAttacksModifier.duration);
-        currentRangedAttacks.numberOfProjectilesPerShot = Mathf.CeilToInt(operation(currentRangedAttacks.multipleProjectilesAngle, rangedAttacksModifier.numberOfProjectilesPerShot));
+        currentRangedAttacks.numberOfProjectilesPerShot = Mathf.CeilToInt(operation(currentRangedAttacks.numberOfProjectilesPerShot,
+            rangedAttacksModifier.numberOfProjectilesPerShot));
         currentRangedAttacks.projectileColor = UpdateColor(operation, currentRangedAttacks.projectileColor, rangedAttacksModifier.projectileColor);
     }
 

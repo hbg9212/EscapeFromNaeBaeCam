@@ -218,3 +218,5 @@ MonoBehaviour:
     maxHealth: 0
     speed: 0
     attackSO: {fileID: 11400000, guid: bd5ff630911227a4891d431b1ac06f8d, type: 2}
+  id: Book
+  weight: 30

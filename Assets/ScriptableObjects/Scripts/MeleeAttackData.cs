@@ -6,6 +6,5 @@ using UnityEngine;
 public class MeleeAttackData : AttackSO
 {
     [Header("Melee Attack Data")]
-    public float multipleProjectilesAngle;
     public Color projectileColor;
 }

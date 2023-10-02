@@ -1,48 +1,54 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeAttackController : MonoBehaviour
-{
-    private MeleeAttackData _attackData;
-    private Vector2 _direction;
-    private bool _isReady;
+public class MeleeAttackController : MonoBehaviour {
+    private CharacterController _controller;
 
-    private Rigidbody2D _rigidbody;
-    private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Transform meleeRangePosition;
+    [SerializeField] private Vector2 meleeRange;
+    private Vector2 _aimDirection = Vector2.right;
+
+    private AttackSO _attackData;
     //private TrailRenderer _trailRenderer;
-
     //public bool fxOnDestroy = true;
 
     private void Awake() {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _rigidbody = GetComponent<Rigidbody2D>();
-        //_trailRenderer = GetComponent<TrailRenderer>();
+        _controller = GetComponent<CharacterController>();
     }
 
-    private void Update() {
-        if (!_isReady)
-            return;
-
-        _rigidbody.velocity = _direction * _attackData.speed;
+    void Start() {
+        _controller.OnAttackEvent += OnAttack;
+        _controller.OnLookEvent += OnAim;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (_attackData.target.value == (_attackData.target.value | (1 << collision.gameObject.layer))) {
-            HealthSystem healthSystem = collision.GetComponent<HealthSystem>();
-            if (healthSystem != null) {
-                healthSystem.ChangeHealth(-_attackData.power);
-                if (_attackData.isOnKnockback) {
-                    Movement movement = collision.GetComponent<Movement>();
-                    if (movement != null) {
-                        movement.ApplyKnockback(transform, _attackData.knockbackPower, _attackData.knockbackTime);
+    private void OnAim(Vector2 newAimDirection) {
+        _aimDirection = newAimDirection;
+    }
+
+    private void OnAttack(AttackSO attackSO) {
+        MeleeAttackData meleeAttackData = attackSO as MeleeAttackData;
+        Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(meleeRangePosition.position, meleeRange, 0);
+        foreach (Collider2D collider in collider2Ds) {
+            if (attackSO.target.value == (attackSO.target.value | (1 << collider.gameObject.layer))) {
+                HealthSystem healthSystem = collider.GetComponent<HealthSystem>();
+                if (healthSystem != null) {
+                    healthSystem.ChangeHealth(-attackSO.power);
+                    if (attackSO.isOnKnockback) {
+                        Movement movement = collider.GetComponent<Movement>();
+                        if (movement != null) {
+                            movement.ApplyKnockback(transform, attackSO.knockbackPower, attackSO.knockbackTime);
+                        }
                     }
                 }
             }
         }
     }
 
-    private void UpdateProjectilSprite() {
-        transform.localScale = Vector3.one * _attackData.size;
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(meleeRangePosition.position, meleeRange);
     }
+
 }

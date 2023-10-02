@@ -19,8 +19,11 @@ public class Shooting : MonoBehaviour
     {
         _objectPoolManager = ObjectPoolManager.instance;
         _controller.OnAttackEvent += OnShoot;
+        _controller.OnSkillEvent += OnSkillShoot;
         _controller.OnLookEvent += OnAim;
     }
+
+    
 
     private void OnAim(Vector2 newAimDirection)
     {
@@ -43,11 +46,32 @@ public class Shooting : MonoBehaviour
         }
     }
 
+    private void OnSkillShoot(SkillSO skillSO) {
+        RangedSkillData rangedSkillData = skillSO as RangedSkillData;
+        float projectilesAngleSpace = rangedSkillData.multipleProjectilesAngle; // �ޱ�
+        int numberOfProjectilesPerShot = rangedSkillData.numberOfProjectilesPerShot; // �߻�ü ��
+
+        float minAngle = -(numberOfProjectilesPerShot / 2) * projectilesAngleSpace + 0.5f * rangedSkillData.multipleProjectilesAngle; // �ޱ� ��ġ�� ���� ����ø�
+
+        for (int i = 0; i < numberOfProjectilesPerShot; i++) {
+            float angle = minAngle + projectilesAngleSpace * i; // �߻�ü���� �ޱ� ����
+            CreateSkillProjectile(rangedSkillData, angle);
+        }
+    }
+
     private void CreateProjectile(RangedAttackData rangedAttackData, float angle) {
         _objectPoolManager.ShootBullet(
             projectileSpawnPosition.position,
             RotateVector2(_aimDirection, angle),
             rangedAttackData
+            );
+    }
+    
+    private void CreateSkillProjectile(RangedSkillData rangedSkillData, float angle) {
+        _objectPoolManager.ShootSkillBullet(
+            projectileSpawnPosition.position,
+            RotateVector2(_aimDirection, angle),
+            rangedSkillData
             );
     }
 

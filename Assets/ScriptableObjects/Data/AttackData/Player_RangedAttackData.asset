@@ -23,7 +23,7 @@ MonoBehaviour:
   isOnKnockback: 1
   knockbackPower: 5
   knockbackTime: 0.1
-  bulletNameTag: SnowBall
+  bulletNameTag: keyboard
   duration: 2
   spread: 4
   numberOfProjectilesPerShot: 1

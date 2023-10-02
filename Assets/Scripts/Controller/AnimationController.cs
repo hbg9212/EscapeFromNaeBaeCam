@@ -9,6 +9,7 @@ public class AnimationController : MonoBehaviour
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int IsHit = Animator.StringToHash("IsHit");
     private static readonly int IsRoll = Animator.StringToHash("IsRoll");
+    private static readonly int Ranged = Animator.StringToHash("Ranged");
 
     private HealthSystem _healthSystem;
     protected CharacterController controller;
@@ -40,6 +41,11 @@ public class AnimationController : MonoBehaviour
 
     private void Attacking(AttackSO obj)
     {
+        if (obj.ranged == true) {
+            animator.SetBool(Ranged, true);
+        } else {
+            animator.SetBool(Ranged, false);
+        }
         animator.SetTrigger(Attack);
     }
 

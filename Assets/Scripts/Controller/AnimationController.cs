@@ -50,7 +50,7 @@ public class AnimationController : MonoBehaviour
 
     private void Roll()
     {
-        animator.SetBool(IsRoll, true);
+        animator.SetTrigger(IsRoll);
     }
 
     public void InvincibilityEnd()

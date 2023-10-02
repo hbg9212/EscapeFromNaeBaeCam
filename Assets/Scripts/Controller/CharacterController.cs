@@ -64,6 +64,7 @@ public class CharacterController : MonoBehaviour
 
     public void CallRollEvent()
     {
+        Debug.Log("CallRollEvent");
         OnRollEvent?.Invoke();
     }
     

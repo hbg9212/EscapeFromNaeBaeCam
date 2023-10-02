@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 6113487607375200950}
   - component: {fileID: 7702575806344717906}
   - component: {fileID: 6107434538414419669}
+  - component: {fileID: 7217284027223992}
   - component: {fileID: 6119879426218777542}
   - component: {fileID: 4448138592141501248}
   - component: {fileID: 1728389552535753584}
   - component: {fileID: 6923416640721116510}
   - component: {fileID: 9123821169492233632}
   - component: {fileID: 8961292850746384669}
-  - component: {fileID: 7217284027223992}
   m_Layer: 7
   m_Name: Enemy_B
   m_TagString: Untagged
@@ -112,6 +112,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.6}
   m_EdgeRadius: 0
+--- !u!114 &7217284027223992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6969382807840113813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efdf085415e06b48bc33f83b1e86626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6119879426218777542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dodgeVec: {x: 0, y: 0}
+  enemySpawner: {fileID: 0}
   followRange: 30.3
   targetTag: Player
   characterRenderer: {fileID: 6923416640721116510}
@@ -244,15 +257,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthChangeDelay: 0.5
---- !u!114 &7217284027223992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6969382807840113813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2efdf085415e06b48bc33f83b1e86626, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

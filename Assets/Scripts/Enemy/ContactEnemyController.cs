@@ -11,14 +11,14 @@ public class ContactEnemyController : EnemyController
     private Vector2 direction = Vector2.zero;
     [SerializeField] private SpriteRenderer characterRenderer;
 
-    private HealthSystem healthSystem;
+  
     private HealthSystem _collidingTargetHealthSystem;
     private Movement _collingMovement;
 
+   
     protected override void Awake()
     {
         base.Awake();
-        healthSystem = GetComponent<HealthSystem>();
         healthSystem.OnDamage += OnDamage;
     }
 

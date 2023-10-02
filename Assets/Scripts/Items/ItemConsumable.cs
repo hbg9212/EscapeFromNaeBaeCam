@@ -18,6 +18,7 @@ public class ItemConsumable : PickupItem
                     ItemManager.instance.bomb += (int)addition.value;
                     break;
                 case AdditionType.Health:
+                    receiver.GetComponent<HealthSystem>().ChangeHealth(addition.value);
                     break;
             }
         }

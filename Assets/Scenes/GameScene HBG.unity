@@ -344,6 +344,7 @@ GameObject:
   - component: {fileID: 88664790}
   - component: {fileID: 88664789}
   - component: {fileID: 88664788}
+  - component: {fileID: 88664799}
   - component: {fileID: 88664798}
   m_Layer: 6
   m_Name: Player
@@ -642,6 +643,19 @@ MonoBehaviour:
   inventoryWindow: {fileID: 1417237116}
   selectedItemName: {fileID: 1454995924}
   selectedItemDescription: {fileID: 1486047463}
+--- !u!114 &88664799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88664787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8a485a103f8d24a85f621a37e310a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthChangeDelay: 0.5
 --- !u!1 &119361330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,6 +1941,8 @@ MonoBehaviour:
   - {fileID: 7824480890868050078, guid: 514c5aa1d1b396b4e9e2ce73f51d784e, type: 3}
   - {fileID: 8468644508774115704, guid: b2a38ac891fe72e4fb860aefd57d0e65, type: 3}
   - {fileID: 4856382405880722189, guid: 65321d7c49fbe6249a9d2f0c563eb2c3, type: 3}
+  - {fileID: 2481177498244251659, guid: 2547fe49d4027e94d8f49228c24680ce, type: 3}
+  - {fileID: 723856168445215775, guid: 3b3d6f086cb95be47adefed9a2ad7cec, type: 3}
   AccessoriesItemList:
   - {fileID: 6261791734127750869, guid: 54a60cd2c3a9ec741b45a8bc37bb7f2e, type: 3}
   - {fileID: 3228215577716455010, guid: a3272c94f6b45a44aa86437764e53962, type: 3}

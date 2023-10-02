@@ -29,16 +29,28 @@ public class ItemManager : MonoBehaviour
     public CharacterStats playerStats;
 
     public GameObject[] ConsumableItemList;
+    public List<GameObject> AccessoriesItemList;
+
+    public Transform test;
+
     public GameObject GetConsumableItem(int index)
     {
         return Instantiate(ConsumableItemList[index], transform);
     }
 
+    public GameObject GetAccessoriesItem(int index)
+    {
+        return Instantiate(AccessoriesItemList[index], transform);
+    }
+
     private IItemDrop testDrop = new ConsumableItemDrop();
+    private IItemDrop testDrop2 = new AccessoriesItemDrop();
 
     private void Start()
     {
         StartCoroutine("DropTest");
+        StartCoroutine("DropTest2");
+        
     }
 
     private void Update()
@@ -53,6 +65,15 @@ public class ItemManager : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             testDrop.ItemDrop(transform);
+        }
+    }
+
+    IEnumerator DropTest2()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5f);
+            testDrop2.ItemDrop(test);
         }
     }
 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cb80f9b7b40d6ba47803ad06d9f6a320
+guid: f90c9a8b0b7075743b31114d18c24451
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,134 +106,16 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bomb_0
+      name: Idle_deletCannon_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 5
-        width: 14
-        height: 4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 721a230e49c5b774a9ea9cd6dfd6871e
-      internalID: 1608674456
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bomb_1
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 5
-        width: 14
-        height: 5
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 773a94049324f9a4994a41965611b9a2
-      internalID: 637651346
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bomb_2
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 4
-        width: 13
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1e2c3c0d604745b47b161a51a9b636d7
-      internalID: -1896471966
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bomb_3
-      rect:
-        serializedVersion: 2
-        x: 51
-        y: 2
-        width: 10
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5cb4f8be51d33e249873749ceed7e684
-      internalID: -634342201
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bomb_4
-      rect:
-        serializedVersion: 2
-        x: 68
-        y: 1
-        width: 8
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 272d30e5fde47ec45bee95eded6a8f92
-      internalID: -1943412982
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bomb_5
-      rect:
-        serializedVersion: 2
-        x: 86
-        y: 1
-        width: 5
+        x: 6
+        y: 18
+        width: 36
         height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -242,8 +124,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c24e9c72d5d9c24a91b57bf74808d57
-      internalID: -1097765255
+      spriteID: ac402f31dbb0ce74695e27e9197f2ed9
+      internalID: 271644848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_deletCannon_1
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 18
+        width: 36
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 084a5a4209c0dd042828e6a79fb781a2
+      internalID: 695261395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_deletCannon_2
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 16
+        width: 36
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76a60b7870e71d5429c12fc1bd430071
+      internalID: 708281437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_deletCannon_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 15
+        width: 36
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2ca11ff976ed7149885cc2f0b36ffd3
+      internalID: 94960728
       vertices: []
       indices: 
       edges: []
@@ -259,12 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bomb_0: 1608674456
-      Bomb_1: 637651346
-      Bomb_2: -1896471966
-      Bomb_3: -634342201
-      Bomb_4: -1943412982
-      Bomb_5: -1097765255
+      Idle_deletCannon_0: 271644848
+      Idle_deletCannon_1: 695261395
+      Idle_deletCannon_2: 708281437
+      Idle_deletCannon_3: 94960728
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

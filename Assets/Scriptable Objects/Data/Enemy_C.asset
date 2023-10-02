@@ -9,16 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e89607046b08c04d85e2b130dcbbd1c, type: 3}
-  m_Name: Enemy_B
+  m_Script: {fileID: 11500000, guid: 706bfe12cc5081549a537324ff200146, type: 3}
+  m_Name: Enemy_C
   m_EditorClassIdentifier: 
   size: 3
-  delay: 1
-  power: 3
-  speed: 1
+  delay: 0.5
+  power: 1
+  speed: 6
   target:
     serializedVersion: 2
     m_Bits: 64
   isOnKnockback: 0
   knockbackPower: 0
   knockbackTime: 0
+  bulletNameTag: Bullet
+  duration: 2
+  spread: 1
+  numberOfProjectilesPerShot: 3
+  multipleProjectilesAngle: 7
+  projectileColor: {r: 1, g: 1, b: 1, a: 1}

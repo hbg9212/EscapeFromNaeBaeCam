@@ -13,7 +13,7 @@ public class CharacterController : MonoBehaviour
 
     public event Action OnRollEvent;
 
-    private float _timeSinceLastAttack = float.MaxValue;
+    protected float _timeSinceLastAttack = float.MaxValue;
     protected CharacterStatsHandler Stats { get; private set; }
     protected bool IsAttacking { get; set; }
     public bool IsRolling { get; set; }

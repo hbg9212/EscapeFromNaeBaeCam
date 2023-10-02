@@ -892,7 +892,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &666686910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1483,6 +1483,7 @@ MonoBehaviour:
     _room_random_range_x: {x: 0.6, y: 0.8}
     _room_random_range_y: {x: 0.6, y: 0.8}
     _door_grid_size: 8
+  _player_prefab: {fileID: 666686909}
 --- !u!4 &1176113131
 Transform:
   m_ObjectHideFlags: 0

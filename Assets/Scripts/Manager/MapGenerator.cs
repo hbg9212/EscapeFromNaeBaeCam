@@ -40,19 +40,19 @@ public class MapGenerator
 
         public bool IsLeaf => ChildLeft == null;
 
-        public RectInt GridRect = new RectInt();
-        public RectInt RoomRect;
-        public RectInt CorridorRect;
+        public RectInt              GridRect = new RectInt();
+        public RectInt              RoomRect;
+        public RectInt              CorridorRect;
 
-        public bool IsSplitHorizon;
+        public bool                 IsSplitHorizon;
 
-        public Node ChildLeft   = null;
-        public Node ChildRight  = null;
+        public Node                 ChildLeft   = null;
+        public Node                 ChildRight  = null;
 
         //디버깅용 입니다.
-        public GameObject   Grid;
-        public GameObject   Room;
-        public GameObject   Corridor;
+        public GameObject           Grid;
+        public GameObject           Room;
+        public GameObject           Corridor;
 
 
         public RectInt CalculateRect()

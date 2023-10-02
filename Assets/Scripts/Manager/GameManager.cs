@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager I;
+    public static GameManager instance;
+
+    public Transform Player { get; private set; }
+    [SerializeField] private string playerTag = "Player";
 
     private void Awake()
     {
-        I = this;
+        instance = this;
+        Player = GameObject.FindGameObjectWithTag(playerTag).transform;
     }
-
 }

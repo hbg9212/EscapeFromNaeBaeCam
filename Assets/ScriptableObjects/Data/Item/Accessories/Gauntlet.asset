@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 837f3f10ab7d74447b253ac5f6eb096b, type: 3}
+  m_Name: Gauntlet
+  m_EditorClassIdentifier: 
+  displayName: "\uAC74\uD2C0\uB9BF"
+  description: "\uC5B4\uB290 \uADC0\uC871\uC774 \uC0AC\uC6A9\uD55C \uAC74\uD2C0\uB9BF"
+  type: 1
+  icon: {fileID: 21300000, guid: 9aff19bf0366fcc43acc5e9675eb39be, type: 3}
+  dropPrefab: {fileID: 8883377088245495494, guid: 87633077a5d22f34ba64d258f951e0e1, type: 3}
+  addition:
+  - type: 5
+    value: -0.5

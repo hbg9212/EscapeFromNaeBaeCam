@@ -29,15 +29,15 @@ public class Shooting : MonoBehaviour
 
     private void OnShoot(AttackSO attackSO)
     {
-        RangedAttackData rangedAttackData = attackSO as RangedAttackData; // ���� ����
-        float projectilesAngleSpace = rangedAttackData.multipleProjectilesAngle; // �ޱ�
-        int numberOfProjectilesPerShot = rangedAttackData.numberOfProjectilesPerShot; // �߻�ü ��
+        RangedAttackData rangedAttackData = attackSO as RangedAttackData; 
+        float projectilesAngleSpace = rangedAttackData.multipleProjectilesAngle; 
+        int numberOfProjectilesPerShot = rangedAttackData.numberOfProjectilesPerShot; 
 
-        float minAngle = -(numberOfProjectilesPerShot / 2) * projectilesAngleSpace + 0.5f * rangedAttackData.multipleProjectilesAngle; // �ޱ� ��ġ�� ���� ����ø�
+        float minAngle = -(numberOfProjectilesPerShot / 2) * projectilesAngleSpace + 0.5f * rangedAttackData.multipleProjectilesAngle;
 
         for (int i = 0; i < numberOfProjectilesPerShot; i++) {
-            float angle = minAngle + projectilesAngleSpace * i; // �߻�ü���� �ޱ� ����
-            float randomSpread = Random.Range(-rangedAttackData.spread, rangedAttackData.spread); // ź�л�
+            float angle = minAngle + projectilesAngleSpace * i; 
+            float randomSpread = Random.Range(-rangedAttackData.spread, rangedAttackData.spread); 
             angle += randomSpread;
             CreateProjectile(rangedAttackData, angle);
         }
@@ -49,13 +49,10 @@ public class Shooting : MonoBehaviour
             RotateVector2(_aimDirection, angle),
             rangedAttackData
             );
-        //Transform bullet = PoolManager.I.Get((int)PoolManager.PrefabId.SnowBall).transform;
-        //bullet.position = projectileSpawnPosition.position;
-        //bullet.GetComponent<SnowBall>().Init(15f, _aimDirection.normalized);
     }
 
     private static Vector2 RotateVector2(Vector2 v, float degree) {
-        return Quaternion.Euler(0, 0, degree) * v; // �߻�ü ���� ȸ��
+        return Quaternion.Euler(0, 0, degree) * v; 
     }
 }
 

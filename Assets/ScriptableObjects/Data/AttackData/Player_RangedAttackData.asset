@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706bfe12cc5081549a537324ff200146, type: 3}
   m_Name: Player_RangedAttackData
   m_EditorClassIdentifier: 
+  ranged: 1
   size: 1
-  delay: 0.2
+  delay: 1
   power: 2
   speed: 20
   target:

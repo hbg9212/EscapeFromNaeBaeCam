@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 1148179773796096543}
   - component: {fileID: 7249665239157833108}
   - component: {fileID: 8570464652724907153}
+  - component: {fileID: 7096535775382700605}
   m_Layer: 0
   m_Name: Enemy_C
   m_TagString: Untagged
@@ -69,7 +70,7 @@ Transform:
   m_Children:
   - {fileID: 5532691066714643922}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5005701181922428345
 MonoBehaviour:
@@ -86,7 +87,7 @@ MonoBehaviour:
   baseStats:
     type: 2
     maxHealth: 5
-    speed: 10
+    speed: 5
     attackSO: {fileID: 11400000, guid: 4170dec5fc97b8b41b11ac93548a8d16, type: 2}
   statsModifiers: []
 --- !u!114 &7580923870895295844
@@ -273,6 +274,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7096535775382700605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3878377266091272735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfb77cf34da8a042b785fa3e60e9865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armRenderer: {fileID: 2562734710114136583}
+  armPivot: {fileID: 5532691066714643922}
 --- !u!1 &6818089742315321110
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class RangeEnemyContreoller : EnemyController
         base.Awake();
     }
 
-    protected void FixedUpdate()
+    protected override void FixedUpdate()
     {
         float distance = DistanceToTarget();
         Vector2 direction = DirectionToTarget();

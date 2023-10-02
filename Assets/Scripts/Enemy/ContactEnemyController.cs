@@ -26,7 +26,7 @@ public class ContactEnemyController : EnemyController
         followRange = 100f;
     }
 
-    protected void FixedUpdate()
+    protected override void FixedUpdate()
     {
         direction = Vector2.zero;
         if (DistanceToTarget() < followRange)
@@ -54,7 +54,7 @@ public class ContactEnemyController : EnemyController
     private void OnTriggerEnter2D(Collider2D collision) {
         GameObject receiver = collision.gameObject;
 
-        if (!receiver.CompareTag(Target.tag))
+        if (!receiver.CompareTag(ClosestTarget.tag))
             return;
 
         _collidingTargetHealthSystem = receiver.GetComponent<HealthSystem>();
@@ -65,7 +65,7 @@ public class ContactEnemyController : EnemyController
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        if (!collision.CompareTag(Target.tag))
+        if (!collision.CompareTag(ClosestTarget.tag))
             return;
 
         _isCollidingWithTarget = false;

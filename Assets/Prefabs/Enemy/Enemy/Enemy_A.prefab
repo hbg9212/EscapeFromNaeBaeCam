@@ -201,7 +201,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -231,6 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dodgeVec: {x: 0, y: 0}
   followRange: 32.9
+  targetTag: Player
   characterRenderer: {fileID: 2347226200333821233}
 --- !u!114 &7268920082225234489
 MonoBehaviour:
@@ -257,7 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats:
-    type: 0
+    type: 2
     maxHealth: 0
     speed: 3
     attackSO: {fileID: 11400000, guid: 0146ce172516c634b907f81ea216f90e, type: 2}

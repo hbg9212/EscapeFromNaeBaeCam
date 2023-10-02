@@ -6,7 +6,7 @@ using UnityEngine;
 public class ContactEnemyController : EnemyController
 {
     [SerializeField][Range(0f, 100f)] private float followRange;
-    
+    [SerializeField] private string targetTag = "Player";
     private bool _isCollidingWithTarget;
     private Vector2 direction = Vector2.zero;
     [SerializeField] private SpriteRenderer characterRenderer;
@@ -54,7 +54,7 @@ public class ContactEnemyController : EnemyController
     private void OnTriggerEnter2D(Collider2D collision) {
         GameObject receiver = collision.gameObject;
 
-        if (!receiver.CompareTag(ClosestTarget.tag))
+        if (!receiver.CompareTag(targetTag))
             return;
 
         _collidingTargetHealthSystem = receiver.GetComponent<HealthSystem>();
@@ -65,7 +65,7 @@ public class ContactEnemyController : EnemyController
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        if (!collision.CompareTag(ClosestTarget.tag))
+        if (!collision.CompareTag(targetTag))
             return;
 
         _isCollidingWithTarget = false;

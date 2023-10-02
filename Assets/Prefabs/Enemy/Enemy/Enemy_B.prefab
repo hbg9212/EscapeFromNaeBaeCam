@@ -38,7 +38,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &7702575806344717906
 Rigidbody2D:
@@ -96,7 +96,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -137,8 +137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats:
-    type: 0
-    maxHealth: 0
+    type: 2
+    maxHealth: 2
     speed: 3
     attackSO: {fileID: 11400000, guid: 1c1ae94894a3041429469691887c148f, type: 2}
   statsModifiers: []
@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dodgeVec: {x: 0, y: 0}
   followRange: 30.3
+  targetTag: Player
   characterRenderer: {fileID: 6923416640721116510}
 --- !u!212 &6923416640721116510
 SpriteRenderer:

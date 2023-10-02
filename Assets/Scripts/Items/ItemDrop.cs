@@ -12,9 +12,9 @@ public class ConsumableItemDrop : IItemDrop
 {
     public void ItemDrop(Transform tf)
     {
-        // 드랍 아이템 목록   1코인 5코인 10코인 20코인 50코인 1폭탄 5폭탄
-        // 드랍 아이템 가중치 50    20    10     5      1      30    5
-        int[] probability = { 50, 20, 10, 5, 1, 30, 5 };
+        // 드랍 아이템 목록   1코인 5코인 10코인 20코인 50코인 1폭탄 5폭탄 하트, 반쪽 하트
+        // 드랍 아이템 가중치 50    20    10     5      1      30    5     10    30
+        int[] probability = { 50, 20, 10, 5, 1, 30, 5, 10, 30 };
 
         int target = Probability.Drop(probability);
         Transform item = ItemManager.instance.GetConsumableItem(target).transform;

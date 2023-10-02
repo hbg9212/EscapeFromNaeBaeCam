@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 837f3f10ab7d74447b253ac5f6eb096b, type: 3}
+  m_Name: HalfHeart
+  m_EditorClassIdentifier: 
+  displayName: "\uD558\uD2B8"
+  description: "0.5 \uD68C\uBCF5"
+  type: 0
+  icon: {fileID: 21300000, guid: bd4de72e93b24f647ad1bc4d656ed82e, type: 3}
+  dropPrefab: {fileID: 723856168445215775, guid: 3b3d6f086cb95be47adefed9a2ad7cec, type: 3}
+  addition:
+  - type: 2
+    value: 0.5

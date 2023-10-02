@@ -54,7 +54,7 @@ public class ContactEnemyController : EnemyController
     private void OnTriggerEnter2D(Collider2D collision) {
         GameObject receiver = collision.gameObject;
 
-        if (!receiver.CompareTag(base.Target.tag) && base.Target.tag != "Player")
+        if (!receiver.CompareTag(Target.tag))
             return;
 
         _collidingTargetHealthSystem = receiver.GetComponent<HealthSystem>();
@@ -65,7 +65,7 @@ public class ContactEnemyController : EnemyController
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        if (!collision.CompareTag(base.Target.tag) && base.Target.tag != "Player")
+        if (!collision.CompareTag(Target.tag))
             return;
 
         _isCollidingWithTarget = false;

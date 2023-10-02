@@ -141,7 +141,7 @@ Transform:
   m_Children:
   - {fileID: 4335280431327834158}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1586694593787200210
 Rigidbody2D:
@@ -231,6 +231,10 @@ MonoBehaviour:
   enemySpawner: {fileID: 0}
   followRange: 32.9
   characterRenderer: {fileID: 2347226200333821233}
+  haveSpecialAttack: 0
+  specialAttackDelay: 3
+  specialAttackSpeed: 3
+  animator: {fileID: 3085387747248463789}
 --- !u!114 &7268920082225234489
 MonoBehaviour:
   m_ObjectHideFlags: 0

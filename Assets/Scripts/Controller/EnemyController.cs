@@ -1,38 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class EnemyController : CharacterController
 {
-    [SerializeField] protected GameObject Target;
-    [SerializeField] protected EnemySpawner enemySpawner;
-    
+    GameManager gameManager;
+    protected Transform ClosestTarget { get; private set; }
 
-    
-    public void SetTarget(GameObject target)
+    protected override void Awake()
     {
-        Target = target;
+        base.Awake();
     }
 
-    public void SetSpawner(EnemySpawner enemySpawner)
+    protected virtual void Start()
     {
-        this.enemySpawner = enemySpawner;
+        gameManager = GameManager.instance;
+        ClosestTarget = gameManager.Player;
     }
 
-    protected virtual void OnDestroy()
+    protected virtual void FixedUpdate()
     {
-        if(enemySpawner != null) 
-        enemySpawner.RemoveFromList(this.gameObject);
+
     }
 
     protected float DistanceToTarget()
     {
-        return Vector3.Distance(transform.position, Target.transform.position);
+        return Vector3.Distance(transform.position, ClosestTarget.position);
     }
 
     protected Vector2 DirectionToTarget()
     {
-        return (Target.transform.position - transform.position).normalized;
+        return (ClosestTarget.position - transform.position).normalized;
     }
 } 

@@ -47,9 +47,6 @@ public class EnemySpawner : MonoBehaviour
             for (int i = 0; i < NumEnemyA; i++)
             {
                 GameObject enemy = Instantiate(EnemyPrefabs[0], this.transform.position, Quaternion.identity);
-                EnemyController enemyController = enemy.GetComponent<EnemyController>();
-                enemyController.SetTarget(Target);
-                enemyController.SetSpawner(this);
                 Enemies.Add(enemy);
             }
         }
@@ -63,9 +60,6 @@ public class EnemySpawner : MonoBehaviour
             for (int i = 0; i < NumEnemyB; i++)
             {
                 GameObject enemy = Instantiate(EnemyPrefabs[1], this.transform.position, Quaternion.identity);
-                EnemyController enemyController = enemy.GetComponent<EnemyController>();
-                enemyController.SetTarget(Target);
-                enemyController.SetSpawner(this);
                 Enemies.Add(enemy);
             }
         }
@@ -79,9 +73,6 @@ public class EnemySpawner : MonoBehaviour
             for (int i = 0; i < NumEnemyC; i++)
             {
                 GameObject enemy = Instantiate(EnemyPrefabs[2], this.transform.position, Quaternion.identity);
-                EnemyController enemyController = enemy.GetComponent<EnemyController>();
-                enemyController.SetTarget(Target);
-                enemyController.SetSpawner(this);
                 Enemies.Add(enemy);
             }
         }

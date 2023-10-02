@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 837f3f10ab7d74447b253ac5f6eb096b, type: 3}
+  m_Name: Armor
+  m_EditorClassIdentifier: 
+  displayName: "\uAC11\uC637"
+  description: "\uAC15\uCCA0 \uAC11\uC637"
+  type: 1
+  icon: {fileID: 21300000, guid: e9da63d0d264d974f9444b5f6ff502aa, type: 3}
+  dropPrefab: {fileID: 3228215577716455010, guid: a3272c94f6b45a44aa86437764e53962, type: 3}
+  addition:
+  - type: 3
+    value: 3

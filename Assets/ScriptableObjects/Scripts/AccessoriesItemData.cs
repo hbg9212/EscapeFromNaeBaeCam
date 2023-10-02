@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "Item", menuName = "Item/New Accessories Item", order = 1)]
-public class AccessoriesItemData : ItemDataConsumable
+public class AccessoriesItemData : ItemData
 {
 
 }

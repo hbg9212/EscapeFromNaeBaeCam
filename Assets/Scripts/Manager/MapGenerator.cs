@@ -6,70 +6,100 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.U2D;
 
-public class MapGenerator : MonoBehaviour
+public class MapGenerator
 {
+
+    [System.Serializable]
+    public struct MAP_GANARATION_PROPERTY
+    {
+
+        public GameObject _grid_prefab;
+        public GameObject _grid_parent;
+
+        public Vector2    _map_size;
+        public Vector2    _map_pivot;
+        public int        _map_generation_patition_number;
+
+        public int        _cell_number_x;
+        public int        _cell_number_y;
+        public Vector2    _cell_split_random_range_x;
+        public Vector2    _cell_split_random_range_y;
+
+        public Vector2    _room_random_range_x;
+        public Vector2    _room_random_range_y;
+
+        public int        _door_grid_size;
+
+    }
 
     public class Node
     {
 
-        public int CenterX => X + W / 2;
-        public int CenterY => Y + H / 2;
+        public int CenterX => GridRect.x + GridRect.width / 2;
+        public int CenterY => GridRect.y + GridRect.height / 2;
 
-        public int X;
-        public int Y;
-        public int W;
-        public int H;
+        public bool IsLeaf => ChildLeft == null;
 
-        public int RoomX;
-        public int RoomY;
-        public int RoomW;
-        public int RoomH;
-
-        public int CorridorX;
-        public int CorridorY;
-        public int CorridorW;
-        public int CorridorH;
+        public RectInt GridRect = new RectInt();
+        public RectInt RoomRect;
+        public RectInt CorridorRect;
 
         public bool IsSplitHorizon;
 
-        public Node ChildLeft;
-        public Node ChildRight;
+        public Node ChildLeft   = null;
+        public Node ChildRight  = null;
 
+        //디버깅용 입니다.
         public GameObject   Grid;
         public GameObject   Room;
         public GameObject   Corridor;
 
-    }
 
+        public RectInt CalculateRect()
+        {
+
+            RectInt rect = new RectInt();
+
+            if (IsLeaf)
+            {
+                return RoomRect;
+            }
+
+            var leftRect    = ChildLeft.CalculateRect();
+            var rightRect   = ChildRight.CalculateRect();
+            rect.min        = new Vector2Int(System.Math.Min(leftRect.min.x, rightRect.min.x), System.Math.Min(leftRect.min.y, rightRect.min.y));
+            rect.max        = new Vector2Int(System.Math.Max(leftRect.max.x, rightRect.max.x), System.Math.Max(leftRect.max.y, rightRect.max.y));
+
+            return rect;
+
+        }
+
+        public int RecursiveOverlapRoom(RectInt rect)
+        {
+            if(IsLeaf)
+            {
+                return GridRect.Overlaps(rect) ? 1 : 0;
+            }
+            else
+            {
+                return ChildLeft.RecursiveOverlapRoom(rect) + ChildRight.RecursiveOverlapRoom(rect);
+            }
+        }
+
+
+    }
 
     public void GenerateMap()
     {
 
-        //맵 전체 크기의 루트 노드를 생성합니다.
-        //포화 이진 트리 구조이기에 노드의 개수를 알 수 있으니 미리 생성해 놓습니다.
-        _node_array = new Node[(int)Mathf.Pow(2, _map_generation_patition_number + 1) - 1];
-        for (int i = 0; i < _node_array.Length; ++i)
-        {
-            _node_array[i] = new Node();
-            _node_array[i].Grid     = Instantiate(_grid_prefab);
-            _node_array[i].Room     = Instantiate(_grid_prefab);
-            _node_array[i].Corridor = Instantiate(_grid_prefab);
-            _node_array[i].Grid.transform.SetParent(_grid_parent.transform);
-            _node_array[i].Room.transform.SetParent(_grid_parent.transform);
-            _node_array[i].Corridor.transform.SetParent(_grid_parent.transform);
-        }
-        _node_array[0].X = 0;
-        _node_array[0].Y = 0;
-        _node_array[0].W = _grid_number_x;
-        _node_array[0].H = _grid_number_y;
-        UpdateLineRenderer(_node_array[0]);
+        CreateTree();
 
         
         //영역을 분할합니다.
         var siblingNumber   = 1;
         int begin           = 0;
         bool isHorizonSplit = Random.Range(0, 2) % 2 == 0;
-        for (int i = 0; i < _map_generation_patition_number; ++i)
+        for (int i = 0; i < _property._map_generation_patition_number; ++i)
         {
 
             begin = (int)Mathf.Pow(2, i) - 1;
@@ -82,7 +112,7 @@ public class MapGenerator : MonoBehaviour
                 var childRight = childLeft + 1;
 
                 //자신을 분할해 자식을 설정합니다.
-                Split(_node_array[index], _node_array[childLeft], _node_array[childRight], isHorizonSplit);
+                Split(_node_array[index], isHorizonSplit);
 
 
             }
@@ -93,8 +123,8 @@ public class MapGenerator : MonoBehaviour
         }
 
         //분할된 영역에 방을 생성합니다.
-        siblingNumber   = (int)Mathf.Pow(2, _map_generation_patition_number);
-        begin           = (int)Mathf.Pow(2, _map_generation_patition_number) - 1;
+        siblingNumber   = (int)Mathf.Pow(2, _property._map_generation_patition_number);
+        begin           = (int)Mathf.Pow(2, _property._map_generation_patition_number) - 1;
         for (int i = 0; i < siblingNumber; ++i)
         {
             GenerateRoom(_node_array[begin + i]);
@@ -104,194 +134,291 @@ public class MapGenerator : MonoBehaviour
 
         //방들을 연결합니다.
 
-        //for (int i = _node_array.Length - 1; i >= 0; i -= 2)
-        //{
-        //
-        //    GenerateCorrider(_node_array[i - 1], _node_array[i]);
-        //
-        //}
-
-        siblingNumber   = (int)Mathf.Pow(2, _map_generation_patition_number - 1);
-        begin           = (int)Mathf.Pow(2, _map_generation_patition_number - 1) - 1;
-        for (int i = 0; i < siblingNumber; ++i)
+        for (int i = (int)Mathf.Pow(2, _property._map_generation_patition_number) - 1 - 1; i >= 0; --i)
         {
-            GenerateCorrider(_node_array[begin + i]);
-            UpdateLineRenderer(_node_array[begin + i]);
+            GenerateCorridor(_node_array[i]);
+            UpdateLineRenderer(_node_array[i]);
         }
 
     }
 
 
-    public void Split(Node parent, Node left, Node right, bool isHorizonSplit)
+    private void CreateTree()
     {
 
-        parent.ChildLeft    = left;
-        parent.ChildRight   = right;
-
-        parent.IsSplitHorizon = isHorizonSplit;
-        if (parent.IsSplitHorizon)
+        //포화 이진 트리 구조이기에 노드의 개수를 알 수 있으니 미리 생성해 놓습니다.
+        _node_array = new Node[(int)Mathf.Pow(2, _property._map_generation_patition_number + 1) - 1];
+        for (int i = 0; i < _node_array.Length; ++i)
         {
 
-            int splitY = (int)(parent.H * Random.Range(_grid_split_random_range_y.x, _grid_split_random_range_y.y));
+            _node_array[i] = new Node();
 
-            left.X = parent.X;
-            left.Y = parent.Y;
-            left.W = parent.W;
-            left.H = splitY;
+            //디버깅 용도
+            _node_array[i].Grid     = GameObject.Instantiate(_property._grid_prefab);
+            _node_array[i].Room     = GameObject.Instantiate(_property._grid_prefab);
+            _node_array[i].Corridor = GameObject.Instantiate(_property._grid_prefab);
+            _node_array[i].Grid.transform.SetParent(_property._grid_parent.transform);
+            _node_array[i].Room.transform.SetParent(_property._grid_parent.transform);
+            _node_array[i].Corridor.transform.SetParent(_property._grid_parent.transform);
 
-            right.X = parent.X;
-            right.Y = parent.Y + splitY;
-            right.W = parent.W;
-            right.H = parent.H - splitY;
+        }
+
+        int   parentNodeCount = (int)Mathf.Pow(2, _property._map_generation_patition_number) - 1;
+        for (int i = 0; i < parentNodeCount; ++i)
+        {
+            _node_array[i].ChildLeft  = _node_array[i * 2 + 1];
+            _node_array[i].ChildRight = _node_array[i * 2 + 2];
+        }
+
+        //루트 노드를 맵 전체 크기로 설정합니다.
+        _node_array[0].GridRect.x       = 0;
+        _node_array[0].GridRect.y       = 0;
+        _node_array[0].GridRect.width   = _property._cell_number_x;
+        _node_array[0].GridRect.height  = _property._cell_number_y;
+
+    }
+
+    private void Split(Node node, bool isHorizonSplit)
+    {
+
+        var left    = node.ChildLeft;
+        var right   = node.ChildRight;
+        node.IsSplitHorizon = isHorizonSplit;
+        if (node.IsSplitHorizon)
+        {
+
+            int splitY = (int)(node.GridRect.height * Random.Range(_property._cell_split_random_range_y.x, _property._cell_split_random_range_y.y));
+
+            left.GridRect.x         = node.GridRect.x;
+            left.GridRect.y         = node.GridRect.y;
+            left.GridRect.width     = node.GridRect.width;
+            left.GridRect.height    = splitY;
+
+            right.GridRect.x        = node.GridRect.x;
+            right.GridRect.y        = node.GridRect.y + splitY;
+            right.GridRect.width    = node.GridRect.width;
+            right.GridRect.height   = node.GridRect.height - splitY;
 
         }
         else
         {
 
-            var splitX = (int)(parent.W * Random.Range(_grid_split_random_range_x.x, _grid_split_random_range_x.y));
+            var splitX = (int)(node.GridRect.width * Random.Range(_property._cell_split_random_range_x.x, _property._cell_split_random_range_x.y));
 
-            left.X = parent.X;
-            left.Y = parent.Y;
-            left.W = splitX;
-            left.H = parent.H;
+            left.GridRect.x         = node.GridRect.x;
+            left.GridRect.y         = node.GridRect.y;
+            left.GridRect.width     = splitX;
+            left.GridRect.height    = node.GridRect.height;
 
-            right.X = parent.X + splitX;
-            right.Y = parent.Y;
-            right.W = parent.W - splitX;
-            right.H = parent.H;
+            right.GridRect.x        = node.GridRect.x + splitX;
+            right.GridRect.y        = node.GridRect.y;
+            right.GridRect.width    = node.GridRect.width - splitX;
+            right.GridRect.height   = node.GridRect.height;
 
         }
 
     }
 
 
-    public void GenerateRoom(Node node)
+    private void GenerateRoom(Node node)
     {
 
-        node.RoomW = (int)(node.W * Random.Range(_room_random_range_x.x, _room_random_range_x.y));
-        node.RoomH = (int)(node.H * Random.Range(_room_random_range_x.y, _room_random_range_x.y));
-        node.RoomX = Random.Range(node.X + 1, node.X + node.W - node.RoomW - 1);
-        node.RoomY = Random.Range(node.Y + 1, node.Y + node.H - node.RoomH - 1);
+        node.RoomRect           = new RectInt();
+        node.RoomRect.width     = (int)(node.GridRect.width * Random.Range(_property._room_random_range_x.x, _property._room_random_range_x.y));
+        node.RoomRect.height    = (int)(node.GridRect.height * Random.Range(_property._room_random_range_x.y, _property._room_random_range_x.y));
+        node.RoomRect.x         = Random.Range(node.GridRect.x + 1, node.GridRect.x + node.GridRect.width - node.RoomRect.width - 1);
+        node.RoomRect.y         = Random.Range(node.GridRect.y + 1, node.GridRect.y + node.GridRect.height - node.RoomRect.height - 1);
 
     }
 
-    private void GenerateCorrider(Node node)
+    private void GenerateCorridor(Node node)
     {
 
-        Node left   = node.ChildLeft;
-        Node right  = node.ChildRight;
+        node.CorridorRect = new RectInt();
+
+        Node    left            = node.ChildLeft;
+        Node    right           = node.ChildRight;
+        RectInt leftRect        = left.CalculateRect();
+        RectInt rightRect       = right.CalculateRect();
         int maxBegin;
         int minEnd;
         if (node.IsSplitHorizon)
         {
 
-            maxBegin    = Mathf.Max(left.RoomX + _door_grid_size, right.RoomX + _door_grid_size);
-            minEnd      = Mathf.Min(left.RoomX + left.RoomW - _door_grid_size, right.RoomX + right.RoomW - _door_grid_size);
+            maxBegin    = Mathf.Max(leftRect.x + _property._door_grid_size, rightRect.x + _property._door_grid_size);
+            minEnd      = Mathf.Min(leftRect.x + leftRect.width - _property._door_grid_size, rightRect.x + rightRect.width - _property._door_grid_size);
 
-            node.CorridorX        = Random.Range(maxBegin, minEnd + 1);
-            node.CorridorW        = _door_grid_size;
-            node.CorridorY        = Mathf.Min(left.CenterY, right.CenterY);
-            node.CorridorH        = Mathf.Abs(right.CenterY - left.CenterY);
+            node.CorridorRect.x         = Random.Range(maxBegin, minEnd + 1);
+            node.CorridorRect.width     = _property._door_grid_size;
+            node.CorridorRect.y         = leftRect.y;
+            node.CorridorRect.height    = (int)Mathf.Abs(rightRect.y + rightRect.height - leftRect.y);
+
+            CuttingCorridorTop(node, left);
+            CuttingCorridorBottom(node, right);
 
         }
         else
         {
 
-            maxBegin    = Mathf.Max(left.RoomY + _door_grid_size, right.RoomY + _door_grid_size);
-            minEnd      = Mathf.Min(left.RoomY + left.RoomH - _door_grid_size, right.RoomY + right.RoomH - _door_grid_size);
+            maxBegin    = Mathf.Max(leftRect.y + _property._door_grid_size, rightRect.y + _property._door_grid_size);
+            minEnd      = Mathf.Min(leftRect.y + leftRect.height - _property._door_grid_size, rightRect.y + rightRect.height - _property._door_grid_size);
 
-            node.CorridorX        = Mathf.Min(left.CenterX, right.CenterX);
-            node.CorridorW        = Mathf.Abs(right.CenterX - left.CenterX);
-            node.CorridorY        = Random.Range(maxBegin, minEnd + 1);
-            node.CorridorH        = _door_grid_size;
+            node.CorridorRect.x         = leftRect.x;
+            node.CorridorRect.width     = (int)Mathf.Abs(rightRect.x + rightRect.width - leftRect.x);
+            node.CorridorRect.y         = Random.Range(maxBegin, minEnd + 1);
+            node.CorridorRect.height    = _property._door_grid_size;
+
+            CuttingCorridorLeft(node, left);
+            CuttingCorridorRight(node, right);
 
         }
 
     }
 
-    public void UpdateLineRenderer(Node node)
+    private void CuttingCorridorLeft(Node corridorNode, Node node)
+    {
+
+        if (node.IsLeaf)
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.RoomRect))
+            {
+                corridorNode.CorridorRect.min = new Vector2Int(node.RoomRect.max.x, corridorNode.CorridorRect.min.y);
+            }
+        }
+        else
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.CorridorRect))
+            {
+                corridorNode.CorridorRect.min = new Vector2Int(node.CorridorRect.max.x, corridorNode.CorridorRect.min.y);
+
+            }
+            CuttingCorridorLeft(corridorNode, node.ChildLeft);
+            CuttingCorridorLeft(corridorNode, node.ChildRight);
+        }
+
+    }
+
+    private void CuttingCorridorRight(Node corridorNode, Node node)
+    {
+
+        if (node.IsLeaf)
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.RoomRect))
+            {
+                corridorNode.CorridorRect.max = new Vector2Int(node.RoomRect.min.x, corridorNode.CorridorRect.max.y);
+            }
+        }
+        else
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.CorridorRect))
+            {
+                corridorNode.CorridorRect.max = new Vector2Int(node.CorridorRect.min.x, corridorNode.CorridorRect.max.y);
+            }
+            CuttingCorridorRight(corridorNode, node.ChildLeft);
+            CuttingCorridorRight(corridorNode, node.ChildRight);
+        }
+
+    }
+
+    private void CuttingCorridorTop(Node corridorNode, Node node)
+    {
+
+        if (node.IsLeaf)
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.RoomRect))
+            {
+                corridorNode.CorridorRect.min = new Vector2Int(corridorNode.CorridorRect.min.x, node.RoomRect.max.y);
+            }
+        }
+        else
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.CorridorRect))
+            {
+                corridorNode.CorridorRect.min = new Vector2Int(corridorNode.CorridorRect.min.x, node.CorridorRect.max.y);
+
+            }
+            CuttingCorridorTop(corridorNode, node.ChildLeft);
+            CuttingCorridorTop(corridorNode, node.ChildRight);
+        }
+
+    }
+
+    private void CuttingCorridorBottom(Node corridorNode, Node node)
+    {
+
+        if (node.IsLeaf)
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.RoomRect))
+            {
+                corridorNode.CorridorRect.max = new Vector2Int(corridorNode.CorridorRect.max.x, node.RoomRect.min.y);
+            }
+        }
+        else
+        {
+            if (corridorNode.CorridorRect.Overlaps(node.CorridorRect))
+            {
+                corridorNode.CorridorRect.max = new Vector2Int(corridorNode.CorridorRect.max.x, node.CorridorRect.min.y);
+            }
+            CuttingCorridorBottom(corridorNode, node.ChildLeft);
+            CuttingCorridorBottom(corridorNode, node.ChildRight);
+        }
+
+    }
+
+    private void UpdateLineRenderer(Node node)
     {
 
         var gridLineRenderer = node.Grid.GetComponent<LineRenderer>();
-
-        var left                        = (float)node.X / _grid_number_x * _map_size.x;
-        var right                       = (float)(node.X + node.W) / _grid_number_x * _map_size.x;
-        var top                         = (float)(node.Y + node.H) / _grid_number_y * _map_size.y;
-        var bottom                      = (float)node.Y / _grid_number_y * _map_size.y;
+        
+        var left                        = (float)node.GridRect.x / _property._cell_number_x * _property._map_size.x;
+        var right                       = (float)(node.GridRect.x + node.GridRect.width) / _property._cell_number_x * _property._map_size.x;
+        var top                         = (float)(node.GridRect.y + node.GridRect.height) / _property._cell_number_y * _property._map_size.y;
+        var bottom                      = (float)node.GridRect.y / _property._cell_number_y * _property._map_size.y;
         gridLineRenderer.enabled        = false;
         gridLineRenderer.startColor     = Color.blue;
         gridLineRenderer.endColor       = Color.blue;
         gridLineRenderer.positionCount  = 4;
-        gridLineRenderer.SetPosition(0, new Vector2(left,   top) - _map_pivot);
-        gridLineRenderer.SetPosition(1, new Vector2(right,  top) - _map_pivot);
-        gridLineRenderer.SetPosition(2, new Vector2(right,  bottom) - _map_pivot);
-        gridLineRenderer.SetPosition(3, new Vector2(left,   bottom) - _map_pivot);
-
-
+        gridLineRenderer.SetPosition(0, new Vector2(left,   top) - _property._map_pivot);
+        gridLineRenderer.SetPosition(1, new Vector2(right,  top) - _property._map_pivot);
+        gridLineRenderer.SetPosition(2, new Vector2(right,  bottom) - _property._map_pivot);
+        gridLineRenderer.SetPosition(3, new Vector2(left,   bottom) - _property._map_pivot);
+        
+        
         //Room
         var roomLineRenderer = node.Room.GetComponent<LineRenderer>();
-
-        left                            = (float)node.RoomX / _grid_number_x * _map_size.x;
-        right                           = (float)(node.RoomX + node.RoomW) / _grid_number_x * _map_size.x;
-        top                             = (float)(node.RoomY + node.RoomH) / _grid_number_y * _map_size.y;
-        bottom                          = (float)node.RoomY / _grid_number_y * _map_size.y;
+        
+        left                            = (float)node.RoomRect.x / _property._cell_number_x * _property._map_size.x;
+        right                           = (float)(node.RoomRect.y + node.RoomRect.width) / _property._cell_number_x * _property._map_size.x;
+        top                             = (float)(node.RoomRect.y + node.RoomRect.height) / _property._cell_number_y * _property._map_size.y;
+        bottom                          = (float)node.RoomRect.y / _property._cell_number_y * _property._map_size.y;
         roomLineRenderer.startColor     = Color.red;
         roomLineRenderer.endColor       = Color.red;
         roomLineRenderer.positionCount  = 4;
-        roomLineRenderer.SetPosition(0, new Vector2(left,   top) - _map_pivot);
-        roomLineRenderer.SetPosition(1, new Vector2(right,  top) - _map_pivot);
-        roomLineRenderer.SetPosition(2, new Vector2(right,  bottom) - _map_pivot);
-        roomLineRenderer.SetPosition(3, new Vector2(left,   bottom) - _map_pivot);
-
+        roomLineRenderer.SetPosition(0, new Vector2(left,   top) - _property._map_pivot);
+        roomLineRenderer.SetPosition(1, new Vector2(right,  top) - _property._map_pivot);
+        roomLineRenderer.SetPosition(2, new Vector2(right,  bottom) - _property._map_pivot);
+        roomLineRenderer.SetPosition(3, new Vector2(left,   bottom) - _property._map_pivot);
+        
         //Corrior
         var corridorLineRenderer = node.Corridor.GetComponent<LineRenderer>();
-
-        left                                = (float)node.CorridorX / _grid_number_x * _map_size.x;
-        right                               = (float)(node.CorridorX + node.CorridorW) / _grid_number_x * _map_size.x;
-        top                                 = (float)(node.CorridorY + node.CorridorH) / _grid_number_y * _map_size.y;
-        bottom                              = (float)node.CorridorY / _grid_number_y * _map_size.y;
+        
+        left                                = (float)node.CorridorRect.x / _property._cell_number_x * _property._map_size.x;
+        right                               = (float)(node.CorridorRect.x + node.CorridorRect.width) / _property._cell_number_x * _property._map_size.x;
+        top                                 = (float)(node.CorridorRect.y + node.CorridorRect.height) / _property._cell_number_y * _property._map_size.y;
+        bottom                              = (float)node.CorridorRect.y / _property._cell_number_y * _property._map_size.y;
         corridorLineRenderer.startColor     = Color.red;
         corridorLineRenderer.endColor       = Color.red;
         corridorLineRenderer.positionCount  = 4;
-        corridorLineRenderer.SetPosition(0, new Vector2(left,   top) - _map_pivot);
-        corridorLineRenderer.SetPosition(1, new Vector2(right,  top) - _map_pivot);
-        corridorLineRenderer.SetPosition(2, new Vector2(right,  bottom) - _map_pivot);
-        corridorLineRenderer.SetPosition(3, new Vector2(left,   bottom) - _map_pivot);
+        corridorLineRenderer.SetPosition(0, new Vector2(left,   top) - _property._map_pivot);
+        corridorLineRenderer.SetPosition(1, new Vector2(right,  top) - _property._map_pivot);
+        corridorLineRenderer.SetPosition(2, new Vector2(right,  bottom) - _property._map_pivot);
+        corridorLineRenderer.SetPosition(3, new Vector2(left,   bottom) - _property._map_pivot);
         
 
     }
 
+    public MAP_GANARATION_PROPERTY _property;
 
-    private void Start()
-    {
-
-        _map_size.x = Camera.main.orthographicSize * Camera.main.aspect * 2.0f;
-        _map_size.y = Camera.main.orthographicSize * 2.0f;
-
-        _map_pivot = _map_size * 0.5f;
-
-        GenerateMap();
-
-    }
-
-
-    [SerializeField] private GameObject _grid_prefab;
-    [SerializeField] private GameObject _grid_parent;
-
-    [SerializeField] private Vector2    _map_size   = new Vector2();
-    [SerializeField] private Vector2    _map_pivot  = new Vector2();
-    [SerializeField] private int        _map_generation_patition_number;
-
-    [SerializeField] private int        _grid_number_x;
-    [SerializeField] private int        _grid_number_y;
-    [SerializeField] private Vector2    _grid_split_random_range_x;
-    [SerializeField] private Vector2    _grid_split_random_range_y;
-
-    [SerializeField] private Vector2    _room_random_range_x;
-    [SerializeField] private Vector2    _room_random_range_y;
-
-    [SerializeField] private int        _door_grid_size;
-
-    private Node[] _node_array;
+    public Node[] _node_array;
 
 }

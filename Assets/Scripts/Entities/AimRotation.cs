@@ -8,12 +8,14 @@ public class AimRotation : MonoBehaviour
     [SerializeField] private SpriteRenderer armRenderer;
     [SerializeField] private Transform armPivot;
 
+    private CharacterStatsHandler _characterStatsHandler;
     private CharacterController _controller;
 
     private void Awake()
     {
-        _controller = GetComponent<CharacterController>();
         characterRenderer = GetComponent<SpriteRenderer>();
+        _characterStatsHandler = GetComponent<CharacterStatsHandler>();
+        _controller = GetComponent<CharacterController>();
     }
 
     void Start()
@@ -29,18 +31,8 @@ public class AimRotation : MonoBehaviour
     private void RotateArm(Vector2 direction)
     {
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        armRenderer.flipY = Mathf.Abs(rotZ) > 90f;
+        characterRenderer.flipX = armRenderer.flipY;
         armPivot.rotation = Quaternion.Euler(0, 0, rotZ);
-        
-        // 마우스 위치에 따른 캐릭터 스프라이트 랜더러 전환
-        if (Mathf.Abs(rotZ) > 90f)
-        {
-            armRenderer.flipY = true;
-            characterRenderer.flipX = true;
-        }
-        else
-        {
-            armRenderer.flipY = false;
-            characterRenderer.flipX = false;
-        }
     }
 }

@@ -49,9 +49,6 @@ public class Shooting : MonoBehaviour
             RotateVector2(_aimDirection, angle),
             rangedAttackData
             );
-        //Transform bullet = PoolManager.I.Get((int)PoolManager.PrefabId.SnowBall).transform;
-        //bullet.position = projectileSpawnPosition.position;
-        //bullet.GetComponent<SnowBall>().Init(15f, _aimDirection.normalized);
     }
 
     private static Vector2 RotateVector2(Vector2 v, float degree) {

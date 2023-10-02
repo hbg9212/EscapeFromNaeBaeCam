@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1181962070164708147}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BulletSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -40,6 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5317533720095545249}
+  - component: {fileID: 3194458664236619678}
   - component: {fileID: 5005701181922428345}
   - component: {fileID: 7580923870895295844}
   - component: {fileID: 2515214888456773621}
@@ -49,7 +50,8 @@ GameObject:
   - component: {fileID: 7249665239157833108}
   - component: {fileID: 8570464652724907153}
   - component: {fileID: 7096535775382700605}
-  m_Layer: 0
+  - component: {fileID: 1096195203760909452}
+  m_Layer: 7
   m_Name: Enemy_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,8 +72,20 @@ Transform:
   m_Children:
   - {fileID: 5532691066714643922}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3194458664236619678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3878377266091272735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efdf085415e06b48bc33f83b1e86626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5005701181922428345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d054c624233ff6245bb7077477d0bbd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dodgeVec: {x: 0, y: 0}
+  enemySpawner: {fileID: 0}
   followRange: 20
   shootRange: 5
 --- !u!61 &5154052368975748209
@@ -172,7 +188,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -262,7 +278,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 271644848, guid: f90c9a8b0b7075743b31114d18c24451, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -288,6 +304,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armRenderer: {fileID: 2562734710114136583}
   armPivot: {fileID: 5532691066714643922}
+--- !u!114 &1096195203760909452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3878377266091272735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8a485a103f8d24a85f621a37e310a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthChangeDelay: 0.5
 --- !u!1 &6818089742315321110
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +327,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4448872190014039431}
   - component: {fileID: 2562734710114136583}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +410,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5532691066714643922}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

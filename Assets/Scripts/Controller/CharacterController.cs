@@ -89,4 +89,9 @@ public class CharacterController : MonoBehaviour
     {
         OnInvenEvent?.Invoke(IsInven);
     }
+
+    protected virtual void OnDestroy()
+    {
+
+    }
 }

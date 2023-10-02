@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4335280431327834158}
   - component: {fileID: 2347226200333821233}
   - component: {fileID: 3085387747248463789}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MainSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: -1937103651, guid: 9633ccd9e2e9b4b4d8b1862ebff07b06, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -117,10 +117,12 @@ GameObject:
   - component: {fileID: 5233599525982883213}
   - component: {fileID: 1586694593787200210}
   - component: {fileID: 592059701731643607}
+  - component: {fileID: 6319800169986530432}
   - component: {fileID: 7480158538162101950}
   - component: {fileID: 7268920082225234489}
   - component: {fileID: 5518267366094852219}
-  m_Layer: 0
+  - component: {fileID: 995123130474063969}
+  m_Layer: 7
   m_Name: Enemy_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +143,7 @@ Transform:
   m_Children:
   - {fileID: 4335280431327834158}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1586694593787200210
 Rigidbody2D:
@@ -199,7 +201,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -215,6 +217,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 1.2}
   m_EdgeRadius: 0
+--- !u!114 &6319800169986530432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3257866580738339206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efdf085415e06b48bc33f83b1e86626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7480158538162101950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,14 +241,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4a45c2f4974fe4c9823d0d15692f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
+  dodgeVec: {x: 0, y: 0}
   enemySpawner: {fileID: 0}
   followRange: 32.9
+  targetTag: Player
   characterRenderer: {fileID: 2347226200333821233}
-  haveSpecialAttack: 0
-  specialAttackDelay: 3
-  specialAttackSpeed: 3
-  animator: {fileID: 3085387747248463789}
 --- !u!114 &7268920082225234489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,8 +271,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats:
-    type: 0
+    type: 2
     maxHealth: 0
     speed: 3
     attackSO: {fileID: 11400000, guid: 0146ce172516c634b907f81ea216f90e, type: 2}
   statsModifiers: []
+--- !u!114 &995123130474063969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3257866580738339206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8a485a103f8d24a85f621a37e310a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthChangeDelay: 0.5

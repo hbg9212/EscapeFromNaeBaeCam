@@ -59,7 +59,6 @@ public class PlayerInputController : CharacterController
 
     public void OnRoll(InputValue value)
     {
-        IsRolling = value.isPressed;
-        CallRollEvent();
+        IsRolling = true;
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.TextCore.Text;
 
 public class Movement : MonoBehaviour
@@ -61,12 +62,13 @@ public class Movement : MonoBehaviour
     private void Dodge()
     {
         Debug.Log(_movementDirection);
-        if (_movementDirection != Vector2.zero && !(_controller.IsRolling))
+        if (_rigidbody.velocity != Vector2.zero && (_controller.IsRolling))
         {
             //_controller.dodgeVec = _movementDirection;
             _stats.CurrentStats.speed *= 2;
+            _controller._timeSinceLastRoll = 0;
             //anim.SetTrigger("doDodge");
-            _controller.IsRolling = true;
+            //_controller.IsRolling = true;
             character.gameObject.tag = "Rolling";
             character.gameObject.layer = LayerMask.NameToLayer("Rolling");
             Invoke("DodgeOut", 0.5f);
@@ -75,6 +77,7 @@ public class Movement : MonoBehaviour
 
     private void DodgeOut()
     {
+        Debug.Log("DodgeOut");
         _stats.CurrentStats.speed *= 0.5f;
         _controller.IsRolling = false;
         _controller.dodgeVec = Vector2.zero;

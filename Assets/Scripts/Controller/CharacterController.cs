@@ -14,6 +14,7 @@ public class CharacterController : MonoBehaviour
     public event Action OnRollEvent;
 
     protected float _timeSinceLastAttack = float.MaxValue;
+    public float _timeSinceLastRoll = float.MaxValue;
     protected CharacterStatsHandler Stats { get; private set; }
     protected bool IsAttacking { get; set; }
     public bool IsRolling { get; set; }
@@ -28,6 +29,8 @@ public class CharacterController : MonoBehaviour
     protected virtual void Update()
     {
         HandleAttackDelay();
+        HandleRollDelay();
+        Debug.Log(IsRolling);
     }
 
     private void HandleAttackDelay()
@@ -44,6 +47,20 @@ public class CharacterController : MonoBehaviour
         {
             _timeSinceLastAttack = 0;
             CallAttackEvent(Stats.CurrentStats.attackSO);
+        }
+    }
+
+    private void HandleRollDelay()
+    {
+        if (_timeSinceLastRoll <= 2.0f)
+        {
+            _timeSinceLastRoll += Time.deltaTime;
+            IsRolling = false;
+        }
+
+        if (IsRolling && _timeSinceLastRoll > 2.0f)
+        {
+            CallRollEvent();
         }
     }
 

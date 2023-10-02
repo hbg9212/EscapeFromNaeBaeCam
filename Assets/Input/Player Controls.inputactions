@@ -42,7 +42,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Q",
+                    "name": "Skill",
                     "type": "Value",
                     "id": "5ed55044-0534-4ceb-89e2-cc7d1a2ee9ea",
                     "expectedControlType": "Button",
@@ -210,8 +210,8 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Q",
+                    "groups": "KeyboardMouse",
+                    "action": "Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

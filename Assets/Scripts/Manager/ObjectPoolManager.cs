@@ -36,7 +36,14 @@ public class ObjectPoolManager : MonoBehaviour
 
         obj.transform.position = startPosition;
         RangedAttackCotroller attackCotroller = obj.GetComponent<RangedAttackCotroller>();
-        attackCotroller.InitializeAttack(direction, attackData, obj, this);
-        //obj.SetActive(true);
+        attackCotroller.InitializeAttack(direction, attackData, obj);
+    }
+    
+    public void ShootSkillBullet(Vector2 startPosition, Vector2 direction, RangedSkillData skillData) {
+        GameObject obj = Instantiate(FindFromPool(skillData.bulletNameTag));
+
+        obj.transform.position = startPosition;
+        RangedAttackCotroller attackCotroller = obj.GetComponent<RangedAttackCotroller>();
+        attackCotroller.InitializeSkillAttack(direction, skillData, obj);
     }
 }

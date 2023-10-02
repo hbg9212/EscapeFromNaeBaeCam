@@ -28,7 +28,7 @@ public class DroneCannon : MonoBehaviour
         if (this.transform.localScale.x < 0)
             dirction.x *= -1;
     
-        rangedAttackCotroller.InitializeAttack(dirction, rangedAttackData, this.gameObject, ObjectPoolManager);
+        rangedAttackCotroller.InitializeAttack(dirction, rangedAttackData, this.gameObject);
     }
 
  

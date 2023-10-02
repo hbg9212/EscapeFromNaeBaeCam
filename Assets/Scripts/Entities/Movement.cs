@@ -69,8 +69,8 @@ public class Movement : MonoBehaviour
             _controller._timeSinceLastRoll = 0;
             //anim.SetTrigger("doDodge");
             //_controller.IsRolling = true;
-            character.gameObject.tag = "Rolling";
-            character.gameObject.layer = LayerMask.NameToLayer("Rolling");
+            //character.gameObject.tag = "Rolling";
+            //character.gameObject.layer = LayerMask.NameToLayer("Rolling");
             Invoke("DodgeOut", 0.5f);
         }
     }

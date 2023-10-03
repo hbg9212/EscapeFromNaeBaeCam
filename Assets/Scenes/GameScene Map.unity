@@ -603,37 +603,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &298721503
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 298721504}
-  m_Layer: 0
-  m_Name: Background
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &298721504
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 298721503}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1176113131}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &352220288
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,6 +844,7 @@ MonoBehaviour:
     maxHealth: 6
     speed: 10
     attackSO: {fileID: 11400000, guid: ef86bda1dd6417244ab88673e0130e25, type: 2}
+    skillSO: {fileID: 0}
   statsModifiers: []
 --- !u!70 &666686911
 CapsuleCollider2D:
@@ -1029,6 +999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99b7a1c48bab1249bd4d29846fa5b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
 --- !u!114 &666686917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,6 +1012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673fc90b549ad414297a12cd8c91288e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeSinceLastRoll: 3.4028235e+38
   dodgeVec: {x: 0, y: 0}
 --- !u!114 &666686918
 MonoBehaviour:
@@ -1358,20 +1330,23 @@ MonoBehaviour:
   _wall_tile: {fileID: 11400000, guid: 5c0f073a9a686cb44a83a790b636d1e5, type: 2}
   _tile_map: {fileID: 272026914}
   _wall_tile_map: {fileID: 36735503}
+  _tile_map_grid: {fileID: 1361922718}
+  _wall_tile_map_grid: {fileID: 1662872332}
   _map_generation_property:
     _grid_prefab: {fileID: 5438597048426868475, guid: b60fbbc72fbb25f4481efe2c61a28f8e, type: 3}
     _grid_parent: {fileID: 868286808}
-    _map_size: {x: 10, y: 10}
-    _map_pivot: {x: 5, y: 5}
-    _map_generation_patition_number: 4
-    _cell_number_x: 256
-    _cell_number_y: 256
+    _map_size: {x: 100, y: 100}
+    _map_pivot: {x: 0, y: 0}
+    _map_generation_patition_number: 3
+    _cell_number_x: 128
+    _cell_number_y: 128
     _cell_split_random_range_x: {x: 0.3, y: 0.7}
     _cell_split_random_range_y: {x: 0.3, y: 0.7}
     _room_random_range_x: {x: 0.6, y: 0.8}
     _room_random_range_y: {x: 0.6, y: 0.8}
-    _door_grid_size: 8
+    _door_grid_size: 4
   _player: {fileID: 666686909}
+  _monster_spawner_prefab: {fileID: 2549410747634604991, guid: ec245fb1d12628349972e2e7cb5be8a9, type: 3}
   _boss_prefab: {fileID: 3257866580738339206, guid: 32261f95f4994f4489865866e145a8f8, type: 3}
 --- !u!4 &1176113131
 Transform:
@@ -1388,7 +1363,6 @@ Transform:
   - {fileID: 1361922717}
   - {fileID: 1662872331}
   - {fileID: 868286809}
-  - {fileID: 298721504}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

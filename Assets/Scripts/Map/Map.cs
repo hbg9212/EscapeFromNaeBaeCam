@@ -7,8 +7,13 @@ using UnityEngine.Tilemaps;
 public class Map : MonoBehaviour
 {
 
-    public GameObject Player { get => _player; }
-    public GameObject BossPrefab { get => _boss_prefab; }
+    public GameObject Player => _player;
+
+    public GameObject MonsterSpawner => _monster_spawner_prefab;
+
+    public GameObject BossPrefab => _boss_prefab;
+
+    public MapGenerator.MAP_GENARATION_PROPERTY MapGenarationProperty => _map_generation_property;
 
     private void Start()
     {
@@ -17,7 +22,10 @@ public class Map : MonoBehaviour
         generator._property = _map_generation_property;
         generator.GenerateMap();
 
-        for(int y = 0; y < generator._property._cell_number_y; ++y)
+        _tile_map_grid.cellSize         = new Vector2(_map_generation_property.CellSizeX, _map_generation_property.CellSizeY);
+        _wall_tile_map_grid.cellSize    = _tile_map_grid.cellSize;
+
+        for (int y = 0; y < generator._property._cell_number_y; ++y)
         {
             for(int x = 0; x < generator._property._cell_number_x; ++x)
             {
@@ -53,7 +61,15 @@ public class Map : MonoBehaviour
 
         _roomList.Add(new PlayerStartRoom());
         _roomList.Add(new BossRoom());
-        for (int i = 2; i < roomNumber; ++i)
+
+        int monsterRoomNumber = (roomNumber - 2) / 2;
+        for (int i = 0; i < monsterRoomNumber; ++i)
+        {
+            _roomList.Add(new MonsterRoom());
+        }
+
+        int emptyRoomNumber = roomNumber - 2 - monsterRoomNumber;
+        for (int i = 0; i < emptyRoomNumber; ++i)
         {
             _roomList.Add(new EmptyRoom());
         }
@@ -76,9 +92,9 @@ public class Map : MonoBehaviour
             }
         }
 
-        _roomList[index].map    = this;
-        _roomList[index].index  = index;
-        _roomList[index].rect   = node.RoomRect;
+        _roomList[index].Map    = this;
+        _roomList[index].Index  = index;
+        _roomList[index].IndexRect   = node.RoomRect;
 
     }
 
@@ -133,8 +149,8 @@ public class Map : MonoBehaviour
                     if (isFloorMap[System.Math.Max(y - 1, 0) * _map_generation_property._cell_number_x + System.Math.Max(x - 1, 0)]   ||
                         isFloorMap[System.Math.Max(y - 1, 0) * _map_generation_property._cell_number_x + (x + 0)]              ||
                         isFloorMap[System.Math.Max(y - 1, 0) * _map_generation_property._cell_number_x + System.Math.Min(x + 1, w)]   ||
-                        isFloorMap[y + 0 * _map_generation_property._cell_number_x + System.Math.Max(x - 1, 0)]                ||
-                        isFloorMap[y + 0 * _map_generation_property._cell_number_x + System.Math.Min(x + 1, w)]                ||
+                        isFloorMap[y * _map_generation_property._cell_number_x + System.Math.Max(x - 1, 0)]                ||
+                        isFloorMap[y * _map_generation_property._cell_number_x + System.Math.Min(x + 1, w)]                ||
                         isFloorMap[System.Math.Min(y + 1, h) * _map_generation_property._cell_number_x + System.Math.Max(x - 1, 0)]   ||
                         isFloorMap[System.Math.Min(y + 1, h) * _map_generation_property._cell_number_x + (x + 0)]              ||
                         isFloorMap[System.Math.Min(y + 1, h) * _map_generation_property._cell_number_x + System.Math.Min(x + 1, w)])
@@ -153,9 +169,12 @@ public class Map : MonoBehaviour
     [SerializeField] private TileBase                               _wall_tile;
     [SerializeField] private Tilemap                                _tile_map;
     [SerializeField] private Tilemap                                _wall_tile_map;
-    [SerializeField] private MapGenerator.MAP_GANARATION_PROPERTY   _map_generation_property;
+    [SerializeField] private Grid                                   _tile_map_grid;
+    [SerializeField] private Grid                                   _wall_tile_map_grid;
+    [SerializeField] private MapGenerator.MAP_GENARATION_PROPERTY   _map_generation_property;
 
     [SerializeField] private GameObject                             _player;
+    [SerializeField] private GameObject                             _monster_spawner_prefab;
     [SerializeField] private GameObject                             _boss_prefab;
 
     private List<Room>  _roomList = new List<Room>();

@@ -188,6 +188,7 @@ MonoBehaviour:
   Enemies: []
   NumEnemyA: 4
   NumEnemyB: 1
+  NumEnemyC: 0
   ColliderWidth: 5
   ColliderHeight: 5
   isClear: 0

@@ -8,10 +8,10 @@ using UnityEngine.Tilemaps;
 public abstract class Room
 {
 
-    public Map      map;
+    public Map      Map;
 
-    public RectInt  rect    = new RectInt();
-    public int      index   = -1;
+    public RectInt  IndexRect   = new RectInt();
+    public int      Index       = -1;
 
     public virtual void Start()
     {
@@ -46,19 +46,16 @@ public class EmptyRoom : Room
 public class MonsterRoom : Room
 {
 
-    public override void Enter()
+    public override void Start()
     {
 
-        if (_first)
-        {
-
-            _first = false;
-
-        }
+        Vector3 position = new Vector2(IndexRect.center.x * Map.MapGenarationProperty.CellSizeX, IndexRect.center.y * Map.MapGenarationProperty.CellSizeY);
+        var spawner = GameObject.Instantiate(Map.MonsterSpawner, position, Quaternion.identity);
+        var spawnerScript = spawner.GetComponent<EnemySpawner>();
+        spawnerScript.ColliderWidth     = IndexRect.width * Map.MapGenarationProperty.CellSizeX * 0.8f;
+        spawnerScript.ColliderHeight    = IndexRect.height * Map.MapGenarationProperty.CellSizeY * 0.8f;
 
     }
-
-    private bool _first = true;
 
 }
 
@@ -67,7 +64,7 @@ public class PlayerStartRoom : Room
 
     public override void Start()
     {
-        map.Player.transform.position = rect.center;
+        Map.Player.transform.position = new Vector2(IndexRect.center.x * Map.MapGenarationProperty.CellSizeX, IndexRect.center.y * Map.MapGenarationProperty.CellSizeY);
     }
 
 }
@@ -79,8 +76,8 @@ public class BossRoom : Room
     public override void Start()
     {
 
-        Vector3 position = rect.center;
-        GameObject.Instantiate(map.BossPrefab, position, Quaternion.identity).SetActive(true);
+        Vector3 position = new Vector2(IndexRect.center.x * Map.MapGenarationProperty.CellSizeX, IndexRect.center.y * Map.MapGenarationProperty.CellSizeY);
+        GameObject.Instantiate(Map.BossPrefab, position, Quaternion.identity);
 
     }
 

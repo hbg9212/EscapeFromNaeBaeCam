@@ -20,6 +20,10 @@ public class HeartManager : MonoBehaviour
     private int currentHp = 0;
     private List<GameObject> Hearts;
 
+
+    // Test
+    protected float _time = 0;
+
     private void Awake()
     {
         Hearts = new List<GameObject>();
@@ -40,11 +44,27 @@ public class HeartManager : MonoBehaviour
         currentHp = heartCount;
     }
 
-    
+
+    // Test - 지울것!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private void Update()
+    {
+        _time += Time.deltaTime;
+        if(_time > 5f)
+        {
+            _time = 0;
+            _healthSystem.ChangeHealth(-3f);
+        }
+        Debug.Log(currentHp);
+    }
+
+
     public void DamagedHP(float value)
     {
-        for(int i = 0; i < value; i++)
+        Debug.Log($"HeartUI => Damage! / {(int)Mathf.Abs(value)}");
+        for(int i = 0; i < (int)Mathf.Abs(value); i++)
         {
+            if (currentHp == 0)
+                break;
             ChagedHP(false);
         }
     }
@@ -61,6 +81,7 @@ public class HeartManager : MonoBehaviour
     // 이미지 변환
     public void ChagedHP(bool healOrDamage)
     {
+        Debug.Log("ChagedHP!!!");
         int HeartIndex = (currentHp / 2) - 1;
         if (currentHp % 2 != 0)
         {
@@ -86,6 +107,7 @@ public class HeartManager : MonoBehaviour
         }
         else
         {
+            Debug.Log($"Damage!!! {HeartIndex}");
             if (currentHp % 2 == 0)
             {
                 Hearts[HeartIndex].GetComponent<Image>().sprite = halfHeart;
@@ -109,9 +131,9 @@ public class HeartManager : MonoBehaviour
             return;
 
         GameObject newHeart = Instantiate(heartPrefab);
-
         Transform parentObject = heartBase.transform; 
         newHeart.transform.SetParent(parentObject);
+        Hearts.Add(newHeart);
     }
 
 

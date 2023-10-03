@@ -811,6 +811,7 @@ GameObject:
   - component: {fileID: 829401202}
   - component: {fileID: 829401201}
   - component: {fileID: 829401200}
+  - component: {fileID: 829401203}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -902,6 +903,25 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &829401203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829401198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f794245ee7412844adda34424110880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1244991905}
+  heartPrefab: {fileID: 3896854687093962423, guid: a1288f51695836046af970842f685409, type: 3}
+  heartBase: {fileID: 1522736496}
+  fullHeart: {fileID: 21300000, guid: fd92aa73a722ad245b3debc78cc585a5, type: 3}
+  halfHeart: {fileID: 21300000, guid: bd4de72e93b24f647ad1bc4d656ed82e, type: 3}
+  soulHeartColor: {r: 0.49803925, g: 0.83921576, b: 0.98823535, a: 0}
+  emptyHeartColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &849487383
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,6 +1006,9 @@ GameObject:
   - component: {fileID: 1244991907}
   - component: {fileID: 1244991906}
   - component: {fileID: 1244991915}
+  - component: {fileID: 1244991919}
+  - component: {fileID: 1244991920}
+  - component: {fileID: 1244991918}
   - component: {fileID: 1244991916}
   - component: {fileID: 1244991917}
   m_Layer: 6
@@ -1261,6 +1284,44 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1244991918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244991905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26faaaaf9aaa14b40b8e0a49f908a39f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeRangePosition: {fileID: 1605094003}
+--- !u!114 &1244991919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244991905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8a485a103f8d24a85f621a37e310a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthChangeDelay: 0.5
+--- !u!114 &1244991920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244991905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efdf085415e06b48bc33f83b1e86626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1283026503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,7 +1554,7 @@ GameObject:
   - component: {fileID: 1522736499}
   - component: {fileID: 1522736498}
   m_Layer: 0
-  m_Name: Heart
+  m_Name: HeartRct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1516,8 +1577,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 290, y: -110}
-  m_SizeDelta: {x: 550, y: 200}
+  m_AnchoredPosition: {x: 290, y: -90}
+  m_SizeDelta: {x: 550, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1522736498
 MonoBehaviour:
@@ -1539,8 +1600,8 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 0, y: 0}
+  m_CellSize: {x: 70, y: 70}
+  m_Spacing: {x: 10, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &1522736499
@@ -1556,7 +1617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

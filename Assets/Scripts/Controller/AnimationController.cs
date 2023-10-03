@@ -52,7 +52,7 @@ public class AnimationController : MonoBehaviour
         animator.SetTrigger(Attack);
     }
 
-    private void Hit()
+    private void Hit(float value)
     {
         animator.SetBool(IsHit, true);
     }

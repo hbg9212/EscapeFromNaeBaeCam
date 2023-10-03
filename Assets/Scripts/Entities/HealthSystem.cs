@@ -10,8 +10,8 @@ public class HealthSystem : MonoBehaviour {
     private CharacterStatsHandler _statsHandler;
     private float _timeSinceLastChange = float.MaxValue;
 
-    public event Action OnDamage;
-    public event Action OnHeal;
+    public event Action<float> OnDamage;
+    public event Action<float> OnHeal;
     public event Action OnDeath;
     public event Action OnInvincibilityEnd;
 
@@ -47,9 +47,9 @@ public class HealthSystem : MonoBehaviour {
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;
 
         if (change > 0) {
-            OnHeal?.Invoke();
+            OnHeal?.Invoke(change);
         } else {
-            OnDamage?.Invoke();
+            OnDamage?.Invoke(change);
         }
 
         if (CurrentHealth <= 0f) {

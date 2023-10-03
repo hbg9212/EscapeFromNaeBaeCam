@@ -18,4 +18,5 @@ public class CharacterStats
     [Range(0f, 20f)] public float speed;
 
     public AttackSO attackSO;
+    public SkillSO skillSO;
 }

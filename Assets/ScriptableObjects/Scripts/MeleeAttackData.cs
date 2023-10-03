@@ -6,5 +6,6 @@ using UnityEngine;
 public class MeleeAttackData : AttackSO
 {
     [Header("Melee Attack Data")]
+    public Vector2 attackRange;
     public Color projectileColor;
 }

@@ -48,6 +48,10 @@ public class PlayerInputController : CharacterController
         IsAttacking = value.isPressed;
     }
 
+    public void OnSkill(InputValue value) {
+        IsSkillAttacking = value.isPressed;
+    }
+
     public void OnInven(InputValue value)
     {
         if(value.isPressed)
@@ -59,7 +63,6 @@ public class PlayerInputController : CharacterController
 
     public void OnRoll(InputValue value)
     {
-        IsRolling = value.isPressed;
-        CallRollEvent();
+        IsRolling = true;
     }
 }

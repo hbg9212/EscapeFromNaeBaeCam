@@ -35,7 +35,6 @@ public class MeleeAttackController : MonoBehaviour
 
     private void OnAttack(AttackSO attackSO)
     {
-        /*
         MeleeAttackData meleeAttackData = attackSO as MeleeAttackData;
         //OnDrawGizmos(meleeAttackData.attackRange);
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(meleeRangePosition.position, meleeAttackData.attackRange, 0);
@@ -58,7 +57,6 @@ public class MeleeAttackController : MonoBehaviour
                 }
             }
         }
-        */
     }
 
     private void OnSkillAttack(SkillSO skillSO)

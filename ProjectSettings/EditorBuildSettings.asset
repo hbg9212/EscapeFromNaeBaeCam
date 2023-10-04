@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: b5fb71bc530cb8248a7fd9583b817e5c
+  - enabled: 1
     path: Assets/Scenes/SelectScene.unity
     guid: 498d33773cc76e5419b541f257251a19
   - enabled: 1
-    path: Assets/Scenes/BattelTest2.unity
-    guid: 792d36a62a5ae524489231409fc1a5ae
+    path: Assets/Scenes/RangedScene.unity
+    guid: cb0797c86ed432246b6e34576780a5b5
   m_configObjects: {}

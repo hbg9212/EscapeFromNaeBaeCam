@@ -44,21 +44,6 @@ public class HeartManager : MonoBehaviour
         currentHp = heartCount;
     }
 
-
-    // Test - Áö¿ï°Í!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    private void Update()
-    {
-        _time += Time.deltaTime;
-        if(_time > 5f)
-        {
-            _time = 0;
-            _healthSystem.ChangeHealth(-3f);
-        }
-        Debug.Log(currentHp);
-    }
-
-
-
     public void DamagedHP(float value)
     {
         for(int i = 0; i < (int)Mathf.Abs(value); i++)

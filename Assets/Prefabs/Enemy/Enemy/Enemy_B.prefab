@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6923416640721116510}
   - component: {fileID: 9123821169492233632}
   - component: {fileID: 8961292850746384669}
+  - component: {fileID: 1878630302383218562}
   m_Layer: 7
   m_Name: Enemy_B
   m_TagString: Untagged
@@ -33,12 +34,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6969382807840113813}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.528532, y: -1.3530462, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &7702575806344717906
 Rigidbody2D:
@@ -136,6 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99b7a1c48bab1249bd4d29846fa5b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
+  knockbackDelay: 0.5
 --- !u!114 &4448138592141501248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +156,7 @@ MonoBehaviour:
     maxHealth: 2
     speed: 3
     attackSO: {fileID: 11400000, guid: 1c1ae94894a3041429469691887c148f, type: 2}
+    skillSO: {fileID: 0}
   statsModifiers: []
 --- !u!114 &1728389552535753584
 MonoBehaviour:
@@ -166,8 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4a45c2f4974fe4c9823d0d15692f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeSinceLastRoll: 3.4028235e+38
   dodgeVec: {x: 0, y: 0}
-  enemySpawner: {fileID: 0}
   followRange: 30.3
   targetTag: Player
   characterRenderer: {fileID: 6923416640721116510}
@@ -257,3 +261,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthChangeDelay: 0.5
+--- !u!58 &1878630302383218562
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6969382807840113813}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.28964272

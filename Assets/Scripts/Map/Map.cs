@@ -17,7 +17,6 @@ public class Map : MonoBehaviour
 
     private void Start()
     {
-
         MapGenerator generator = new MapGenerator();
         generator._property = _map_generation_property;
         generator.GenerateMap();

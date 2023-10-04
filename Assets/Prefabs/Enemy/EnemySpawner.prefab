@@ -186,9 +186,9 @@ MonoBehaviour:
   MainSprite: {fileID: 6129223896093382719}
   Collider: {fileID: 374586269420069469}
   Enemies: []
-  NumEnemyA: 4
-  NumEnemyB: 1
-  NumEnemyC: 0
+  NumEnemyA: 2
+  NumEnemyB: 2
+  NumEnemyC: 2
   ColliderWidth: 5
   ColliderHeight: 5
   isClear: 0

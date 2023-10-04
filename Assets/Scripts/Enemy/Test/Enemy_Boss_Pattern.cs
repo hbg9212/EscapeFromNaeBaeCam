@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy_Boss_Pattern : MonoBehaviour
 {
+
     [SerializeField] private List<GameObject> Drones;
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D rb;
@@ -33,7 +34,7 @@ public class Enemy_Boss_Pattern : MonoBehaviour
 
     IEnumerator AttackRoutine()
     {
-        while (isMove)
+        while (true)
         {
              if(AttackCount > 5)
              {
@@ -61,11 +62,6 @@ public class Enemy_Boss_Pattern : MonoBehaviour
     {
         float distanceToPlayer = Vector2.Distance(transform.position, Player.position);
 
-        if(distanceToPlayer > 40f)
-        {
-            return;
-        }
-
         if (distanceToPlayer > 10f)
         {
             if(!isMove)
@@ -84,5 +80,4 @@ public class Enemy_Boss_Pattern : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
     }
-
 }

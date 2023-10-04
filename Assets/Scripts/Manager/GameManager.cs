@@ -7,8 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [SerializeField] private GameObject meleePlayer;
-    [SerializeField] private GameObject rangedPlayer;
     private HealthSystem playerHealthSystem;
 
     [SerializeField] private GameObject pauseMenu;
@@ -19,10 +17,11 @@ public class GameManager : MonoBehaviour
     public Transform Player { get; private set; }
     [SerializeField] private string playerTag = "Player";
 
+    private Transform dropPosition;
+
     private void Awake()
     {
         instance = this;
-        ActivePlayer(SelectManager.instance.rangedPlayer);
         Player = GameObject.FindGameObjectWithTag(playerTag).transform;
         playerHealthSystem = Player.GetComponent<HealthSystem>();
         playerHealthSystem.OnDeath += GameOver;
@@ -30,14 +29,6 @@ public class GameManager : MonoBehaviour
         //SoundManager.instance.
         gameOverMenu.SetActive(false);
         Time.timeScale = 1;
-    }
-
-    private void ActivePlayer(bool type) {
-        if (type) {
-            rangedPlayer.SetActive(true);
-        } else {
-            meleePlayer.SetActive(true);
-        }
     }
 
     public void PauseGame() {
@@ -56,7 +47,6 @@ public class GameManager : MonoBehaviour
 
     public void CharacterSelect() {
         SceneManager.LoadScene("SelectScene");
-        SelectManager.instance.DestroyThis();
     }
 
     public void GameOver() {

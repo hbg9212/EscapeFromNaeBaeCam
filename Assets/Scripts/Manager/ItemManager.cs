@@ -46,13 +46,6 @@ public class ItemManager : MonoBehaviour
     private IItemDrop testDrop = new ConsumableItemDrop();
     private IItemDrop testDrop2 = new AccessoriesItemDrop();
 
-    private void Start()
-    {
-        StartCoroutine("DropTest");
-        StartCoroutine("DropTest2");
-        
-    }
-
     private void Update()
     {
         _goldText.text = gold.ToString().PadLeft(3, '0');

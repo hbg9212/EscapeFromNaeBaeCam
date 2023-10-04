@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyController : CharacterController
 {
+    private IItemDrop itemDrop = new ConsumableItemDrop();
+
+
     protected Transform ClosestTarget { get; private set; }
     protected EnemySpawner _enemySpawner;
     protected HealthSystem healthSystem;
@@ -14,7 +17,7 @@ public class EnemyController : CharacterController
     {
         base.Awake();
         healthSystem = GetComponent<HealthSystem>();
-        //healthSystem.OnDeath += RemoveFromEnemySpawner;
+        healthSystem.OnDeath += RemoveFromEnemySpawner;
     }
 
     protected virtual void Start()
@@ -42,8 +45,9 @@ public class EnemyController : CharacterController
         _enemySpawner = spawner;
     }
 
-    //private void RemoveFromEnemySpawner()
-    //{
-    //    _enemySpawner.RemoveFromList(gameObject);
-    //}
+    private void RemoveFromEnemySpawner()
+    {
+        _enemySpawner.RemoveFromList(gameObject);
+        itemDrop.ItemDrop(transform);
+    }
 } 

@@ -6,26 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class SelectManager : MonoBehaviour
 {
-    public static SelectManager instance;
-
-    public bool rangedPlayer { get; private set; }
-
-    private void Awake() {
-        DontDestroyOnLoad(gameObject);
-        instance = this;
-    }
-
     public void SelectRangedPlayer() {
-        rangedPlayer = true;
-        SceneManager.LoadScene("BattelTest2");
+        SceneManager.LoadScene("RangedScene");
     }
 
     public void SelectMeleePlayer() {
-        rangedPlayer = false;
-        SceneManager.LoadScene("BattelTest2");
+        SceneManager.LoadScene("MeleeScene");
     }
 
-    public void DestroyThis() {
-        Destroy(gameObject);
+    public void StartScene() {
+        SceneManager.LoadScene("SelectScene");
     }
 }

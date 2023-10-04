@@ -7,5 +7,6 @@ public class MeleeSkillData : SkillSO
 {
     [Header("Melee Skill Data")]
     public Vector2 attackRange;
+    public float duration;
     public Color projectileColor;
 }

@@ -8,11 +8,14 @@ public class EnemyController : CharacterController
     protected Transform ClosestTarget { get; private set; }
     protected EnemySpawner _enemySpawner;
     protected HealthSystem healthSystem;
+
+    // 임시로 추가
+    protected SpriteRenderer _spriteRenderer;
     protected override void Awake()
     {
         base.Awake();
         healthSystem = GetComponent<HealthSystem>();
-        healthSystem.OnDeath += RemoveFromEnemySpawner;
+        //healthSystem.OnDeath += RemoveFromEnemySpawner;
     }
 
     protected virtual void Start()
@@ -41,8 +44,8 @@ public class EnemyController : CharacterController
         _enemySpawner = spawner;
     }
 
-    private void RemoveFromEnemySpawner()
-    {
-        _enemySpawner.RemoveFromList(this.gameObject);
-    }
+    //private void RemoveFromEnemySpawner()
+    //{
+    //    _enemySpawner.RemoveFromList(gameObject);
+    //}
 } 

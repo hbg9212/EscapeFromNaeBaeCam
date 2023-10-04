@@ -19,7 +19,7 @@ public class Shooting : MonoBehaviour
     {
         _objectPoolManager = ObjectPoolManager.instance;
         _controller.OnAttackEvent += OnShoot;
-        _controller.OnSkillEvent += OnSkillShoot;
+        _controller.OnSkillEvent += OnRangedSkill;
         _controller.OnLookEvent += OnAim;
     }
 
@@ -46,7 +46,7 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    private void OnSkillShoot(SkillSO skillSO) {
+    private void OnRangedSkill(SkillSO skillSO) {
         RangedSkillData rangedSkillData = skillSO as RangedSkillData;
         float projectilesAngleSpace = rangedSkillData.multipleProjectilesAngle; // �ޱ�
         int numberOfProjectilesPerShot = rangedSkillData.numberOfProjectilesPerShot; // �߻�ü ��
@@ -55,6 +55,8 @@ public class Shooting : MonoBehaviour
 
         for (int i = 0; i < numberOfProjectilesPerShot; i++) {
             float angle = minAngle + projectilesAngleSpace * i; // �߻�ü���� �ޱ� ����
+            float randomSpread = Random.Range(-rangedSkillData.spread, rangedSkillData.spread);
+            angle += randomSpread;
             CreateSkillProjectile(rangedSkillData, angle);
         }
     }

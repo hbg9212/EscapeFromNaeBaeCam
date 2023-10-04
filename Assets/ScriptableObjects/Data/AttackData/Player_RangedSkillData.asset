@@ -16,7 +16,7 @@ MonoBehaviour:
   size: 1
   delay: 5
   power: 2
-  speed: 15
+  speed: 12
   target:
     serializedVersion: 2
     m_Bits: 128
@@ -24,8 +24,10 @@ MonoBehaviour:
   isOnKnockback: 1
   knockbackPower: 5
   knockbackTime: 0.1
-  bulletNameTag: keyboard
-  duration: 3
-  numberOfProjectilesPerShot: 4
-  multipleProjectilesAngle: 5
+  bulletNameTag: fireBall
+  duration: 4
+  spread: 0
+  numberOfProjectilesPerShot: 1
+  multipleProjectilesAngle: 3
+  unDestroy: 0
   projectileColor: {r: 1, g: 1, b: 1, a: 1}

@@ -1,5 +1,6 @@
  using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,9 +14,16 @@ public class ObjectPoolManager : MonoBehaviour
         public GameObject prefab;
     }
     
+    [System.Serializable]
+    public struct Sound {
+        public string tag;
+        public GameObject prefab;
+    }
+    
     public List<Pool> pools;
+    public List<Sound> sounds;
 
-    void Awake()
+    private void Awake()
     {
         instance = this;
     }
@@ -24,6 +32,18 @@ public class ObjectPoolManager : MonoBehaviour
     {
         GameObject target;
         foreach (Pool obj in pools) {
+            if (obj.tag == tag) {
+                target = obj.prefab;
+                return target;
+            }
+        }
+        return null;
+    }
+    
+    public GameObject FindFromSounds(string tag)
+    {
+        GameObject target;
+        foreach (Sound obj in sounds) {
             if (obj.tag == tag) {
                 target = obj.prefab;
                 return target;

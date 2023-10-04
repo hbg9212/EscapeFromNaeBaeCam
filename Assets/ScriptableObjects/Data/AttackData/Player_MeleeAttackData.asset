@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player_MeleeAttackData
   m_EditorClassIdentifier: 
   ranged: 0
-  size: 5
+  size: 1
   delay: 1
   power: 3
   speed: 10
@@ -23,5 +23,5 @@ MonoBehaviour:
   isOnKnockback: 1
   knockbackPower: 8
   knockbackTime: 0.2
-  attackRange: {x: 1.3, y: 1.3}
+  attackRange: {x: 2, y: 2}
   projectileColor: {r: 1, g: 1, b: 1, a: 1}

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyController : CharacterController
 {
-    GameManager gameManager;
     protected Transform ClosestTarget { get; private set; }
     protected EnemySpawner _enemySpawner;
     protected HealthSystem healthSystem;
@@ -20,8 +19,7 @@ public class EnemyController : CharacterController
 
     protected virtual void Start()
     {
-        gameManager = GameManager.instance;
-        ClosestTarget = gameManager.Player;
+        ClosestTarget = GameManager.instance.Player;
     }
 
     protected virtual void FixedUpdate()

@@ -7,13 +7,13 @@ public class PlayerInputController : CharacterController
 {
     private Camera _camera;
     private bool _invenOpen = false;
+    
 
     protected override void Awake()
     {
         base.Awake();
         _camera = Camera.main;
     }
-  
 
     public void OnMove(InputValue value)
     {

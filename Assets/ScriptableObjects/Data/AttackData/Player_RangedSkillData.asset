@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Player_RangedSkillData
   m_EditorClassIdentifier: 
   ranged: 1
-  size: 1
+  size: 2
   delay: 5
   power: 2
-  speed: 12
+  speed: 20
   target:
     serializedVersion: 2
     m_Bits: 128

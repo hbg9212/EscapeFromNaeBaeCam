@@ -10,8 +10,11 @@ public class MapGenerator
 {
 
     [System.Serializable]
-    public struct MAP_GANARATION_PROPERTY
+    public struct MAP_GENARATION_PROPERTY
     {
+
+        public float CellSizeX => _map_size.x / _cell_number_x;
+        public float CellSizeY => _map_size.y / _cell_number_y;
 
         public GameObject _grid_prefab;
         public GameObject _grid_parent;
@@ -40,19 +43,19 @@ public class MapGenerator
 
         public bool IsLeaf => ChildLeft == null;
 
-        public RectInt GridRect = new RectInt();
-        public RectInt RoomRect;
-        public RectInt CorridorRect;
+        public RectInt              GridRect = new RectInt();
+        public RectInt              RoomRect;
+        public RectInt              CorridorRect;
 
-        public bool IsSplitHorizon;
+        public bool                 IsSplitHorizon;
 
-        public Node ChildLeft   = null;
-        public Node ChildRight  = null;
+        public Node                 ChildLeft   = null;
+        public Node                 ChildRight  = null;
 
         //디버깅용 입니다.
-        public GameObject   Grid;
-        public GameObject   Room;
-        public GameObject   Corridor;
+        public GameObject           Grid;
+        public GameObject           Room;
+        public GameObject           Corridor;
 
 
         public RectInt CalculateRect()
@@ -137,7 +140,7 @@ public class MapGenerator
         for (int i = (int)Mathf.Pow(2, _property._map_generation_patition_number) - 1 - 1; i >= 0; --i)
         {
             GenerateCorridor(_node_array[i]);
-            UpdateLineRenderer(_node_array[i]);
+            //UpdateLineRenderer(_node_array[i]);
         }
 
     }
@@ -417,7 +420,7 @@ public class MapGenerator
 
     }
 
-    public MAP_GANARATION_PROPERTY _property;
+    public MAP_GENARATION_PROPERTY _property;
 
     public Node[] _node_array;
 

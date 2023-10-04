@@ -17,7 +17,7 @@ public class Enemy_Boss_Pattern : MonoBehaviour
 
     private int AttackCount = 0;
     public float moveSpeed = 5.0f;
-
+    private bool isMove = false;
     void Start()
     {
         gameManager = GameManager.instance;
@@ -33,7 +33,7 @@ public class Enemy_Boss_Pattern : MonoBehaviour
 
     IEnumerator AttackRoutine()
     {
-        while (true)
+        while (isMove)
         {
              if(AttackCount > 5)
              {
@@ -61,8 +61,17 @@ public class Enemy_Boss_Pattern : MonoBehaviour
     {
         float distanceToPlayer = Vector2.Distance(transform.position, Player.position);
 
+        if(distanceToPlayer > 40f)
+        {
+            return;
+        }
+
         if (distanceToPlayer > 10f)
         {
+            if(!isMove)
+            {
+                isMove = true;
+            }
             Vector2 direction = (Player.position - transform.position).normalized;
             rb.velocity = direction * moveSpeed;
         }

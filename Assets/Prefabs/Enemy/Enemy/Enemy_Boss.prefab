@@ -43,7 +43,7 @@ Transform:
   - {fileID: 8119809119584527624}
   - {fileID: 5910133239594330038}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &5971168661022512877
 Rigidbody2D:
@@ -112,7 +112,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 492996708, guid: 26a50ee4e412af140b321967e79bb677, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -185,6 +185,7 @@ MonoBehaviour:
     maxHealth: 20
     speed: 10
     attackSO: {fileID: 11400000, guid: c2f21b2cbdf96734e8ebc2d3961538da, type: 2}
+    skillSO: {fileID: 0}
   statsModifiers: []
 --- !u!114 &7289528355392075955
 MonoBehaviour:

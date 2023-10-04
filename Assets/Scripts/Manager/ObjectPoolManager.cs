@@ -1,6 +1,7 @@
  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ObjectPoolManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class ObjectPoolManager : MonoBehaviour
         public string tag;
         public GameObject prefab;
     }
-
+    
     public List<Pool> pools;
 
     void Awake()
@@ -22,9 +23,9 @@ public class ObjectPoolManager : MonoBehaviour
     public GameObject FindFromPool(string tag)
     {
         GameObject target;
-        foreach (Pool pool in pools) { 
-            if (pool.tag == tag) {
-                target = pool.prefab;
+        foreach (Pool obj in pools) {
+            if (obj.tag == tag) {
+                target = obj.prefab;
                 return target;
             }
         }
@@ -33,17 +34,19 @@ public class ObjectPoolManager : MonoBehaviour
 
     public void ShootBullet(Vector2 startPosition, Vector2 direction, RangedAttackData attackData) {
         GameObject obj = Instantiate(FindFromPool(attackData.bulletNameTag));
-
-        obj.transform.position = startPosition;
-        RangedAttackCotroller attackCotroller = obj.GetComponent<RangedAttackCotroller>();
-        attackCotroller.InitializeAttack(direction, attackData, obj);
+        if (obj != null) {
+            obj.transform.position = startPosition;
+            RangedAttackCotroller attackCotroller = obj.GetComponent<RangedAttackCotroller>();
+            attackCotroller.InitializeAttack(direction, attackData, obj);
+        }
     }
     
     public void ShootSkillBullet(Vector2 startPosition, Vector2 direction, RangedSkillData skillData) {
         GameObject obj = Instantiate(FindFromPool(skillData.bulletNameTag));
-
-        obj.transform.position = startPosition;
-        RangedAttackCotroller attackCotroller = obj.GetComponent<RangedAttackCotroller>();
-        attackCotroller.InitializeSkillAttack(direction, skillData, obj);
+        if (obj != null) {
+            obj.transform.position = startPosition;
+            RangedSkillCotroller skillCotroller = obj.GetComponent<RangedSkillCotroller>();
+            skillCotroller.InitializeSkillAttack(direction, skillData, obj);
+        }
     }
 }

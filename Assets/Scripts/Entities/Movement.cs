@@ -18,6 +18,9 @@ public class Movement : MonoBehaviour
     private Vector2 _knockback = Vector2.zero;
     private float knockbackDuration = 0.0f;
 
+    [SerializeField] private float knockbackDelay = .5f;
+    private float _timeSinceLastKnockback = float.MaxValue;
+
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
@@ -38,6 +41,8 @@ public class Movement : MonoBehaviour
         if (knockbackDuration > 0.0f) {
             knockbackDuration -= Time.fixedDeltaTime;
         }
+
+        _timeSinceLastKnockback += Time.fixedDeltaTime;
     }
 
     private void Move(Vector2 direction)
@@ -46,8 +51,13 @@ public class Movement : MonoBehaviour
     }
 
     public void ApplyKnockback(Transform other, float power, float duration) {
-        knockbackDuration = duration;
-        _knockback = -(other.position - transform.position).normalized * power;
+        if (_timeSinceLastKnockback < knockbackDelay) {
+            return;
+        } else {
+            knockbackDuration = duration;
+            _knockback = -(other.position - transform.position).normalized * power;
+            _timeSinceLastKnockback = 0;
+        }
     }
 
     private void ApplyMovment(Vector2 direction)

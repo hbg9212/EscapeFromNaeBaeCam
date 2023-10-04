@@ -37,7 +37,7 @@ public class CharacterController : MonoBehaviour
 
     private void HandleAttackDelay()
     {
-        if (Stats.CurrentStats.attackSO == null)
+        if (Stats.CurrentStats.attackSO == null || IsSkillAttacking)
             return;
 
         if(_timeSinceLastAttack <= Stats.CurrentStats.attackSO.delay)

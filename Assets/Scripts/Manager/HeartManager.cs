@@ -57,10 +57,8 @@ public class HeartManager : MonoBehaviour
         Debug.Log(currentHp);
     }
 
-
     public void DamagedHP(float value)
     {
-        Debug.Log($"HeartUI => Damage! / {(int)Mathf.Abs(value)}");
         for(int i = 0; i < (int)Mathf.Abs(value); i++)
         {
             if (currentHp == 0)
@@ -79,7 +77,7 @@ public class HeartManager : MonoBehaviour
 
     // 체력의 변화가 있을 때. (데미지, 체력 회복)
     // 이미지 변환
-    public void ChagedHP(bool healOrDamage)
+    private void ChagedHP(bool healOrDamage)
     {
         Debug.Log("ChagedHP!!!");
         int HeartIndex = (currentHp / 2) - 1;

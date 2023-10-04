@@ -14,7 +14,7 @@ public class AnimationController : MonoBehaviour
 
     private HealthSystem _healthSystem;
     protected CharacterController controller;
-    protected Rigidbody2D rigidbody;
+    protected Rigidbody2D _rigidbody;
     protected Animator animator;
 
     private void Awake()
@@ -22,7 +22,7 @@ public class AnimationController : MonoBehaviour
         _healthSystem = GetComponent<HealthSystem>();
         animator = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
-        rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -63,14 +63,14 @@ public class AnimationController : MonoBehaviour
         animator.SetTrigger(SkillAttack);
     }
 
-    private void Hit()
+    private void Hit(float value)
     {
         animator.SetBool(IsHit, true);
     }
 
     private void Roll()
     {
-        if(rigidbody.velocity != Vector2.zero)
+        if(_rigidbody.velocity != Vector2.zero)
             animator.SetTrigger(IsRoll);
     }
 

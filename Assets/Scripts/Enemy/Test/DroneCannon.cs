@@ -25,9 +25,14 @@ public class DroneCannon : MonoBehaviour
     {
         GameObject gameObject = Instantiate(BulletPrefab, projectileSpawnPositionEnd.position, Quaternion.identity);
         RangedAttackCotroller rangedAttackCotroller= gameObject.GetComponent<RangedAttackCotroller>();
-        if (this.transform.localScale.x < 0)
+
+        float angle = transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
+        dirction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+
+        if (transform.localScale.x < 0)
             dirction.x *= -1;
-    
+        dirction *= 2;
+      
         rangedAttackCotroller.InitializeAttack(dirction, rangedAttackData, this.gameObject);
     }
 

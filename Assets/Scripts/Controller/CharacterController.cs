@@ -62,6 +62,7 @@ public class CharacterController : MonoBehaviour
 
         if (IsRolling && _timeSinceLastRoll > 2.0f)
         {
+            Debug.Log("_timeSinceLastRoll > 2.0f");
             CallRollEvent();
         }
     }
@@ -101,7 +102,6 @@ public class CharacterController : MonoBehaviour
 
     public void CallRollEvent()
     {
-        Debug.Log("CallRollEvent");
         OnRollEvent?.Invoke();
     }
     

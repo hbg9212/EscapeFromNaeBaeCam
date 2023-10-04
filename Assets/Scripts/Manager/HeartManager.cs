@@ -57,6 +57,8 @@ public class HeartManager : MonoBehaviour
         Debug.Log(currentHp);
     }
 
+
+
     public void DamagedHP(float value)
     {
         for(int i = 0; i < (int)Mathf.Abs(value); i++)

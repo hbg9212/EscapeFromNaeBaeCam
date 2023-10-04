@@ -61,16 +61,15 @@ public class Movement : MonoBehaviour
 
     private void Dodge()
     {
-        Debug.Log(_movementDirection);
+        _controller._timeSinceLastRoll = 0;
         if (_rigidbody.velocity != Vector2.zero && (_controller.IsRolling))
         {
             //_controller.dodgeVec = _movementDirection;
             _stats.CurrentStats.speed *= 2;
-            _controller._timeSinceLastRoll = 0;
             //anim.SetTrigger("doDodge");
             //_controller.IsRolling = true;
-            //character.gameObject.tag = "Rolling";
-            //character.gameObject.layer = LayerMask.NameToLayer("Rolling");
+            character.gameObject.tag = "Rolling";
+            character.gameObject.layer = LayerMask.NameToLayer("Rolling");
             Invoke("DodgeOut", 0.5f);
         }
     }
